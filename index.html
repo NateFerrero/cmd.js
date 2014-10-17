@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="cmd.js"></script>
+        <script>
+            var users = [{id: 1}, {id: 2}, {}, {id: 3}, {id: 4}];
+            var userIds = cmd(
+                cmd.pluck('id'),
+                cmd.filter(cmd.exists),
+                cmd.join(', ')
+            );
+            userIds(users);
+        </script>
+    </head>
+    <body></body>
+</html>
