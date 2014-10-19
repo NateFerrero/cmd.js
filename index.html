@@ -4,13 +4,48 @@
         <script src="cmd.js"></script>
         <script>
             var users = [{id: 1}, {id: 2}, {}, {id: 3}, {id: 4}];
-            var userIds = cmd(
-                cmd.pluck('id'),
-                cmd.filter(cmd.exists),
-                cmd.join(', ')
-            );
-            userIds(users);
+            var userIds = 
+                cmd.pluck('id').
+                cmd.filter(cmd.exists)//.
+                //cmd.join(', ');
+
+            console.log(userIds(users));
+/*
+            var rows = [];
+            var row = cmd('save to rows', function(args, vals) {
+                //cmd.obj('label', 'fn')(
+                //    cmd.push(arg))(vals); // push vals onto rows array
+            })(rows);
+
+            row('cmd.foo', function () {
+                return cmd.foo;
+            });
+
+            row('cmd.foo()', function () {
+                return cmd.foo();
+            });
+
+            row('cmd.foo(1)', function () {
+                return cmd.foo(1);
+            });
+
+            row('cmd.foo(1, 2, 3)', function () {
+                return cmd.foo(1, 2, 3);
+            });
+
+            row('cmd.foo([])', function () {
+                return cmd.foo([]);
+            });
+
+            row('cmd.foo([1])', function () {
+                return cmd.foo([1]);
+            });
+
+            row('cmd.foo([1, 2], 3)', function () {
+                return cmd.foo([1, 2], 3);
+            });*/
         </script>
     </head>
-    <body></body>
+    <body>
+    </body>
 </html>
