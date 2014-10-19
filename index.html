@@ -2,17 +2,25 @@
 <html>
     <head>
         <script src="cmd.js"></script>
+        <script src="cmd.lib.js"></script>
         <script>
             var users = [{id: 1}, {id: 2}, {}, {id: 3}, {id: 4}];
             var userIds = 
                 cmd.pluck('id').
-                cmd.filter(cmd.exists)//.
-                //cmd.join(', ');
+                cmd.filter(cmd.exists).
+                cmd.join(', ');
 
-            console.log(userIds(users));
-/*
+            cmd.format('User ids: {}').
+                cmd.log(userIds(users));
+
+            userIds.
+                cmd.format('Another format: {}').
+                cmd.log(users);
+        </script>
+
+        <script>
             var rows = [];
-            var row = cmd('save to rows', function(args, vals) {
+            var row = cmd.all('save to rows', function(args, vals) {
                 //cmd.obj('label', 'fn')(
                 //    cmd.push(arg))(vals); // push vals onto rows array
             })(rows);
@@ -43,7 +51,7 @@
 
             row('cmd.foo([1, 2], 3)', function () {
                 return cmd.foo([1, 2], 3);
-            });*/
+            });
         </script>
     </head>
     <body>

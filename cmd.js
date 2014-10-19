@@ -1,201 +1,112 @@
 /**
- * cmd: cmd(function () { ... })
+ * Command: Command(function () { ... })
  * @author Nate Ferrero
  */
-var cmd = function (name, fn) {
-    if (debug) console.debug('cmd()', arguments);
-
-    if (typeof fn !== 'function') {
-        throw new Error('cmd(name, fn), fn was not a function, got ' + typeof fn);
-    }
-    return cmd.argsFn(name, false, null, fn);
+var Command = function (context) {
+    this.context = context;
 };
 
-cmd.each = function (name, fn) {
-    if (debug) console.debug('cmd.each()', arguments);
+/**
+ * Global export
+ */
+var cmd = new Command();
 
+/**
+ * Command.all() causes the function to be called on an array of values
+ * @author Nate Ferrero
+ */
+Command.prototype.all = function cmdAll (name, fn, args) {
+    if (typeof fn !== 'function') {
+        throw new Error('cmd.all(name, fn), fn was not a function, got ' + typeof fn);
+    }
+
+    Command.prototype.__defineGetter__(name, function () {
+
+        if (Array.isArray(args)) {
+            return this.getArgs(name, 'vals', function (vals) {
+                return fn(args, vals);
+            }.bind(this));
+        };
+
+        return this.getArgs(name, 'args', function (args) {
+            return this.getArgs(name, 'vals', function (vals) {
+                return fn(args, vals);
+            }.bind(this));
+        }.bind(this));
+    });
+};
+
+/**
+ * Command.each() causes the function to be called on each value
+ * @author Nate Ferrero
+ */
+Command.prototype.each = function cmdEach (name, fn, args) {
     if (typeof fn !== 'function') {
         throw new Error('cmd.each(name, fn), fn was not a function, got ' + typeof fn);
     }
-    return cmd.argsFn(name, true, null, fn);
+
+    Command.prototype.__defineGetter__(name, function () {
+
+        if (Array.isArray(args)) {
+            return this.getArgs(name, 'vals', function (vals) {
+                return vals.map(function (val) {
+                    return fn(args, val);
+                });
+            }.bind(this));
+        };
+
+        return this.getArgs(name, 'args', function (args) {
+            return this.getArgs(name, 'vals', function (vals) {
+                return vals.map(function (val) {
+                    return fn(args, val);
+                });
+            }.bind(this));
+        }.bind(this));
+    });
 };
 
-cmd.argsFn = function (name, each, first, then) {
-    if (debug) console.debug('cmd.argsFn()', arguments);
+/**
+ * Command.getArgs()
+ * @author Nate Ferrero
+ */
+Command.prototype.getArgs = function getArgsWrapper (name, purpose, done) {
 
-    var aFn = function (/* args */) {
+    var getArgs = function getArgs () {
         var args = Array.prototype.slice.apply(arguments);
-        return cmd.valsFn(name, first, function (vals) {
-            return each ? vals.map(function (val) {
-                return then(args, val);
-            }) : then(args, vals);
-        });
-    };
 
-    aFn.__defineGetter__('cmd', function () {
-        throw new Error('cmd.chain can only be used after args are provided for cmd.' + name);
-    });
-
-    aFn.$each = each;
-    aFn.$cmd = name;
-    aFn.$cmdArgs = true;
-    return aFn;
-};
-
-cmd.valsFn = function (name, first, then) {
-    if (debug) console.debug('cmd.valsFn()', arguments);
-
-    var vFn = function (/* vals */) {
-        if (debug) console.debug('vFn', name, arguments);
-
-        var vals = [];
-        Array.prototype.slice.apply(arguments).forEach(function (val) {
-            if (Array.isArray(val)) {
-                vals.push.apply(vals, val);
-            }
-            else {
-                vals.push(val);
-            }
-        });
-
-        if (first) {
-            vals = first.apply(null, vals);
+        if (purpose === 'vals') {
+            var _args = [];
+            args.forEach(function (arg) {
+                Array.isArray(arg) ? Array.prototype.push.apply(_args, arg) :
+                    _args.push(arg);
+            });
+            return done(_args);
         }
 
-        return then(vals);
+        return done(args);
     };
 
-    vFn.raw = function (val) {
-        if (debug) console.debug('vFn.raw()', arguments);
+    getArgs.$name = name;
+    getArgs.$purpose = purpose;
 
-        return first ? then(first([val])) : then([val]);
-    };
-
-    vFn.__defineGetter__('cmd', function () {
-        if (debug) console.debug('.cmd', arguments);
-
-        return cmd.chain(vFn);
-    });
-
-    vFn.$cmd = name;
-    vFn.$cmdVals = true;
-    return vFn;
-};
-
-cmd.chain = function (first) {
-    if (debug) console.debug('cmd.chain()', arguments);
-
-    var chain = {};
-    Object.keys(cmd).forEach(function (key) {
-        chain.__defineGetter__(key, function () {
-            var next = cmd[key];
-        
-            if (next.$cmdArgs) {
-                return cmd.argsFn(next.$cmd, next.$each, first, function (args) {
-                    if (debug) console.debug('chain > cmd.argsFn > callback()', arguments);
-
-                    return next.apply(null, args);
-                });
-            }
-            
-            else if (next.$cmdVals) {
-                return cmd.valsFn(next.$cmd, next.$each, first, function () {
-                    if (debug) console.debug('chain > cmd.valsFn > callback()', arguments);
-
-                    return next.apply(null, arguments);
-                });
-            }
-
-            else {
-                throw new Error('Invalid cmd.chain');
-            }
+    if (purpose === 'vals') {
+        getArgs.__defineGetter__('cmd', function () {
+            return new Command(getArgs);
         });
-    });
 
-    return chain;
+        getArgs.raw = function () {
+            var args = Array.prototype.slice.apply(arguments);
+            var result = getArgs.apply(null, args);
+            return result.shift();
+        };
+
+        if (this.context) {
+            var context = this.context;
+            return cmd.getArgs(name, 'vals', function (vals) {
+                return getArgs.apply(null, context(vals));
+            });
+        }
+    }
+
+    return getArgs;
 };
-
-/**
- * cmd.each(...) causes the function to be run on each value
- */
-
-/**
- * cmd: upper('a') === ['A']
- */
-cmd.upper = cmd.each('upper', function (args, val) {
-    return ('' + val).toUpperCase();
-})();
-
-/**
- * cmd: lower('a') === ['A']
- */
-cmd.lower = cmd.each('lower', function (args, val) {
-    return ('' + val).toLowerCase();
-})();
-
-/**
- * cmd: exists(null) === [false]
- *      exists.raw(null) === false
- * @author Nate Ferrero
- */
-cmd.exists = cmd.each('exists', function (args, val) {
-    return val !== null && val !== undefined;
-})();
-
-/**
- * cmd: pluck('color')({color: 'red'}) === ['red']
-        pluck('color').raw({color: 'red'}) === 'red'
- * @author Nate Ferrero
- */
-cmd.pluck = cmd.each('pluck', function (args, val) {
-    var exists = cmd.exists.raw;
-    args.forEach(function (arg) {
-        if (exists(val)) {
-            val = val[arg];
-        }
-    });
-    return val;
-});
-
-/**
- * cmd(...) causes the function to be run on the values array
- */
-
-/**
- * cmd: push(1)(2) === [2, 1]
- * @author Nate Ferrero
- */
-cmd.push = cmd('push', function (args, vals) {
-    vals.push.apply(vals, args);
-    return vals;
-});
-
-/**
- * cmd: join('-')(1, 2, 3) === ['1-2-3']
- * @author Nate Ferrero
- */
-cmd.join = cmd('join', function (args, vals) {
-    return args.map(function (arg) {
-        return vals.join(arg);
-    });
-});
-
-/**
- * cmd: filter(function (x) {
- *          return x >= 3;
- *      })(1, 2, 3) === [3]
- * @author Nate Ferrero
- */
-cmd.filter = cmd('filter', function (args, vals) {
-    return vals.filter(function (val) {
-        var len = args.length, i = -1;
-        while (++i < len) {
-            if (!(args[i].raw || args[i])(val)) {
-                return false;
-            }
-        }
-        return true;
-    });
-});
-
-var debug = true //&& false;
