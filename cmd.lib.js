@@ -65,12 +65,26 @@ cmd.each('pluck', function (args, val) {
 });
 
 /**
+ * Command: obj('a', 'b')(1, 2) === [{a: 1, b: 2}]
+ */
+cmd.all('obj', function (args, vals) {
+    var obj = {};
+    args.forEach(function (arg, i) {
+        if (i in vals) {
+            obj[arg] = vals[i];
+        }
+    });
+    return [obj];
+});
+
+/**
  * Command: push(1)(2) === [2, 1]
  * @author Nate Ferrero
  */
 cmd.all('push', function (args, vals) {
-    vals.push.apply(vals, args);
-    return vals;
+    return args.map(function (arg) {
+        arg.push.apply(arg, vals);
+    });
 });
 
 /**

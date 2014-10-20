@@ -19,11 +19,24 @@
         </script>
 
         <script>
+            /**
+             * Example foo command
+             */
+            cmd.all('foo', function (args, vals) {
+                return {args: args, vals: vals};
+            });
+
             var rows = [];
             var row = cmd.all('save to rows', function(args, vals) {
-                //cmd.obj('label', 'fn')(
-                //    cmd.push(arg))(vals); // push vals onto rows array
-            })(rows);
+                cmd.obj('label', 'fn').
+                    cmd.push(rows)(vals); // push vals onto rows array
+            })();
+
+            var cols = [];
+            var col = cmd.all('save to cols', function(args, vals) {
+                cmd.obj('label', 'fn').
+                    cmd.push(cols)(vals); // push vals onto cols array
+            })();
 
             row('cmd.foo', function () {
                 return cmd.foo;

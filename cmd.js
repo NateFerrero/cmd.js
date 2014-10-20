@@ -34,6 +34,8 @@ Command.prototype.all = function cmdAll (name, fn, args) {
             }.bind(this));
         }.bind(this));
     });
+
+    return cmd[name];
 };
 
 /**
@@ -63,6 +65,8 @@ Command.prototype.each = function cmdEach (name, fn, args) {
             }.bind(this));
         }.bind(this));
     });
+
+    return cmd[name];
 };
 
 /**
