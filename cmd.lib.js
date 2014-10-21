@@ -7,6 +7,45 @@ cmd.each('alert', function (args, val) {
 }, []);
 
 /**
+ * Command: compare(6, 3) === -1
+ * @author Nate Ferrero
+ */
+cmd.all('compare', function (args, vals) {
+    var _a = vals[0];
+    var _b = vals[1];
+
+    var compare = function (a, b) {
+        if (typeof a !== typeof b) {
+            return typeof a < typeof b;
+        }
+        switch (typeof a) {
+            case 'number':
+                return a - b;
+            case 'string':
+            case 'boolean':
+                return a < b;
+            default:
+                return 0;
+        }
+    };
+
+    if (!Array.isArray(_a)) {
+        return compare(_a, _b);
+    }
+
+    var result = 0;
+
+    for (var i = 0; i < _a.length; i++) {
+        result = compare(_a[i], _b[i]);
+        if (result !== 0) {
+            break;
+        }
+    }
+
+    return result;
+}, []);
+
+/**
  * Command: exists(null) === [false]
  *      exists.raw(null) === false
  * @author Nate Ferrero
@@ -62,6 +101,26 @@ cmd.each('log', function (args, val) {
 }, []);
 
 /**
+ * Command: logger(function (a) {
+ *     return 10 * a;
+ * }, 1)(1, 2, 3) - logs to console:
+ * 10 1
+ * 20 1
+ * 30 1
+ * @author Nate Ferrero
+ */
+cmd.each('logger', function (args, val) {
+    var logs = [];
+    args.forEach(function (arg) {
+        var log = typeof arg === 'function' ? arg(val) : arg;
+        Array.isArray(log) ? Array.prototype.push.apply(logs, log) :
+            logs.push(log);
+    });
+    console.log.apply(console, logs);
+    return val;
+});
+
+/**
  * Command: lower('A') === ['a']
  * @author Nate Ferrero
  */
@@ -104,6 +163,28 @@ cmd.each('pluck', function (args, val) {
 cmd.all('push', function (args, vals) {
     return args.map(function (arg) {
         arg.push.apply(arg, vals);
+    });
+});
+
+/**
+ * Command: sort(function (val) {
+ *   return val;
+ * })(3, 2, 1) === [1, 2, 3]
+ * @author Nate Ferrero
+ */
+cmd.all('sort', function (args, vals) {
+    return vals.sort(function (a, b) {
+        if (!args.length) {
+            return cmd.compare(a, b);
+        }
+        return cmd.compare(
+            args.map(function (arg) {
+                return arg(a);
+            }),
+            args.map(function (arg) {
+                return arg(b);
+            })
+        );
     });
 });
 
