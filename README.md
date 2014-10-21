@@ -30,29 +30,29 @@ users.forEach(function (user) {
     console.log(user.name, user.id);
 });
 
-# The output:
-# Justin 4
-# Janine 3
-# Kimberly 2
-# John 1
+// The output:
+// Justin 4
+// Janine 3
+// Kimberly 2
+// John 1
 ```
 
 Pretty simple, right?
 
 ### cmd.js
 
-```
+```js
 var pluck = cmd.pluck;
 var sortAndPrint = cmd.sort(pluck('age')).
     cmd.log(pluck('name'), pluck('id'));
 
 sortAndPrint(users);
 
-# The output:
-# Justin 4
-# Janine 3
-# Kimberly 2
-# John 1
+// The output:
+// Justin 4
+// Janine 3
+// Kimberly 2
+// John 1
 ```
 
 The benefits of this style include reusability, clear logical flow, and less code in general. By composing commands you keep your functionality completely isolated from your data.
