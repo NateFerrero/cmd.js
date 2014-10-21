@@ -1,0 +1,43 @@
+{
+  "name": "cmd.js",
+  "version": "0.0.0",
+  "description": "A chainable utility toolkit for JavaScript.",
+  "main": "cmd.js",
+  "dependencies": {
+    "gulp": "^3.8.8"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-cached": "^1.0.1",
+    "gulp-concat": "^2.4.1",
+    "gulp-footer": "^1.0.5",
+    "gulp-header": "^1.2.2",
+    "gulp-jshint": "^1.8.5",
+    "gulp-remember": "^0.2.1",
+    "gulp-watch": "^1.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NateFerrero/cmd.js.git"
+  },
+  "keywords": [
+    "underscore",
+    "lodash",
+    "tool",
+    "utility",
+    "utilities",
+    "command",
+    "cmd",
+    "commands",
+    "script"
+  ],
+  "author": "Nate Ferrero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NateFerrero/cmd.js/issues"
+  },
+  "homepage": "https://github.com/NateFerrero/cmd.js"
+}
