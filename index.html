@@ -7,15 +7,15 @@
             var users = [{id: 1}, {id: 2}, {}, {id: 3}, {id: 4}];
             var userIds = 
                 cmd.pluck('id').
-                cmd.filter(cmd.exists).
-                cmd.join(', ');
+                and.filter(cmd.exists).
+                and.join(', ');
 
             cmd.format('User ids: {}').
-                cmd.log(userIds(users));
+                and.log(userIds(users));
 
             userIds.
-                cmd.format('Another format: {}').
-                cmd.log(users);
+                and.format('Another format: {}').
+                and.log(users);
         </script>
 
         <script>
@@ -29,13 +29,13 @@
             var rows = [];
             var row = cmd.all('save to rows', function(args, vals) {
                 cmd.obj('label', 'fn').
-                    cmd.push(rows)(vals); // push vals onto rows array
+                    and.push(rows)(vals); // push vals onto rows array
             })();
 
             var cols = [];
             var col = cmd.all('save to cols', function(args, vals) {
                 cmd.obj('label', 'fn').
-                    cmd.push(cols)(vals); // push vals onto cols array
+                    and.push(cols)(vals); // push vals onto cols array
             })();
 
             row('cmd.foo', function () {

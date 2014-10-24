@@ -87,7 +87,7 @@ this.cmd = (function (Command) {
         getArgs.$purpose = purpose;
 
         if (purpose === 'vals') {
-            getArgs.__defineGetter__('cmd', function () {
+            getArgs.__defineGetter__('and', function () {
                 return new Command(getArgs);
             });
 
