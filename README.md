@@ -44,7 +44,7 @@ Pretty simple, right?
 ```js
 var pluck = cmd.pluck;
 var sortAndPrint = cmd.sort(pluck('age')).
-    cmd.log(pluck('name'), pluck('id'));
+    and.log(pluck('name'), pluck('id'));
 
 sortAndPrint(users);
 
