@@ -1,4 +1,4 @@
-## cmd.alert
+## `cmd.alert(val1, ...)`
 
 | name     | all or each?  | accepts args?  | return value        |
 |----------|---------------|----------------|---------------------|

@@ -62,3 +62,15 @@ The benefits of this style include reusability, clear logical flow, and less cod
 This project uses gulp. Make all changes/additions in `lib/*.js` while running `gulp` from the command line.
 
 # API Reference
+
+## Structure of a Command
+
+```js
+cmd.name(... args ...)(... vals ...);
+```
+
+Some commands do not accept args, and you are given the command with empty args already provided.
+
+```js
+cmd.sum(... vals ...);
+```

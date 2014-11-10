@@ -63,7 +63,19 @@ This project uses gulp. Make all changes/additions in `lib/*.js` while running `
 
 # API Reference
 
-## cmd.alert
+## Structure of a Command
+
+```js
+cmd.name(... args ...)(... vals ...);
+```
+
+Some commands do not accept args, and you are given the command with empty args already provided.
+
+```js
+cmd.sum(... vals ...);
+```
+
+## `cmd.alert(val1, ...)`
 
 | name     | all or each?  | accepts args?  | return value        |
 |----------|---------------|----------------|---------------------|
@@ -75,4 +87,49 @@ The following example displays two alerts in sequence.
 
 ```js
 cmd.alert('Hello World!', 'Will Smith here.');
+```
+
+## `cmd.compare(val1, val2)`
+
+| name       | all or each?  | accepts args?  | return value    |
+|------------|---------------|----------------|-----------------|
+| `compare`  | all           | no             | `-1 or 0 or 1`  |
+
+Compare is a unique command in that it only accepts 2 values. Any further values will be ignored.
+
+#### Example
+
+The following example compares two values.
+
+```js
+console.log(cmd.compare(8, 5)); // logs 3
+```
+
+## `cmd.exists(val1, ...)`
+
+| name       | all or each?  | accepts args?  | return value            |
+|------------|---------------|----------------|-------------------------|
+| `exists`   | each          | no             | `[true or false, ...]`  |
+
+#### Example
+
+The following example checks the existence of the values. Only null and undefined count as not existing.
+
+```js
+cmd.exists(null, undefined, false, '', 0, true); // [false, false, true, true, true, true]
+```
+
+## `cmd.extend(arg1, ...)(val1, ...)`
+
+| name       | all or each?  | accepts args?  | return value    |
+|------------|---------------|----------------|-----------------|
+| `extend`   | each          | yes            | `[{...}, ...]`  |
+
+Extends each value with each argument, in order.
+
+#### Example
+
+```js
+cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
+// [{item: 'wrench', color: 'red'}, {item: 'apple', color: 'red'}]
 ```
