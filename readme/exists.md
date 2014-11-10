@@ -1,4 +1,6 @@
-## `cmd.exists(val1, ...)`
+## Exists
+
+### `cmd.exists(val1, ...)`
 
 | name       | all or each?  | accepts args?  | return value            |
 |------------|---------------|----------------|-------------------------|

@@ -75,7 +75,9 @@ Some commands do not accept args, and you are given the command with empty args 
 cmd.sum(... vals ...);
 ```
 
-## `cmd.alert(val1, ...)`
+## Alert
+
+### `cmd.alert(val1, ...)`
 
 | name     | all or each?  | accepts args?  | return value        |
 |----------|---------------|----------------|---------------------|
@@ -89,7 +91,9 @@ The following example displays two alerts in sequence.
 cmd.alert('Hello World!', 'Will Smith here.');
 ```
 
-## `cmd.compare(val1, val2)`
+## Compare
+
+### `cmd.compare(val1, val2)`
 
 | name       | all or each?  | accepts args?  | return value    |
 |------------|---------------|----------------|-----------------|
@@ -105,7 +109,9 @@ The following example compares two values.
 console.log(cmd.compare(8, 5)); // logs 3
 ```
 
-## `cmd.exists(val1, ...)`
+## Exists
+
+### `cmd.exists(val1, ...)`
 
 | name       | all or each?  | accepts args?  | return value            |
 |------------|---------------|----------------|-------------------------|
@@ -119,7 +125,9 @@ The following example checks the existence of the values. Only null and undefine
 cmd.exists(null, undefined, false, '', 0, true); // [false, false, true, true, true, true]
 ```
 
-## `cmd.extend(arg1, ...)(val1, ...)`
+## Extend
+
+### `cmd.extend(arg1, ...)(val1, ...)`
 
 | name       | all or each?  | accepts args?  | return value    |
 |------------|---------------|----------------|-----------------|

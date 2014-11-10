@@ -1,4 +1,6 @@
-## `cmd.extend(arg1, ...)(val1, ...)`
+## Extend
+
+### `cmd.extend(arg1, ...)(val1, ...)`
 
 | name       | all or each?  | accepts args?  | return value    |
 |------------|---------------|----------------|-----------------|

@@ -1,4 +1,6 @@
-## `cmd.compare(val1, val2)`
+## Compare
+
+### `cmd.compare(val1, val2)`
 
 | name       | all or each?  | accepts args?  | return value    |
 |------------|---------------|----------------|-----------------|
