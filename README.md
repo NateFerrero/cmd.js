@@ -65,11 +65,11 @@ This project uses gulp. Make all changes/additions in `lib/*.js` while running `
 
 ## cmd.alert
 
-### Example
-
 | name     | all or each?  | accepts args?  | return value        |
 |----------|---------------|----------------|---------------------|
 | `alert`  | each          | no             | `[undefined, ...]`  |
+
+#### Example
 
 The following example displays two alerts in sequence.
 
