@@ -65,8 +65,29 @@
             row('cmd.foo([1, 2], 3)', function () {
                 return cmd.foo([1, 2], 3);
             });
+            
+            var cmdExamples;
+
+            setTimeout(function () {
+                var CmdExamplesView = cmd.view(document.getElementById('cmd.examples'));
+                cmdExamples = new CmdExamplesView(document.body);
+                cmdExamples.update({rows: rows});
+            });
         </script>
     </head>
     <body>
+        <template id="cmd.examples">
+            <h1><span $title></span></h1>
+            <table>
+                <tr $rows>
+                    <th></th>
+                    <th $headers></th>
+                </tr>
+                <tr $rows>
+                    <td></td>
+                    <td $columns></th>
+                </tr>
+            </table>
+        </template>
     </body>
 </html>

@@ -189,9 +189,90 @@ cmd.all('sort', function (args, vals) {
 });
 
 /**
+ * Command: switch(function (when, val) {
+ *   when(val == 1, function () { return 'a'; });
+ *   when(val == 2, function () { return 'b'; });
+ *   when(val >= 3, function () { return 'c'; });
+ * })(1, 2, 3) === ['a', 'b', 'c']
+ * @author Nate Ferrero
+ */
+cmd.each('switch', function (args, val) {
+    cond = args[0];
+    if (typeof cond !== 'function') {
+        throw new Error('cmd.switch(function (when) { ... }) called without function as first argument');
+    }
+
+    var when = function (condition, result) {
+        if (typeof result !== 'function') {
+            throw new Error('when(condition, function () { ... }) called without function as second argument');
+        }
+        if (condition) {
+            throw {
+                name: 'ConditionMatched',
+                result: result()
+            };
+        }
+    };
+
+    try {
+        cond(when, val);
+    }
+    catch (e) {
+        if (e.name === 'ConditionMatched') {
+            return e.result;
+        }
+        else {
+            throw e;
+        }
+    }
+});
+
+/**
  * Command: upper('a') === ['A']
  * @author Nate Ferrero
  */
 cmd.each('upper', function (args, val) {
     return ('' + val).toUpperCase();
 }, []);
+
+/**
+ * Command: view(#element) === ViewClass
+ *          new ViewClass(#element) to render
+ * @author Nate Ferrero
+ */
+(function () {
+    var ViewClassPrototype = {
+        update: function () {
+            cmd.extend.apply(null, arguments)(this.scope);
+            console.log(this.scope);
+            this.render();
+        },
+        render: function () {
+            while(this.node.lastChild) {
+                this.node.removeChild(this.node.lastChild);
+            }
+            this.node.appendChild(this.template.cloneNode(true));
+        }
+    };
+
+    cmd.all('view', function (args, vals) {
+        var template = document.createDocumentFragment();
+        vals.forEach(function (val) {
+            template.appendChild(val.content || val.cloneNode(true));
+        });
+
+        var ViewClass = function (on) {
+            this.on = on;
+            this.template = document.importNode(template, true);
+            this.node = document.createElement('view');
+            this.scope = {};
+            if (on) {
+                on.appendChild(this.node);
+            }
+            this.render();
+        };
+
+        ViewClass.prototype = ViewClassPrototype;
+        return ViewClass;
+    }, []);
+})();
