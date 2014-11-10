@@ -12,8 +12,17 @@ gulp.task('lib', function() {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('watch', function () {
-    gulp.watch(lib, ['lib']);
+var readme = 'readme/*.md';
+
+gulp.task('readme', function() {
+  return gulp.src(readme)
+    .pipe(concat('README.md')) 
+    .pipe(gulp.dest('.'));
 });
 
-gulp.task('default', ['lib', 'watch']);
+gulp.task('watch', function () {
+    gulp.watch(lib, ['lib']);
+    gulp.watch(readme, ['readme']);
+});
+
+gulp.task('default', ['lib', 'readme', 'watch']);

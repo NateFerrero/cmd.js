@@ -62,17 +62,3 @@ The benefits of this style include reusability, clear logical flow, and less cod
 This project uses gulp. Make all changes/additions in `lib/*.js` while running `gulp` from the command line.
 
 # API Reference
-
-## cmd.alert
-
-### Example
-
-| name   | all or each?  |accepts args?  |
-|--------|---------------|---------------|
-| alert  | each          | no            |
-
-The following example displays two alerts in sequence.
-
-```js
-cmd.alert('Hello World!', 'Will Smith here.');
-```

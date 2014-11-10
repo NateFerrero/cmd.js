@@ -55,6 +55,22 @@ cmd.each('exists', function (args, val) {
 }, []);
 
 /**
+ * Command: extend({b: 2}, {c: 3})({a: 1}) === [{a: 1, b: 2, c: 3}]
+ * Extends each val with each args
+ * @author Nate Ferrero
+ */
+cmd.each('extend', function (args, val) {
+    args.forEach(function (arg) {
+        Object.keys(arg).forEach(function (key) {
+            if (arg.hasOwnProperty(key)) {
+                val[key] = arg[key];
+            }
+        })
+    })
+    return val;
+});
+
+/**
  * Command: filter(function (x) {
  *          return x >= 3;
  *      })(1, 2, 3) === [3]
