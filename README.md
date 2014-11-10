@@ -67,9 +67,9 @@ This project uses gulp. Make all changes/additions in `lib/*.js` while running `
 
 ### Example
 
-| name   | all or each?  |accepts args?  |
-|--------|---------------|---------------|
-| alert  | each          | no            |
+| name     | all or each?  | accepts args?  | return value        |
+|----------|---------------|----------------|---------------------|
+| `alert`  | each          | no             | `[undefined, ...]`  |
 
 The following example displays two alerts in sequence.
 

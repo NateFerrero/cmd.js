@@ -2,9 +2,9 @@
 
 ### Example
 
-| name   | all or each?  |accepts args?  |
-|--------|---------------|---------------|
-| alert  | each          | no            |
+| name     | all or each?  | accepts args?  | return value        |
+|----------|---------------|----------------|---------------------|
+| `alert`  | each          | no             | `[undefined, ...]`  |
 
 The following example displays two alerts in sequence.
 
