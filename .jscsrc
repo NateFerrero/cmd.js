@@ -38,19 +38,14 @@
     "requireSpaceAfterLineComment": true,
     "requireSpaceBeforeObjectValues": true,
     "requireSpaceBetweenArguments": true,
-    "requireSpacesInAnonymousFunctionExpression": {
-        "beforeOpeningCurlyBrace": true
-    },
     "requireSpacesInForStatement": true,
-    "requireSpacesInFunctionDeclaration": {
-        "beforeOpeningCurlyBrace": true
-    },
     "disallowSpacesInNamedFunctionExpression": {
         "beforeOpeningRoundBrace": true
     },
     "disallowSpacesInFunctionDeclaration": {
         "beforeOpeningRoundBrace": true
     },
+    "disallowSpaceAfterObjectKeys": true,
     "disallowMultipleVarDecl": true,
     "requireBlocksOnNewline": true,
     "disallowEmptyBlocks": true,
