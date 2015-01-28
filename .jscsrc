@@ -39,7 +39,6 @@
     "requireSpaceBeforeObjectValues": true,
     "requireSpaceBetweenArguments": true,
     "requireSpacesInAnonymousFunctionExpression": {
-        "beforeOpeningRoundBrace": true,
         "beforeOpeningCurlyBrace": true
     },
     "requireSpacesInForStatement": true,
