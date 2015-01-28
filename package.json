@@ -22,8 +22,8 @@
   "scripts": {
     "lint": "./node_modules/.bin/jshint ./cmd.js ./lib --reporter=node_modules/jshint-stylish/stylish.js",
     "checkStyle": "./node_modules/.bin/jscs ./cmd.js ./lib",
-    "pretest": "npm run-script lint && npm run-script checkStyle",
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --check-leaks --recursive -R spec",
+    "pretest": "npm run-script --loglevel silent lint && npm run-script --loglevel silent checkStyle",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --check-leaks --no-exit --recursive -R spec",
     "posttest": "./node_modules/.bin/istanbul check-coverage"
   },
   "repository": {
