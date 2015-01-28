@@ -3,12 +3,13 @@
  * @author Nate Ferrero
  */
 this.cmd = (function (Command) {
+    'use strict';
 
     /**
      * Command.all() causes the function to be called on an array of values
      * @author Nate Ferrero
      */
-    Command.prototype.all = function cmdAll (name, fn, args) {
+    Command.prototype.all = function cmdAll(name, fn, args) {
         if (typeof fn !== 'function') {
             throw new Error('cmd.all(name, fn), fn was not a function, got ' + typeof fn);
         }
@@ -19,7 +20,7 @@ this.cmd = (function (Command) {
                 return this.getArgs(name, 'vals', function (vals) {
                     return fn(args, vals);
                 }.bind(this));
-            };
+            }
 
             return this.getArgs(name, 'args', function (args) {
                 return this.getArgs(name, 'vals', function (vals) {
@@ -35,7 +36,7 @@ this.cmd = (function (Command) {
      * Command.each() causes the function to be called on each value
      * @author Nate Ferrero
      */
-    Command.prototype.each = function cmdEach (name, fn, args) {
+    Command.prototype.each = function cmdEach(name, fn, args) {
         if (typeof fn !== 'function') {
             throw new Error('cmd.each(name, fn), fn was not a function, got ' + typeof fn);
         }
@@ -48,7 +49,7 @@ this.cmd = (function (Command) {
                         return fn(args, val);
                     });
                 }.bind(this));
-            };
+            }
 
             return this.getArgs(name, 'args', function (args) {
                 return this.getArgs(name, 'vals', function (vals) {
@@ -66,16 +67,20 @@ this.cmd = (function (Command) {
      * Command.getArgs()
      * @author Nate Ferrero
      */
-    Command.prototype.getArgs = function getArgsWrapper (name, purpose, done) {
+    Command.prototype.getArgs = function getArgsWrapper(name, purpose, done) {
 
-        var getArgs = function getArgs () {
+        var getArgs = function getArgs() {
             var args = Array.prototype.slice.apply(arguments);
 
             if (purpose === 'vals') {
                 var _args = [];
                 args.forEach(function (arg) {
-                    Array.isArray(arg) ? Array.prototype.push.apply(_args, arg) :
+                    if (Array.isArray(arg)) {
+                        Array.prototype.push.apply(_args, arg);
+                    }
+                    else {
                         _args.push(arg);
+                    }
                 });
                 return done(_args);
             }
@@ -108,19 +113,26 @@ this.cmd = (function (Command) {
         return getArgs;
     };
 
-    return new Command();
+    var cmd = new Command();
+    return cmd;
 })(function (context) {
+    'use strict';
     this.context = context;
 });
 
 /**
  * Node.js require support
  */
-this.module && (this.module.exports = this.cmd);
+if (this.module) {
+    this.module.exports = this.cmd;
+}
 
 /**
  * AMD support
  */
-this.define && this.define('cmd', [], function () {
-    return this.cmd;
-});
+if (this.define) {
+    this.define('cmd', [], function () {
+        'use strict';
+        return this.cmd;
+    });
+}
