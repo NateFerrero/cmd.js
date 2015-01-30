@@ -67,7 +67,11 @@ The benefits of this style include reusability, clear logical flow, and less cod
 
 ### Developer Notes
 
-This project uses gulp. Make all changes/additions in `lib/*.js` while running `gulp` from the command line.
+Installation is done with `npm install` or `make install` for convenience.
+
+Testing is accomplished with mocha, and can be run with `npm test` or `make test`. There's also a handy `make test-watch` to see live test results during development.
+
+This project is built with [gulp](http://gulpjs.com/). Make all changes/additions in `lib/*.js` while running `make build-watch` from the command line.
 
 # API Reference
 
