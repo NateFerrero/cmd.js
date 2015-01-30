@@ -2,7 +2,7 @@
   "name": "cmd.js",
   "version": "0.0.4",
   "description": "A chainable utility toolkit for JavaScript.",
-  "main": "cmd.js",
+  "main": "index.js",
   "dependencies": {},
   "devDependencies": {
     "chai": "^1.10.0",

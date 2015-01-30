@@ -3,7 +3,7 @@ var watch = require('gulp-watch');
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
 
-var lib = 'lib/*.js';
+var lib = 'src/lib/*.js';
 
 gulp.task('lib', function() {
   return gulp.src(lib)
