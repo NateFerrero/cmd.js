@@ -18,6 +18,9 @@
             else if (plugin.each) {
                 self.each(name, plugin.each, plugin.args);
             }
+            else if (plugin.raw) {
+                self.raw(name, plugin.raw);
+            }
         });
     };
 
@@ -77,6 +80,18 @@
         });
 
         return cmd[name];
+    };
+
+    /**
+     * Command.raw() causes to function to be called exactly once with the given arguments
+     */
+    Command.prototype.raw = function cmdRaw(name, fn) {
+        if (typeof fn !== 'function') {
+            throw new Error('cmd.raw(name, fn), fn was not a function, got ' + typeof fn);
+        }
+        Command.prototype.__defineGetter__(name, function () {
+            return fn;
+        });
     };
 
     /**
