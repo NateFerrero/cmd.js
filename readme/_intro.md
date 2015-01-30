@@ -47,6 +47,9 @@ Pretty simple, right?
 ### cmd.js
 
 ```js
+// Enable all cmd plugins
+cmd.use('*');
+
 var pluck = cmd.pluck;
 var sortAndPrint = cmd.sort(pluck('age')).
     and.logger(pluck('name'), pluck('id'));
