@@ -6,8 +6,11 @@
 &nbsp;
 [![NPM](https://nodei.co/npm-dl/cmd.js.png?months=6&height=2)](https://nodei.co/npm/cmd.js/)
 
+[![Package Version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/cmd.js)
+[![Package License](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/cmd.js)
 [![Code Climate](https://codeclimate.com/github/NateFerrero/cmd.js/badges/gpa.svg)](https://codeclimate.com/github/NateFerrero/cmd.js)
 [![Test Coverage](https://codeclimate.com/github/NateFerrero/cmd.js/badges/coverage.svg)](https://codeclimate.com/github/NateFerrero/cmd.js)
+[![Github Stars](https://img.shields.io/github/stars/badges/shields.svg)](https://github.com/NateFerrero/cmd.js)
 
 Ever find yourself handling complex data structures in JavaScript? With cmd.js, one can assemble small blocks of logic, and easily pass data through them for processing. Here's a sample task, and how it's made clearer with cmd.js:
 
