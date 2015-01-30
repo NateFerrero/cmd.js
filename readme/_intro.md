@@ -4,6 +4,11 @@
 
 Ever find yourself handling complex data structures in JavaScript? With cmd.js, one can assemble small blocks of logic, and easily pass data through them for processing. Here's a sample task, and how it's made clearer with cmd.js:
 
+[![NPM](https://nodei.co/npm/cmd.js.png?downloads=true&stars=true)](https://nodei.co/npm/cmd.js/)
+
+[![Code Climate](https://codeclimate.com/github/NateFerrero/cmd.js/badges/gpa.svg)](https://codeclimate.com/github/NateFerrero/cmd.js)
+[![Test Coverage](https://codeclimate.com/github/NateFerrero/cmd.js/badges/coverage.svg)](https://codeclimate.com/github/NateFerrero/cmd.js)
+
 ### The Task
 
 Sort the users by increasing age, and display the name and id of each user.
