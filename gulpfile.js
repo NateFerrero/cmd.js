@@ -9,7 +9,7 @@ gulp.task('lib', function() {
   return gulp.src(lib)
     .pipe(jshint())
     .pipe(concat('cmd.lib.js')) 
-    .pipe(gulp.dest('.'));
+    .pipe(gulp.dest('./build'));
 });
 
 var readme = 'readme/*.md';
@@ -25,4 +25,5 @@ gulp.task('watch', function () {
     gulp.watch(readme, ['readme']);
 });
 
-gulp.task('default', ['lib', 'readme', 'watch']);
+gulp.task('default', ['lib', 'readme']);
+gulp.task('start', ['default', 'watch']);
