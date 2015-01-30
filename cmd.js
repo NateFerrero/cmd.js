@@ -2,8 +2,24 @@
  * Command: new Command(function () { ... })
  * @author Nate Ferrero
  */
-this.cmd = (function (Command) {
+(function (Command) {
     'use strict';
+
+    /**
+     * Command.use() loads plugins
+     */
+    Command.prototype.use = function () {
+        var self = this;
+        Array.prototype.forEach.call(arguments, function (name) {
+            var plugin = require('./lib/' + name);
+            if (plugin.all) {
+                self.all(name, plugin.all, plugin.args);
+            }
+            else if (plugin.each) {
+                self.each(name, plugin.each, plugin.args);
+            }
+        });
+    };
 
     /**
      * Command.all() causes the function to be called on an array of values
@@ -72,20 +88,16 @@ this.cmd = (function (Command) {
         var getArgs = function getArgs() {
             var args = Array.prototype.slice.apply(arguments);
 
-            if (purpose === 'vals') {
-                var _args = [];
-                args.forEach(function (arg) {
-                    if (Array.isArray(arg)) {
-                        Array.prototype.push.apply(_args, arg);
-                    }
-                    else {
-                        _args.push(arg);
-                    }
-                });
-                return done(_args);
-            }
-
-            return done(args);
+            var _args = [];
+            args.forEach(function (arg) {
+                if (Array.isArray(arg)) {
+                    Array.prototype.push.apply(_args, arg);
+                }
+                else {
+                    _args.push(arg);
+                }
+            });
+            return done(_args);
         };
 
         getArgs.$name = name;
@@ -114,25 +126,28 @@ this.cmd = (function (Command) {
     };
 
     var cmd = new Command();
-    return cmd;
+
+    /**
+     * Node.js support
+     */
+    if (typeof module === 'object') {
+        module.exports = cmd;
+    }
+
+    /**
+     * Require.js support
+     */
+    else if (typeof this.define === 'function') {
+        this.define([], cmd);
+    }
+
+    /**
+     * Otherwise attach to global
+     */
+    else {
+        this.cmd = cmd;
+    }
 })(function (context) {
     'use strict';
     this.context = context;
 });
-
-/**
- * Node.js require support
- */
-if (this.module) {
-    this.module.exports = this.cmd;
-}
-
-/**
- * AMD support
- */
-if (this.define) {
-    this.define('cmd', [], function () {
-        'use strict';
-        return this.cmd;
-    });
-}

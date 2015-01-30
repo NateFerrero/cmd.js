@@ -5,6 +5,7 @@
   "main": "cmd.js",
   "dependencies": {},
   "devDependencies": {
+    "chai": "^1.10.0",
     "gulp": "^3.8.8",
     "gulp-cached": "^1.0.1",
     "gulp-concat": "^2.4.1",
