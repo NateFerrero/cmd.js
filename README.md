@@ -87,6 +87,26 @@ Some commands do not accept args, and you are given the command with empty args 
 cmd.sum(... vals ...);
 ```
 
+## Argument Merging
+
+Arguments are automatically merged one level deep for maximum convenience. For example, you can provide an array of arguments or individual arguments, or any combination thereof. The following are all identical:
+
+```js
+cmd.use('max');
+
+cmd.max(1, 2, 3, 4, 5); // [5]
+
+cmd.max([1, 2, 3, 4, 5]); // [5]
+
+cmd.max(1, [2, 3], 4, 5); // [5]
+
+cmd.max([1], 2, [3, 4, 5]); // [5]
+
+cmd.max([1], [2], [3], [4], [5]); // [5]
+```
+
+Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
+
 ## Alert
 
 ### `cmd.alert(val1, ...)`
