@@ -5,6 +5,8 @@
 (function () {
     'use strict';
 
+    var scope = this;
+
     /**
      * Command class
      */
@@ -18,7 +20,26 @@
     Command.prototype.use = function () {
         var self = this;
         Array.prototype.forEach.call(arguments, function (name) {
-            var plugin = require('./lib/' + name);
+            if (name === '*') {
+                var plugins = [
+                    'alert', 'compare', 'exists', 'extend', 'filter',
+                    'format', 'join', 'log', 'logger', 'lower', 'obj', 'pluck',
+                    'push', 'sort', 'switch', 'upper', 'view'
+                ];
+                return plugins.forEach(function (name) {
+                    self.use(name);
+                });
+            }
+
+            /**
+             * Load via require for Node or from window for browser
+             */
+            var plugin = typeof module === 'object' ? require('./lib/' + name) : scope['cmd:lib'][name];
+
+            if (!plugin || typeof plugin !== 'object') {
+                throw new Error('cmd.js plugin ' + name + ' is not available');
+            }
+
             if (plugin.all) {
                 self.all(name, plugin.all, plugin.args);
             }
@@ -159,16 +180,16 @@
     /**
      * Require.js support
      */
-    else if (typeof this.define === 'function') {
-        this.define([], cmd);
-        this['cmd:lib'] = {};
+    else if (typeof scope.define === 'function') {
+        scope.define([], cmd);
+        scope['cmd:lib'] = {};
     }
 
     /**
      * Otherwise attach to global
      */
     else {
-        this.cmd = cmd;
-        this['cmd:lib'] = {};
+        scope.cmd = cmd;
+        scope['cmd:lib'] = {};
     }
 }).call(this);

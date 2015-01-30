@@ -4,8 +4,12 @@
         <script src="cmd.js"></script>
         <script src="build/cmd.lib.js"></script>
         <script>
+            // Enable all cmd plugins
+            cmd.use('*');
+        </script>
+        <script>
             var users = [{id: 1}, {id: 2}, {}, {id: 3}, {id: 4}];
-            var userIds = 
+            var userIds =
                 cmd.pluck('id').
                 and.filter(cmd.exists).
                 and.join(', ');
@@ -65,7 +69,7 @@
             row('cmd.foo([1, 2], 3)', function () {
                 return cmd.foo([1, 2], 3);
             });
-            
+
             var cmdExamples;
 
             setTimeout(function () {
