@@ -8,6 +8,7 @@
 
 [![Package Version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/cmd.js)
 [![Package License](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/cmd.js)
+[![Build Status](https://travis-ci.org/NateFerrero/cmd.js.svg?branch=master)](https://travis-ci.org/NateFerrero/cmd.js)
 [![Code Climate](https://codeclimate.com/github/NateFerrero/cmd.js/badges/gpa.svg)](https://codeclimate.com/github/NateFerrero/cmd.js)
 [![Test Coverage](https://codeclimate.com/github/NateFerrero/cmd.js/badges/coverage.svg)](https://codeclimate.com/github/NateFerrero/cmd.js)
 [![Github Stars](https://img.shields.io/github/stars/badges/shields.svg)](https://github.com/NateFerrero/cmd.js)
