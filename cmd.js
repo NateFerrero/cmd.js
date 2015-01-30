@@ -2,8 +2,15 @@
  * Command: new Command(function () { ... })
  * @author Nate Ferrero
  */
-(function (Command) {
+(function () {
     'use strict';
+
+    /**
+     * Command class
+     */
+    var Command = function (context) {
+        this.context = context;
+    };
 
     /**
      * Command.use() loads plugins
@@ -154,6 +161,7 @@
      */
     else if (typeof this.define === 'function') {
         this.define([], cmd);
+        this['cmd:lib'] = {};
     }
 
     /**
@@ -161,8 +169,6 @@
      */
     else {
         this.cmd = cmd;
+        this['cmd:lib'] = {};
     }
-})(function (context) {
-    'use strict';
-    this.context = context;
-});
+}).call(this);
