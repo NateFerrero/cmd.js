@@ -66,5 +66,5 @@
             }
         };
     };
-}).call(typeof module === 'undefined' ? this['cmd:lib'].title = {} : this);
+}).call(typeof module === 'undefined' ? this['cmd:lib'].case = {} : this);
 
