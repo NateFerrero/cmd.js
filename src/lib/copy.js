@@ -8,7 +8,9 @@
         var copy;
 
         // Handle the 3 simple types, and null or undefined
-        if (null == obj || "object" != typeof obj) return obj;
+        if (obj === null || typeof obj !== 'object') {
+            return obj;
+        }
 
         // Handle Date
         if (obj instanceof Date) {
@@ -30,15 +32,17 @@
         if (obj instanceof Object) {
             copy = {};
             for (var attr in obj) {
-                if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
+                if (obj.hasOwnProperty(attr)) {
+                    copy[attr] = clone(obj[attr]);
+                }
             }
             return copy;
         }
 
-        throw new Error("Unable to copy obj! Its type isn't supported.");
-    };
+        throw new Error('Unable to copy obj! Its type (' + typeof obj + ')is not supported.');
+    }
 
-    this.export = function (cmd) {
+    this.export = function () {
 
         /**
          * Command: copy(null) === [false]

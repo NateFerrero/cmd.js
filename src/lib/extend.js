@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    this.export = function (cmd) {
+    this.export = function () {
 
         /**
          * Command: extend({b: 2}, {c: 3})({a: 1}) === [{a: 1, b: 2, c: 3}]

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    this.export = function (cmd) {
+    this.export = function () {
 
         /**
          * Command: filter(function (x) {

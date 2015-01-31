@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    this.export = function (cmd) {
+    this.export = function () {
 
         /**
          * Command: obj('a', 'b')(1, 2) === [{a: 1, b: 2}]

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    this.export = function (cmd) {
+    this.export = function () {
 
         /**
          * Command: max(1, 2, 3, 4, 5) - returns the maximum value
