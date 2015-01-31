@@ -1,10 +1,10 @@
 ### `cmd.case.*(val1, ...)`
 
-| name          | all or each?  | accepts args?  | return value        |
-|---------------|---------------|----------------|---------------------|
-| `case.lower`  | each          | no             | `['change string case', ...]`  |
-| `case.title`  | each          | no             | `['Change String Case', ...]`  |
-| `case.upper`  | each          | no             | `['CHANGE STRING CASE', ...]`  |
+| name          | return value                   |
+|---------------|--------------------------------|
+| `case.lower`  | `['change string case', ...]`  |
+| `case.title`  | `['Change String Case', ...]`  |
+| `case.upper`  | `['CHANGE STRING CASE', ...]`  |
 
 #### Example
 

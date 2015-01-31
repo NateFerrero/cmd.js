@@ -1,8 +1,8 @@
 ### `cmd.extend(arg1, ...)(val1, ...)`
 
-| name       | all or each?  | accepts args?  | return value    |
-|------------|---------------|----------------|-----------------|
-| `extend`   | each          | yes            | `[{...}, ...]`  |
+| name       | return value    |
+|------------|-----------------|
+| `extend`   | `[{...}, ...]`  |
 
 Extends each value with each argument, in order.
 

@@ -48,9 +48,9 @@ cmd.log('Hello World');
 </script>
 ```
 
-### Comparison With Vanilla JS
+## Chaining Example
 
-Sort the users by increasing age, and display the name and id of each user.
+Goal: sort the users by increasing age, and display the name and id of each user.
 
 #### Data Set
 
@@ -81,7 +81,7 @@ users.forEach(function (user) {
 // John 1
 ```
 
-Pretty simple, right?
+Pretty simple, right? With cmd.js, it's even simpler:
 
 #### cmd.js
 
@@ -90,6 +90,7 @@ Pretty simple, right?
 cmd.use('*');
 
 var pluck = cmd.pluck;
+
 var sortAndPrint = cmd.sort(pluck('age')).
     and.logger(pluck('name'), pluck('id'));
 
@@ -102,7 +103,7 @@ sortAndPrint(users);
 // John 1
 ```
 
-The benefits of this style include reusability, clear logical flow, and less code in general. By composing commands you keep your functionality completely isolated from your data.
+The benefits of this style include reusability, clear logical flow, and less code in general. By chaining commands you create reusable logic isolated from specifc data variables.
 
 ### Developer Notes
 

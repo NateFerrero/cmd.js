@@ -48,9 +48,9 @@ cmd.log('Hello World');
 </script>
 ```
 
-### Comparison With Vanilla JS
+## Chaining Example
 
-Sort the users by increasing age, and display the name and id of each user.
+Goal: sort the users by increasing age, and display the name and id of each user.
 
 #### Data Set
 
@@ -81,7 +81,7 @@ users.forEach(function (user) {
 // John 1
 ```
 
-Pretty simple, right?
+Pretty simple, right? With cmd.js, it's even simpler:
 
 #### cmd.js
 
@@ -90,6 +90,7 @@ Pretty simple, right?
 cmd.use('*');
 
 var pluck = cmd.pluck;
+
 var sortAndPrint = cmd.sort(pluck('age')).
     and.logger(pluck('name'), pluck('id'));
 
@@ -102,7 +103,7 @@ sortAndPrint(users);
 // John 1
 ```
 
-The benefits of this style include reusability, clear logical flow, and less code in general. By composing commands you keep your functionality completely isolated from your data.
+The benefits of this style include reusability, clear logical flow, and less code in general. By chaining commands you create reusable logic isolated from specifc data variables.
 
 ### Developer Notes
 
@@ -150,9 +151,9 @@ Because of this, if you absolutely need to work with an array as-is, pass it in 
 
 ### `cmd.alert(val1, ...)`
 
-| name     | all or each?  | accepts args?  | return value        |
-|----------|---------------|----------------|---------------------|
-| `alert`  | each          | no             | `[undefined, ...]`  |
+| name     | return value        |
+|----------|---------------------|
+| `alert`  | `[undefined, ...]`  |
 
 #### Example
 
@@ -165,11 +166,11 @@ cmd.alert('Hello World!', 'Will Smith here.');
 
 ### `cmd.case.*(val1, ...)`
 
-| name          | all or each?  | accepts args?  | return value        |
-|---------------|---------------|----------------|---------------------|
-| `case.lower`  | each          | no             | `['change string case', ...]`  |
-| `case.title`  | each          | no             | `['Change String Case', ...]`  |
-| `case.upper`  | each          | no             | `['CHANGE STRING CASE', ...]`  |
+| name          | return value                   |
+|---------------|--------------------------------|
+| `case.lower`  | `['change string case', ...]`  |
+| `case.title`  | `['Change String Case', ...]`  |
+| `case.upper`  | `['CHANGE STRING CASE', ...]`  |
 
 #### Example
 
@@ -182,9 +183,9 @@ cmd.case.lower('Hello World!', 'Will Smith here.');
 
 ### `cmd.compare(val1, val2)`
 
-| name       | all or each?  | accepts args?  | return value    |
-|------------|---------------|----------------|-----------------|
-| `compare`  | all           | no             | `-1 or 0 or 1`  |
+| name       | return value    |
+|------------|-----------------|
+| `compare`  | `-1 or 0 or 1`  |
 
 Compare is a unique command in that it only accepts 2 values. Any further values will be ignored. It is used internally for `cmd.sort` but available for custom sorting as well. It defines a sort order for any two JavaScript types.
 
@@ -208,9 +209,9 @@ cmd.compare('hello', false);
 
 ### `cmd.exists(val1, ...)`
 
-| name       | all or each?  | accepts args?  | return value            |
-|------------|---------------|----------------|-------------------------|
-| `exists`   | each          | no             | `[true or false, ...]`  |
+| name       | return value            |
+|------------|-------------------------|
+| `exists`   | `[true or false, ...]`  |
 
 #### Example
 
@@ -223,9 +224,9 @@ cmd.exists(null, undefined, false, '', 0, true);
 
 ### `cmd.extend(arg1, ...)(val1, ...)`
 
-| name       | all or each?  | accepts args?  | return value    |
-|------------|---------------|----------------|-----------------|
-| `extend`   | each          | yes            | `[{...}, ...]`  |
+| name       | return value    |
+|------------|-----------------|
+| `extend`   | `[{...}, ...]`  |
 
 Extends each value with each argument, in order.
 
@@ -236,11 +237,112 @@ cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
 // [{item: 'wrench', color: 'red'}, {item: 'apple', color: 'red'}]
 ```
 
+### `cmd.filter(val1, ...)`
+
+| name       | return value    |
+|------------|---------------- |
+| `filter`   | `[mixed, ...]`  |
+
+#### Example
+
+The following example filters the values to only even numbers greater than 5.
+
+```js
+cmd.filter(function (x) {
+    return x % 2 === 0;
+}, function (x) {
+    return x > 5;
+})(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+// [6, 8, 10]
+```
+
+### `cmd.format(val1, ...)`
+
+| name       | return value                 |
+|------------|----------------------------- |
+| `format`   | `['formatted string', ...]`  |
+
+#### Example
+
+The following example formats two strings using positional targets.
+
+```js
+cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 'c');
+// ["I love apples, blueberries, and cake", "a + b = c"]
+```
+
+### `cmd.join(val1, ...)`
+
+| name     | return value              |
+|----------|-------------------------- |
+| `join`   | `['joined string', ...]`  |
+
+#### Example
+
+The following example joins the values using the glue provided in initial arguments.
+
+```js
+cmd.join('-', '+')('a', 'b', 'c');
+// ["a-b-c", "a+b+c"]
+```
 
 
 
+### `cmd.obj(val1, ...)`
 
+| name     | return value     |
+|----------|----------------- |
+| `obj`   | `[{ ... }, ...]`  |
 
+#### Example
+
+The following example builds an object with keys and repeated values. Note the `[[wrapped array]]` syntax to avoid spreading the array as arguments.
+
+```js
+cmd.obj('name', 'age', 'city', 'interests')(
+    'Nate', 25, 'Los Angeles, CA', [['tech', 'javascript', 'node.js', 'space']]
+);
+// [{
+//     "name": "Nate",
+//     "age": 25,
+//     "city": "Los Angeles, CA",
+//     "interests": ["tech","javascript","node.js","space"]
+// }]
+```
+
+### `cmd.pluck(val1, ...)`
+
+| name       | return value    |
+|------------|---------------- |
+| `pluck`    | `[mixed, ...]`  |
+
+#### Example
+
+The following example plucks object properties.
+
+```js
+var people = [{
+    name: 'Adam',
+    pet: {
+        type: 'bird',
+        name: 'Sherlock'
+    }
+}, {
+    name: 'Shannon',
+    pet: {
+        type: 'snake',
+        name: 'Rosa'
+    }
+}, {
+    name: 'Upgrayyed',
+    pet: {
+        type: 'dog',
+        name: 'Maxximus'
+    }
+}];
+cmd.pluck('pet', 'name')(people);
+// ["Sherlock", "Rosa", "Maxximus"]
+```
 
 
 

@@ -1,0 +1,33 @@
+### `cmd.pluck(val1, ...)`
+
+| name       | return value    |
+|------------|---------------- |
+| `pluck`    | `[mixed, ...]`  |
+
+#### Example
+
+The following example plucks object properties.
+
+```js
+var people = [{
+    name: 'Adam',
+    pet: {
+        type: 'bird',
+        name: 'Sherlock'
+    }
+}, {
+    name: 'Shannon',
+    pet: {
+        type: 'snake',
+        name: 'Rosa'
+    }
+}, {
+    name: 'Upgrayyed',
+    pet: {
+        type: 'dog',
+        name: 'Maxximus'
+    }
+}];
+cmd.pluck('pet', 'name')(people);
+// ["Sherlock", "Rosa", "Maxximus"]
+```

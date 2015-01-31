@@ -1,8 +1,8 @@
 ### `cmd.exists(val1, ...)`
 
-| name       | all or each?  | accepts args?  | return value            |
-|------------|---------------|----------------|-------------------------|
-| `exists`   | each          | no             | `[true or false, ...]`  |
+| name       | return value            |
+|------------|-------------------------|
+| `exists`   | `[true or false, ...]`  |
 
 #### Example
 

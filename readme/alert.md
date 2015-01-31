@@ -1,8 +1,8 @@
 ### `cmd.alert(val1, ...)`
 
-| name     | all or each?  | accepts args?  | return value        |
-|----------|---------------|----------------|---------------------|
-| `alert`  | each          | no             | `[undefined, ...]`  |
+| name     | return value        |
+|----------|---------------------|
+| `alert`  | `[undefined, ...]`  |
 
 #### Example
 
