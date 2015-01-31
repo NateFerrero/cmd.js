@@ -26,21 +26,32 @@
             /**
              * Example foo command
              */
-            cmd.all('foo', function (args, vals) {
-                return {args: args, vals: vals};
+            cmd.module('foo', {
+                all: function (args, vals) {
+                    return {args: args, vals: vals};
+                }
             });
 
             var rows = [];
-            var row = cmd.all('save to rows', function(args, vals) {
-                cmd.obj('label', 'fn').
-                    and.push.to(rows)(vals); // push vals onto rows array
-            })();
+            cmd.module('save to rows', {
+                args: [],
+                all: function(args, vals) {
+                    cmd.obj('label', 'fn').
+                        and.push.to(rows)(vals); // push vals onto rows array
+                }
+            });
 
             var cols = [];
-            var col = cmd.all('save to cols', function(args, vals) {
-                cmd.obj('label', 'fn').
-                    and.push.to(cols)(vals); // push vals onto cols array
-            })();
+            cmd.module('save to cols', {
+                args: [],
+                all: function(args, vals) {
+                    cmd.obj('label', 'fn').
+                        and.push.to(cols)(vals); // push vals onto cols array
+                }
+            });
+
+            var row = cmd['save to rows'];
+            var col = cmd['save to cols'];
 
             row('cmd.foo', function () {
                 return cmd.foo;

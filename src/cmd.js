@@ -21,12 +21,12 @@
         var self = this;
         Array.prototype.forEach.call(arguments, function (name) {
             if (name === '*') {
-                var plugins = [
+                var libs = [
                     'alert', 'case', 'compare', 'copy', 'exists', 'extend', 'filter', 'format', 'join',
                     'log', 'logger', 'max', 'min', 'obj', 'pluck', 'product',
                     'push', 'sort', 'sum', 'switch', 'view'
                 ];
-                return plugins.forEach(function (name) {
+                return libs.forEach(function (name) {
                     self.use(name);
                 });
             }
@@ -34,26 +34,35 @@
             /**
              * Load via require for Node or from window for browser
              */
-            var plugin = typeof module === 'object' ? require('./lib/' + name) : scope['cmd:lib'][name];
+            var mod = typeof module === 'object' ? require('./lib/' + name) : scope['cmd:lib'][name];
 
-            if (!plugin || typeof plugin !== 'object') {
-                throw new Error('cmd.js plugin ' + name + ' is not available');
-            }
-
-            if (plugin.export) {
-                plugin.export(self);
+            if (!mod || typeof mod !== 'object') {
+                throw new Error('cmd.js module ' + name + ' is not available');
             }
 
-            if (plugin.all) {
-                self.all(name, plugin.all, plugin);
-            }
-            else if (plugin.each) {
-                self.each(name, plugin.each, plugin);
-            }
-            else if (plugin.raw) {
-                self.raw(name, plugin.raw);
-            }
+            /**
+             * Register the module scope as cmd.name
+             */
+            self.module(name, mod);
         });
+    };
+
+    /**
+     * Command.module(name, mod) registers a new module as cmd.name
+     */
+    Command.prototype.module = function (name, mod) {
+        if (mod.export) {
+            mod.export(this);
+        }
+        if (mod.all) {
+            this.all(name, mod.all, mod);
+        }
+        else if (mod.each) {
+            this.each(name, mod.each, mod);
+        }
+        else if (mod.raw) {
+            this.raw(name, mod.raw);
+        }
     };
 
     /**
