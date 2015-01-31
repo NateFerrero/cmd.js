@@ -16,6 +16,6 @@ cmd.obj('name', 'age', 'city', 'interests')(
 //     "name": "Nate",
 //     "age": 25,
 //     "city": "Los Angeles, CA",
-//     "interests": ["tech","javascript","node.js","space"]
+//     "interests": ["tech", "javascript", "node.js", "space"]
 // }]
 ```
