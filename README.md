@@ -112,6 +112,8 @@ cmd.max([1], [2], [3], [4], [5]); // [5]
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
 
+## All Modules
+
 ### `cmd.alert(val1, ...)`
 
 | name     | all or each?  | accepts args?  | return value        |
