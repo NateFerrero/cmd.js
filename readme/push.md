@@ -1,4 +1,4 @@
-### `cmd.push.to(val1, ...)`
+### cmd.push.to
 
 | name       | return value    |
 |------------|---------------- |

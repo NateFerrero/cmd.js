@@ -1,4 +1,4 @@
-### `cmd.compare(val1, val2)`
+### cmd.compare
 
 | name       | return value    |
 |------------|-----------------|

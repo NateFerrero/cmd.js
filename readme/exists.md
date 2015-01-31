@@ -1,4 +1,4 @@
-### `cmd.exists(val1, ...)`
+### cmd.exists
 
 | name       | return value            |
 |------------|-------------------------|

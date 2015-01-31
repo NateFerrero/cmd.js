@@ -1,4 +1,4 @@
-### `cmd.filter(val1, ...)`
+### cmd.filter
 
 | name       | return value    |
 |------------|---------------- |

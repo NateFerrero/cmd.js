@@ -1,4 +1,4 @@
-### `cmd.extend(arg1, ...)(val1, ...)`
+### cmd.extend
 
 | name       | return value    |
 |------------|-----------------|

@@ -1,4 +1,4 @@
-### `cmd.pluck(val1, ...)`
+### cmd.pluck
 
 | name       | return value    |
 |------------|---------------- |

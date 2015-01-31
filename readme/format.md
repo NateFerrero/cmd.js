@@ -1,4 +1,4 @@
-### `cmd.format(val1, ...)`
+### cmd.format
 
 | name       | return value                 |
 |------------|----------------------------- |

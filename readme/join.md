@@ -1,4 +1,4 @@
-### `cmd.join(val1, ...)`
+### cmd.join
 
 | name     | return value              |
 |----------|-------------------------- |

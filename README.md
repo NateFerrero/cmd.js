@@ -149,7 +149,7 @@ Because of this, if you absolutely need to work with an array as-is, pass it in 
 
 ## All Modules
 
-### `cmd.alert(val1, ...)`
+### cmd.alert
 
 | name     | return value        |
 |----------|---------------------|
@@ -164,7 +164,7 @@ cmd.alert('Hello World!', 'Will Smith here.');
 // two alerts displayed (only in browser)
 ```
 
-### `cmd.case.*(val1, ...)`
+### cmd.case.*
 
 | name          | return value                   |
 |---------------|--------------------------------|
@@ -181,7 +181,7 @@ cmd.case.lower('Hello World!', 'Will Smith here.');
 // ["hello world!", "will smith here."]
 ```
 
-### `cmd.compare(val1, val2)`
+### cmd.compare
 
 | name       | return value    |
 |------------|-----------------|
@@ -207,7 +207,7 @@ cmd.compare('hello', false);
 // 1
 ```
 
-### `cmd.exists(val1, ...)`
+### cmd.exists
 
 | name       | return value            |
 |------------|-------------------------|
@@ -222,7 +222,7 @@ cmd.exists(null, undefined, false, '', 0, true);
 // [false, false, true, true, true, true]
 ```
 
-### `cmd.extend(arg1, ...)(val1, ...)`
+### cmd.extend
 
 | name       | return value    |
 |------------|-----------------|
@@ -237,7 +237,7 @@ cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
 // [{item: 'wrench', color: 'red'}, {item: 'apple', color: 'red'}]
 ```
 
-### `cmd.filter(val1, ...)`
+### cmd.filter
 
 | name       | return value    |
 |------------|---------------- |
@@ -256,7 +256,7 @@ cmd.filter(function (x) {
 // [6, 8, 10]
 ```
 
-### `cmd.format(val1, ...)`
+### cmd.format
 
 | name       | return value                 |
 |------------|----------------------------- |
@@ -271,7 +271,7 @@ cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 
 // ["I love apples, blueberries, and cake", "a + b = c"]
 ```
 
-### `cmd.join(val1, ...)`
+### cmd.join
 
 | name     | return value              |
 |----------|-------------------------- |
@@ -288,7 +288,7 @@ cmd.join('-', '+')('a', 'b', 'c');
 
 
 
-### `cmd.obj(val1, ...)`
+### cmd.obj
 
 | name     | return value     |
 |----------|----------------- |
@@ -310,7 +310,7 @@ cmd.obj('name', 'age', 'city', 'interests')(
 // }]
 ```
 
-### `cmd.pluck(val1, ...)`
+### cmd.pluck
 
 | name       | return value    |
 |------------|---------------- |
@@ -344,7 +344,7 @@ cmd.pluck('pet', 'name')(people);
 // ["Sherlock", "Rosa", "Maxximus"]
 ```
 
-### `cmd.push.to(val1, ...)`
+### cmd.push.to
 
 | name       | return value    |
 |------------|---------------- |

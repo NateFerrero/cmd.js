@@ -1,4 +1,4 @@
-### `cmd.alert(val1, ...)`
+### cmd.alert
 
 | name     | return value        |
 |----------|---------------------|

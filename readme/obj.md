@@ -1,4 +1,4 @@
-### `cmd.obj(val1, ...)`
+### cmd.obj
 
 | name     | return value     |
 |----------|----------------- |
