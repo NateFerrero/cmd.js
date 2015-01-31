@@ -112,8 +112,6 @@ cmd.max([1], [2], [3], [4], [5]); // [5]
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
 
-## Alert
-
 ### `cmd.alert(val1, ...)`
 
 | name     | all or each?  | accepts args?  | return value        |
@@ -128,8 +126,6 @@ The following example displays two alerts in sequence.
 cmd.alert('Hello World!', 'Will Smith here.');
 // two alerts displayed (only in browser)
 ```
-
-## Case
 
 ### `cmd.case.*(val1, ...)`
 
@@ -148,15 +144,13 @@ cmd.case.lower('Hello World!', 'Will Smith here.');
 // ["hello world!", "will smith here."]
 ```
 
-## Compare
-
 ### `cmd.compare(val1, val2)`
 
 | name       | all or each?  | accepts args?  | return value    |
 |------------|---------------|----------------|-----------------|
 | `compare`  | all           | no             | `-1 or 0 or 1`  |
 
-Compare is a unique command in that it only accepts 2 values. Any further values will be ignored.
+Compare is a unique command in that it only accepts 2 values. Any further values will be ignored. It is used internally for `cmd.sort` but available for custom sorting as well. It defines a sort order for any two JavaScript types.
 
 #### Example
 
@@ -165,9 +159,16 @@ The following example compares two values.
 ```js
 cmd.compare(8, 5);
 // 3
-```
 
-## Exists
+cmd.compare(1000, 'a');
+// -1
+
+cmd.compare('boo', 'apple');
+// 1
+
+cmd.compare('hello', false);
+// 1
+```
 
 ### `cmd.exists(val1, ...)`
 
@@ -183,8 +184,6 @@ The following example checks the existence of the values. Only null and undefine
 cmd.exists(null, undefined, false, '', 0, true);
 // [false, false, true, true, true, true]
 ```
-
-## Extend
 
 ### `cmd.extend(arg1, ...)(val1, ...)`
 
