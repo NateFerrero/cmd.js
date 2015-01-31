@@ -128,6 +128,7 @@ The following example displays two alerts in sequence.
 cmd.alert('Hello World!', 'Will Smith here.');
 ```
 
+
 ## Compare
 
 ### `cmd.compare(val1, val2)`
@@ -179,8 +180,6 @@ Extends each value with each argument, in order.
 cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
 // [{item: 'wrench', color: 'red'}, {item: 'apple', color: 'red'}]
 ```
-
-
 
 
 
