@@ -27,7 +27,7 @@ npm install cmd.js
 ```js
 var cmd = require('cmd.js');
 
-// Enable all cmd plugins
+// Enable all cmd modules
 cmd.use('*');
 
 // Test
@@ -40,7 +40,7 @@ cmd.log('Hello World');
 <script src="src/cmd.js"></script>
 <script src="build/cmd.lib.js"></script>
 <script>
-    // Enable all cmd plugins
+    // Enable all cmd modules
     cmd.use('*');
 
     // Test
@@ -86,7 +86,7 @@ Pretty simple, right? With cmd.js, it's even simpler:
 #### cmd.js
 
 ```js
-// Enable all cmd plugins
+// Enable all cmd modules
 cmd.use('*');
 
 var pluck = cmd.pluck;
