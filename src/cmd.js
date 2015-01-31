@@ -22,9 +22,9 @@
         Array.prototype.forEach.call(arguments, function (name) {
             if (name === '*') {
                 var plugins = [
-                    'alert', 'compare', 'copy', 'exists', 'extend', 'filter', 'format', 'join',
-                    'log', 'logger', 'lower', 'max', 'min', 'obj', 'pluck', 'product',
-                    'push', 'sort', 'sum', 'switch', 'title', 'upper', 'view'
+                    'alert', 'case', 'compare', 'copy', 'exists', 'extend', 'filter', 'format', 'join',
+                    'log', 'logger', 'max', 'min', 'obj', 'pluck', 'product',
+                    'push', 'sort', 'sum', 'switch', 'view'
                 ];
                 return plugins.forEach(function (name) {
                     self.use(name);
