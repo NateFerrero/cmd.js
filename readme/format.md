@@ -6,7 +6,7 @@
 
 #### Example
 
-The following example formats two strings using positional targets.
+The following example formats two strings using positional targets:
 
 ```js
 cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 'c');

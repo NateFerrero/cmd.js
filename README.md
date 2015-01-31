@@ -157,7 +157,7 @@ Because of this, if you absolutely need to work with an array as-is, pass it in 
 
 #### Example
 
-The following example displays two alerts in sequence.
+The following example displays two alerts in sequence:
 
 ```js
 cmd.alert('Hello World!', 'Will Smith here.');
@@ -187,7 +187,7 @@ cmd.case.lower('Hello World!', 'Will Smith here.');
 |------------|-----------------|
 | `compare`  | `-1 or 0 or 1`  |
 
-Compare is a unique command in that it only accepts 2 values. Any further values will be ignored. It is used internally for `cmd.sort` but available for custom sorting as well. It defines a sort order for any two JavaScript types.
+Compare is a unique command in that it only accepts 2 values. Any further values will be ignored. It is used internally for `cmd.sort` but available for custom sorting as well. It defines a sort order for any two JavaScript types:
 
 #### Example
 
@@ -215,7 +215,7 @@ cmd.compare('hello', false);
 
 #### Example
 
-The following example checks the existence of the values. Only null and undefined count as not existing.
+The following example checks the existence of the values. Only null and undefined count as not existing:
 
 ```js
 cmd.exists(null, undefined, false, '', 0, true);
@@ -228,7 +228,7 @@ cmd.exists(null, undefined, false, '', 0, true);
 |------------|-----------------|
 | `extend`   | `[{...}, ...]`  |
 
-Extends each value with each argument, in order.
+Extends each value with each argument, in order:
 
 #### Example
 
@@ -245,7 +245,7 @@ cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
 
 #### Example
 
-The following example filters the values to only even numbers greater than 5.
+The following example filters the values to only even numbers greater than 5:
 
 ```js
 cmd.filter(function (x) {
@@ -264,7 +264,7 @@ cmd.filter(function (x) {
 
 #### Example
 
-The following example formats two strings using positional targets.
+The following example formats two strings using positional targets:
 
 ```js
 cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 'c');
@@ -279,7 +279,7 @@ cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 
 
 #### Example
 
-The following example joins the values using the glue provided in initial arguments.
+The following example joins the values using the glue provided in initial arguments:
 
 ```js
 cmd.join('-', '+')('a', 'b', 'c');
@@ -296,7 +296,7 @@ cmd.join('-', '+')('a', 'b', 'c');
 
 #### Example
 
-The following example builds an object with keys and repeated values. Note the `[[wrapped array]]` syntax to avoid spreading the array as arguments.
+The following example builds an object with keys and repeated values. Note the `[[wrapped array]]` syntax to avoid spreading the array as arguments:
 
 ```js
 cmd.obj('name', 'age', 'city', 'interests')(
@@ -318,7 +318,7 @@ cmd.obj('name', 'age', 'city', 'interests')(
 
 #### Example
 
-The following example plucks object properties.
+The following example plucks object properties:
 
 ```js
 var people = [{
@@ -344,6 +344,41 @@ cmd.pluck('pet', 'name')(people);
 // ["Sherlock", "Rosa", "Maxximus"]
 ```
 
+### `cmd.push.to(val1, ...)`
+
+| name       | return value    |
+|------------|---------------- |
+| `push.to`  | `[mixed, ...]`  |
+
+#### Example
+
+The following example pushes to an array:
+
+```js
+var people = [];
+var add = cmd.push.to(people);
+
+add({
+    name: 'Adam'
+});
+
+add({
+    name: 'Blake'
+});
+
+console.log(people);
+// [{"name":"Adam"}, {"name":"Blake"}]
+```
+
+Push returns the value(s) passed in, so it can be used perfectly while chaining commands:
+
+```js
+add.and.log({name: 'Charlie'});
+// Object {name: "Charlie"}
+
+people.length;
+// 3
+```
 
 
 

@@ -4,7 +4,7 @@
 |------------|-----------------|
 | `extend`   | `[{...}, ...]`  |
 
-Extends each value with each argument, in order.
+Extends each value with each argument, in order:
 
 #### Example
 

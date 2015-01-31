@@ -7,10 +7,11 @@
          * Command: push.to([1])(2) -> [1, 2]
          * @author Nate Ferrero
          */
-        this.all = function (args, vals) {
-            return args.map(function (arg) {
-                arg.push.apply(arg, vals);
+        this.each = function (args, val) {
+            args.map(function (arg) {
+                arg.push(val);
             });
+            return val;
         };
     };
 }).call(typeof module === 'undefined' ? this['cmd:lib'].push = {} : this);

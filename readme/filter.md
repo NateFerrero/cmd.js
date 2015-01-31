@@ -6,7 +6,7 @@
 
 #### Example
 
-The following example filters the values to only even numbers greater than 5.
+The following example filters the values to only even numbers greater than 5:
 
 ```js
 cmd.filter(function (x) {

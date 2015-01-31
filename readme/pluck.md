@@ -6,7 +6,7 @@
 
 #### Example
 
-The following example plucks object properties.
+The following example plucks object properties:
 
 ```js
 var people = [{
