@@ -72,9 +72,9 @@ The benefits of this style include reusability, clear logical flow, and less cod
 
 ### Developer Notes
 
-Installation is done with `npm install` or `make install` for convenience.
+Development dependencies can be installed with `npm install` or `make install` for convenience.
 
-Testing is accomplished with mocha, and can be run with `npm test` or `make test`. There's also a handy `make test-watch` to see live test results during development.
+Testing is accomplished with [mocha](http://mochajs.org/), and can be run with `npm test` or `make test`. There's also a handy `make test-watch` to see live test results during development.
 
 This project is built with [gulp](http://gulpjs.com/). Make all changes/additions in `src/lib/*.js` while running `make build-watch` from the command line.
 
