@@ -33,13 +33,13 @@
             var rows = [];
             var row = cmd.all('save to rows', function(args, vals) {
                 cmd.obj('label', 'fn').
-                    and.push(rows)(vals); // push vals onto rows array
+                    and.push.to(rows)(vals); // push vals onto rows array
             })();
 
             var cols = [];
             var col = cmd.all('save to cols', function(args, vals) {
                 cmd.obj('label', 'fn').
-                    and.push(cols)(vals); // push vals onto cols array
+                    and.push.to(cols)(vals); // push vals onto cols array
             })();
 
             row('cmd.foo', function () {

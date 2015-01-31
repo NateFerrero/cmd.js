@@ -22,9 +22,9 @@
         Array.prototype.forEach.call(arguments, function (name) {
             if (name === '*') {
                 var plugins = [
-                    'alert', 'compare', 'exists', 'extend', 'filter',
-                    'format', 'join', 'log', 'logger', 'lower', 'obj', 'pluck',
-                    'push', 'sort', 'switch', 'upper', 'view'
+                    'alert', 'compare', 'copy', 'exists', 'extend', 'filter', 'format', 'join',
+                    'log', 'logger', 'lower', 'max', 'min', 'obj', 'pluck', 'product',
+                    'push', 'sort', 'sum', 'switch', 'title', 'upper', 'view'
                 ];
                 return plugins.forEach(function (name) {
                     self.use(name);
@@ -40,11 +40,15 @@
                 throw new Error('cmd.js plugin ' + name + ' is not available');
             }
 
+            if (plugin.export) {
+                plugin.export(self);
+            }
+
             if (plugin.all) {
-                self.all(name, plugin.all, plugin.args);
+                self.all(name, plugin.all, plugin);
             }
             else if (plugin.each) {
-                self.each(name, plugin.each, plugin.args);
+                self.each(name, plugin.each, plugin);
             }
             else if (plugin.raw) {
                 self.raw(name, plugin.raw);
@@ -56,24 +60,58 @@
      * Command.all() causes the function to be called on an array of values
      * @author Nate Ferrero
      */
-    Command.prototype.all = function cmdAll(name, fn, args) {
+    Command.prototype.all = function cmdAll(name, fn, plugin) {
         if (typeof fn !== 'function') {
             throw new Error('cmd.all(name, fn), fn was not a function, got ' + typeof fn);
         }
 
         Command.prototype.__defineGetter__(name, function () {
+            var self = this;
 
-            if (Array.isArray(args)) {
-                return this.getArgs(name, 'vals', function (vals) {
-                    return fn(args, vals);
-                }.bind(this));
+            /**
+             * Handle the case where plugin.args is defined
+             */
+            if (Array.isArray(plugin.args)) {
+                return self.getArgs(name, 'vals', function (vals) {
+                    return fn(plugin.args, vals);
+                });
             }
 
-            return this.getArgs(name, 'args', function (args) {
-                return this.getArgs(name, 'vals', function (vals) {
+            /**
+             * Values loader
+             */
+            var valsLoader = function (args) {
+                return self.getArgs(name, 'vals', function (vals) {
                     return fn(args, vals);
-                }.bind(this));
-            }.bind(this));
+                });
+            };
+
+            /**
+             * Expect the arguments to be provided in the form cmd.x(...args...)(...vals...)
+             * but still allow default argSets to be used
+             */
+            var argsLoader = self.getArgs(name, 'args', function (args) {
+                return valsLoader(args);
+            });
+
+            /**
+             * To syntax to avoid merging array arguments, just use raw arguments
+             */
+            argsLoader.__defineGetter__('to', function () {
+                return function rawArgsLoader() {
+                    return valsLoader(Array.prototype.slice.call(arguments));
+                };
+            })
+
+            if (typeof plugin.argSets === 'object' && plugin.argSets) {
+                Object.keys(plugin.argSets).forEach(function (key) {
+                    argsLoader.__defineGetter__(key, function () {
+                        return valsLoader(plugin.argSets[key]);
+                    });
+                });
+            }
+
+            return argsLoader;
         });
 
         return cmd[name];
@@ -83,28 +121,62 @@
      * Command.each() causes the function to be called on each value
      * @author Nate Ferrero
      */
-    Command.prototype.each = function cmdEach(name, fn, args) {
+    Command.prototype.each = function cmdEach(name, fn, plugin) {
         if (typeof fn !== 'function') {
             throw new Error('cmd.each(name, fn), fn was not a function, got ' + typeof fn);
         }
 
         Command.prototype.__defineGetter__(name, function () {
+            var self = this;
 
-            if (Array.isArray(args)) {
-                return this.getArgs(name, 'vals', function (vals) {
+            /**
+             * Handle the case where plugin.args is defined
+             */
+            if (Array.isArray(plugin.args)) {
+                return self.getArgs(name, 'vals', function (vals) {
                     return vals.map(function (val) {
-                        return fn(args, val);
+                        return fn(plugin.args, val);
                     });
-                }.bind(this));
+                });
             }
 
-            return this.getArgs(name, 'args', function (args) {
-                return this.getArgs(name, 'vals', function (vals) {
+            /**
+             * Values loader
+             */
+            var valsLoader = function (args) {
+                return self.getArgs(name, 'vals', function (vals) {
                     return vals.map(function (val) {
                         return fn(args, val);
                     });
-                }.bind(this));
-            }.bind(this));
+                });
+            };
+
+            /**
+             * Expect the arguments to be provided in the form cmd.x(...args...)(...vals...)
+             * but still allow default argSets to be used
+             */
+            var argsLoader = self.getArgs(name, 'args', function (args) {
+                return valsLoader(args);
+            });
+
+            /**
+             * To syntax to avoid merging array arguments, just use raw arguments
+             */
+            argsLoader.__defineGetter__('to', function () {
+                return function rawArgsLoader() {
+                    return valsLoader(Array.prototype.slice.call(arguments));
+                };
+            })
+
+            if (typeof plugin.argSets === 'object' && plugin.argSets) {
+                Object.keys(plugin.argSets).forEach(function (key) {
+                    argsLoader.__defineGetter__(key, function () {
+                        return valsLoader(plugin.argSets[key]);
+                    });
+                });
+            }
+
+            return argsLoader;
         });
 
         return cmd[name];

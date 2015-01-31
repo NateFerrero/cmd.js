@@ -1,13 +1,15 @@
 (function () {
     'use strict';
 
-    /**
-     * Command: alert('a') - shows an alert
-     * @author Nate Ferrero
-     */
-    this.args = [];
-    this.each = function (args, val) {
-        return typeof alert === 'function' ? alert(val) : undefined;
-    };
+    this.export = function (cmd) {
 
+        /**
+         * Command: alert('a') - shows an alert
+         * @author Nate Ferrero
+         */
+        this.args = [];
+        this.each = function (args, val) {
+            return typeof alert === 'function' ? alert(val) : undefined;
+        };
+    };
 }).call(typeof module === 'undefined' ? this['cmd:lib'].alert = {} : this);
