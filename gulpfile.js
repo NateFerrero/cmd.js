@@ -1,5 +1,6 @@
+'use strict';
+
 var gulp = require('gulp');
-var watch = require('gulp-watch');
 var concat = require('gulp-concat');
 var jshint = require('gulp-jshint');
 
@@ -8,7 +9,7 @@ var lib = 'src/lib/*.js';
 gulp.task('lib', function() {
   return gulp.src(lib)
     .pipe(jshint())
-    .pipe(concat('cmd.lib.js')) 
+    .pipe(concat('cmd.lib.js'))
     .pipe(gulp.dest('./build'));
 });
 
@@ -16,7 +17,7 @@ var readme = 'readme/*.md';
 
 gulp.task('readme', function() {
   return gulp.src(readme)
-    .pipe(concat('README.md')) 
+    .pipe(concat('README.md'))
     .pipe(gulp.dest('.'));
 });
 
