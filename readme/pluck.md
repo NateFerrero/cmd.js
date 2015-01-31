@@ -4,6 +4,8 @@
 |------------|---------------- |
 | `pluck`    | `[mixed, ...]`  |
 
+Surfaces data within a structure of objects or arrays, using arguments as keys.
+
 #### Example
 
 The following example plucks object properties:

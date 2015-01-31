@@ -4,6 +4,8 @@
 |------------|---------------- |
 | `push.to`  | `[mixed, ...]`  |
 
+Pushes provided values to each argument array. The use of `.to` avoids having to `[[double wrap]]` array arguments.
+
 #### Example
 
 The following example pushes to an array:

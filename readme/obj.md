@@ -4,6 +4,8 @@
 |----------|----------------- |
 | `obj`   | `[{ ... }, ...]`  |
 
+Zips up an object using arguments as keys and values as values.
+
 #### Example
 
 The following example builds an object with keys and repeated values. Note the `[[wrapped array]]` syntax to avoid spreading the array as arguments:

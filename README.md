@@ -155,6 +155,8 @@ Because of this, if you absolutely need to work with an array as-is, pass it in 
 |----------|---------------------|
 | `alert`  | `[undefined, ...]`  |
 
+Causes a browser alert for each value passed in. Does nothing in a Node.js environment.
+
 #### Example
 
 The following example displays two alerts in sequence:
@@ -171,6 +173,8 @@ cmd.alert('Hello World!', 'Will Smith here.');
 | `case.lower`  | `['change string case', ...]`  |
 | `case.title`  | `['Change String Case', ...]`  |
 | `case.upper`  | `['CHANGE STRING CASE', ...]`  |
+
+Converts strings to various cases.
 
 #### Example
 
@@ -213,6 +217,8 @@ cmd.compare('hello', false);
 |------------|-------------------------|
 | `exists`   | `[true or false, ...]`  |
 
+Checks if each value passed in exists (not null or undefined).
+
 #### Example
 
 The following example checks the existence of the values. Only null and undefined count as not existing:
@@ -228,9 +234,11 @@ cmd.exists(null, undefined, false, '', 0, true);
 |------------|-----------------|
 | `extend`   | `[{...}, ...]`  |
 
-Extends each value with each argument, in order:
+Extends each value with each argument, in order.
 
 #### Example
+
+The following example adds the color red to each value passed in:
 
 ```js
 cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
@@ -242,6 +250,8 @@ cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
 | name       | return value    |
 |------------|---------------- |
 | `filter`   | `[mixed, ...]`  |
+
+Filters out values based on arguments.
 
 #### Example
 
@@ -262,6 +272,8 @@ cmd.filter(function (x) {
 |------------|----------------------------- |
 | `format`   | `['formatted string', ...]`  |
 
+Formats string arguments using positional `{}` targets.
+
 #### Example
 
 The following example formats two strings using positional targets:
@@ -276,6 +288,8 @@ cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 
 | name     | return value              |
 |----------|-------------------------- |
 | `join`   | `['joined string', ...]`  |
+
+Joins values provided with arguments as glue.
 
 #### Example
 
@@ -293,6 +307,8 @@ cmd.join('-', '+')('a', 'b', 'c');
 | name     | return value     |
 |----------|----------------- |
 | `obj`   | `[{ ... }, ...]`  |
+
+Zips up an object using arguments as keys and values as values.
 
 #### Example
 
@@ -315,6 +331,8 @@ cmd.obj('name', 'age', 'city', 'interests')(
 | name       | return value    |
 |------------|---------------- |
 | `pluck`    | `[mixed, ...]`  |
+
+Surfaces data within a structure of objects or arrays, using arguments as keys.
 
 #### Example
 
@@ -349,6 +367,8 @@ cmd.pluck('pet', 'name')(people);
 | name       | return value    |
 |------------|---------------- |
 | `push.to`  | `[mixed, ...]`  |
+
+Pushes provided values to each argument array. The use of `.to` avoids having to `[[double wrap]]` array arguments.
 
 #### Example
 

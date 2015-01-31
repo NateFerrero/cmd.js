@@ -4,6 +4,8 @@
 |----------|-------------------------- |
 | `join`   | `['joined string', ...]`  |
 
+Joins values provided with arguments as glue.
+
 #### Example
 
 The following example joins the values using the glue provided in initial arguments:

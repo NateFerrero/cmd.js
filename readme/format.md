@@ -4,6 +4,8 @@
 |------------|----------------------------- |
 | `format`   | `['formatted string', ...]`  |
 
+Formats string arguments using positional `{}` targets.
+
 #### Example
 
 The following example formats two strings using positional targets:

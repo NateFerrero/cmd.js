@@ -4,6 +4,8 @@
 |----------|---------------------|
 | `alert`  | `[undefined, ...]`  |
 
+Causes a browser alert for each value passed in. Does nothing in a Node.js environment.
+
 #### Example
 
 The following example displays two alerts in sequence:

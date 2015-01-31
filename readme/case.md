@@ -6,6 +6,8 @@
 | `case.title`  | `['Change String Case', ...]`  |
 | `case.upper`  | `['CHANGE STRING CASE', ...]`  |
 
+Converts strings to various cases.
+
 #### Example
 
 The following example converts strings to lowercase:
