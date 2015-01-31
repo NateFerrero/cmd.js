@@ -13,5 +13,6 @@ Compare is a unique command in that it only accepts 2 values. Any further values
 The following example compares two values.
 
 ```js
-console.log(cmd.compare(8, 5)); // logs 3
+cmd.compare(8, 5);
+// 3
 ```

@@ -126,8 +126,27 @@ The following example displays two alerts in sequence.
 
 ```js
 cmd.alert('Hello World!', 'Will Smith here.');
+// two alerts displayed (only in browser)
 ```
 
+## Case
+
+### `cmd.case.*(val1, ...)`
+
+| name          | all or each?  | accepts args?  | return value        |
+|---------------|---------------|----------------|---------------------|
+| `case.lower`  | each          | no             | `['change string case', ...]`  |
+| `case.title`  | each          | no             | `['Change String Case', ...]`  |
+| `case.upper`  | each          | no             | `['CHANGE STRING CASE', ...]`  |
+
+#### Example
+
+The following example converts strings to lowercase:
+
+```js
+cmd.case.lower('Hello World!', 'Will Smith here.');
+// ["hello world!", "will smith here."]
+```
 
 ## Compare
 
@@ -144,7 +163,8 @@ Compare is a unique command in that it only accepts 2 values. Any further values
 The following example compares two values.
 
 ```js
-console.log(cmd.compare(8, 5)); // logs 3
+cmd.compare(8, 5);
+// 3
 ```
 
 ## Exists
