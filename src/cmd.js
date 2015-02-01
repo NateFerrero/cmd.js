@@ -22,9 +22,16 @@
         Array.prototype.forEach.call(arguments, function (name) {
             if (name === '*') {
                 var libs = [
-                    'alert', 'case', 'clone', 'compare', 'exists', 'extend', 'filter', 'format', 'join',
-                    'log', 'logger', 'max', 'min', 'obj', 'pluck', 'product',
-                    'push', 'sort', 'sum', 'switch'
+                    'alert',
+                    'case', 'clone', 'compare',
+                    'equals', 'exists', 'extend',
+                    'filter', 'format',
+                    'join',
+                    'log', 'logger',
+                    'max', 'min',
+                    'obj',
+                    'pluck', 'product', 'push',
+                    'sort', 'sum', 'switch'
                 ];
                 return libs.forEach(function (name) {
                     self.use(name);
