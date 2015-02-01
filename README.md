@@ -452,4 +452,3 @@ cmd.sort(function (x) {
 // [{name: "Spoon", price: 1.29}, {name: "TV", price: 899}, {name: "Car", price: 16999}]
 ```
 
-
