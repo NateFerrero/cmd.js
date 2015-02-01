@@ -134,15 +134,15 @@ Arguments are automatically merged one level deep for maximum convenience. For e
 ```js
 cmd.use('max');
 
-cmd.max(1, 2, 3, 4, 5); // [5]
+cmd.max(1, 2, 3, 4, 5); // 5
 
-cmd.max([1, 2, 3, 4, 5]); // [5]
+cmd.max([1, 2, 3, 4, 5]); // 5
 
-cmd.max(1, [2, 3], 4, 5); // [5]
+cmd.max(1, [2, 3], 4, 5); // 5
 
-cmd.max([1], 2, [3, 4, 5]); // [5]
+cmd.max([1], 2, [3, 4, 5]); // 5
 
-cmd.max([1], [2], [3], [4], [5]); // [5]
+cmd.max([1], [2], [3], [4], [5]); // 5
 ```
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
@@ -336,6 +336,32 @@ cmd.logger(withDate, 'and the number is: {}')(1, 2, 3);
 // [1, 2, 3]
 ```
 
+### cmd.max
+
+| name    | return value  | description   |
+|---------|---------------|---------------|
+| `max`   | `100`         | Returns the maximum of all given values. |
+
+The following example returns the maximum value:
+
+```js
+cmd.max(1, 2, 3, 4, 5);
+// 5
+```
+
+### cmd.min
+
+| name    | return value  | description   |
+|---------|---------------|---------------|
+| `min`   | `100`         | Returns the minimum of all given values. |
+
+The following example returns the minimum value:
+
+```js
+cmd.min(1, 2, 3, 4, 5);
+// 1
+```
+
 ### cmd.obj
 
 | name     | return value     | description   |
@@ -386,6 +412,19 @@ var people = [{
 }];
 cmd.pluck('pet', 'name')(people);
 // ["Sherlock", "Rosa", "Maxximus"]
+```
+
+### cmd.product
+
+| name        | return value  | description   |
+|-------------|---------------|---------------|
+| `product`   | `100`         | Returns the product of all given values. |
+
+The following example returns the product 1 * 2 * 3 * 4 * 5:
+
+```js
+cmd.product(1, 2, 3, 4, 5);
+// 120
 ```
 
 ### cmd.push.to
@@ -450,6 +489,19 @@ cmd.sort(function (x) {
     return x.price;
 })({name: 'TV', price: 899.00}, {name: 'Car', price: 16999.00}, {name: 'Spoon', price: 1.29});
 // [{name: "Spoon", price: 1.29}, {name: "TV", price: 899}, {name: "Car", price: 16999}]
+```
+
+### cmd.sum
+
+| name        | return value  | description   |
+|-------------|---------------|---------------|
+| `sum`   | `100`         | Returns the sum of all given values. |
+
+The following example returns the sum 1 * 2 * 3 * 4 * 5:
+
+```js
+cmd.sum(1, 2, 3, 4, 5);
+// 15
 ```
 
 ### cmd.switch
