@@ -531,5 +531,12 @@ var msgSwitch = cmd.switch(function (when, x) {
 });
 
 msgSwitch(0, 1, 2, 3, 4, 5, 6, 'x');
-// ["You have no messages", "You have a message", "You have a few messages", "You have a few messages", "You have a few messages", "You have five messages", "You have lots of messages", "Unknown"]
+// ["You have no messages",
+//  "You have a message",
+//  "You have a few messages",
+//  "You have a few messages",
+//  "You have a few messages",
+//  "You have five messages",
+//  "You have lots of messages",
+//  "Unknown"]
 ```
