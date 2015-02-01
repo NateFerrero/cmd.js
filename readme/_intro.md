@@ -147,4 +147,20 @@ cmd.max([1], [2], [3], [4], [5]); // [5]
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
 
+## Get Raw Value
+
+Most commands normally return an array of values. To get the first value not wrapped in an array instead, just use `.raw` immediately before passing in the values:
+
+```js
+cmd.use('case');
+
+cmd.case.upper.raw('hello world');
+// "HELLO WORLD"
+
+cmd.use('format');
+
+cmd.format('my favorite number is {}').raw(100);
+// "my favorite number is 100"
+```
+
 ## All Modules

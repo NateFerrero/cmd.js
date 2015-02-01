@@ -147,6 +147,22 @@ cmd.max([1], [2], [3], [4], [5]); // [5]
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
 
+## Get Raw Value
+
+Most commands normally return an array of values. To get the first value not wrapped in an array instead, just use `.raw` immediately before passing in the values:
+
+```js
+cmd.use('case');
+
+cmd.case.upper.raw('hello world');
+// "HELLO WORLD"
+
+cmd.use('format');
+
+cmd.format('my favorite number is {}').raw(100);
+// "my favorite number is 100"
+```
+
 ## All Modules
 
 ### cmd.alert
@@ -175,6 +191,22 @@ The following example converts strings to lowercase:
 ```js
 cmd.case.lower('Hello World!', 'Will Smith here.');
 // ["hello world!", "will smith here."]
+```
+
+### cmd.clone
+
+| name     | return value    | description   |
+|----------|-----------------|---------------|
+| `clone`  | `[mixed, ...]`  | Clone any JavaScript variable not containing a circular reference. |
+
+The following example clones an object:
+
+```js
+var answer = {data: 42};
+var cloned = cmd.clone.raw(answer); // raw returns non-wrapped first response
+
+[cloned === answer, cloned.data === answer.data];
+// [false, true]
 ```
 
 ### cmd.compare
@@ -269,7 +301,40 @@ cmd.join('-', '+')('a', 'b', 'c');
 // ["a-b-c", "a+b+c"]
 ```
 
+### cmd.log
 
+| name    | return value    | description   |
+|---------|-----------------|---------------|
+| `log`   | `[mixed, ...]`  | Logs values and passes them through unchanged. |
+
+The following example logs each value to the console and returns the values:
+
+```js
+cmd.log(1, 2, 3);
+// 1
+// 2
+// 3
+// [1, 2, 3]
+```
+
+### cmd.logger
+
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `logger`   | `[mixed, ...]`  | Logs values once per each argument and passes them through unchanged. |
+
+The following example logs each value wrapped in a custom log format to the console and returns the values. If a string is passed it will use `cmd.format` to format the logs:
+
+```js
+var withDate = function (x) {
+    return 'Log at ' + (new Date()) + ': ' + x;
+};
+cmd.logger(withDate, 'and the number is: {}')(1, 2, 3);
+// Log at Sat Jan 31 2015 23:05:59 GMT-0800 (PST): 1 and the number is: 1
+// Log at Sat Jan 31 2015 23:05:59 GMT-0800 (PST): 2 and the number is: 2
+// Log at Sat Jan 31 2015 23:05:59 GMT-0800 (PST): 3 and the number is: 3
+// [1, 2, 3]
+```
 
 ### cmd.obj
 
@@ -357,5 +422,34 @@ people.length;
 // 3
 ```
 
+### cmd.sort
+
+| name          | return value    | description   |
+|---------------|-----------------|---------------|
+| `sort`        | `[mixed, ...]`  | Sorts the array in custom order.     |
+| `sort.asc`    | `[mixed, ...]`  | Sorts the array in ascending order.  |
+| `sort.desc`   | `[mixed, ...]`  | Sorts the array in descending order. |
+
+The following example sorts the values with various sort orders and parameters:
+
+```js
+cmd.sort.asc('c', 'a', 'b', 3, 1, 2);
+// [1, 2, 3, "a", "b", "c"]
+
+cmd.sort.desc('c', 'a', 'b', 3, 1, 2);
+// ["c", "b", "a", 3, 2, 1]
+
+// Sort by type, leaving order preserved within a type
+cmd.sort(function (x) {
+    return typeof x;
+})('c', 'a', 'b', 3, 1, 2);
+// [3, 1, 2, "c", "a", "b"]
+
+// Sort objects by a key
+cmd.sort(function (x) {
+    return x.price;
+})({name: 'TV', price: 899.00}, {name: 'Car', price: 16999.00}, {name: 'Spoon', price: 1.29});
+// [{name: "Spoon", price: 1.29}, {name: "TV", price: 899}, {name: "Car", price: 16999}]
+```
 
 

@@ -5,7 +5,7 @@
         /**
          * Dependencies
          */
-        cmd.use('compare', 'copy');
+        cmd.use('compare', 'clone');
 
         /**
          * Command: sort(function (val) {
@@ -15,7 +15,7 @@
          */
         this.all = function (args, vals) {
             var direction = 1;
-            var local = cmd.copy(args);
+            var local = cmd.clone(args);
 
             if (local && local.length && typeof local[0] === 'number') {
                 direction = local.shift();

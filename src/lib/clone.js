@@ -45,8 +45,8 @@
     this.export = function () {
 
         /**
-         * Command: copy(null) === [false]
-         *      copy.raw(null) === false
+         * Command: clone(null) === [false]
+         *      clone.raw(null) === false
          * @author Nate Ferrero
          */
         this.args = [];
@@ -54,4 +54,4 @@
             return clone(val);
         };
     };
-}).call(typeof module === 'undefined' ? this['cmd:lib'].copy = {} : this);
+}).call(typeof module === 'undefined' ? this['cmd:lib'].clone = {} : this);

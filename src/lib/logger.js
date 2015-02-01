@@ -2,6 +2,10 @@
     'use strict';
 
     this.export = function (cmd) {
+        /**
+         * Dependencies
+         */
+        cmd.use('format');
 
         /**
          * Command: logger(function (a) {
@@ -15,7 +19,9 @@
         this.each = function (args, val) {
             var logs = [];
             args.forEach(function (arg) {
-                var log = typeof arg === 'function' ? arg(val) : arg;
+                var log = typeof arg === 'function' ? arg(val) : (
+                    typeof arg === 'string' ? cmd.format(arg).raw(val) : arg
+                );
                 if (Array.isArray(log)) {
                     Array.prototype.push.apply(logs, log);
                 }
