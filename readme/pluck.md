@@ -1,10 +1,8 @@
 ### cmd.pluck
 
-| name       | return value    |
-|------------|---------------- |
-| `pluck`    | `[mixed, ...]`  |
-
-Surfaces data within a structure of objects or arrays, using arguments as keys.
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `pluck`    | `[mixed, ...]`  | Surfaces data within a structure of objects or arrays, using arguments as keys. |
 
 #### Example
 

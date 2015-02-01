@@ -1,12 +1,10 @@
 ### cmd.case.*
 
-| name          | return value                   |
-|---------------|--------------------------------|
-| `case.lower`  | `['change string case', ...]`  |
-| `case.title`  | `['Change String Case', ...]`  |
-| `case.upper`  | `['CHANGE STRING CASE', ...]`  |
-
-Converts strings to various cases.
+| name          | return value                   | description   |
+|---------------|--------------------------------|---------------|
+| `case.lower`  | `['change string case', ...]`  | Convert strings to lower case. |
+| `case.title`  | `['Change String Case', ...]`  | Convert strings to title case. |
+| `case.upper`  | `['CHANGE STRING CASE', ...]`  | Convert strings to upper case. |
 
 #### Example
 

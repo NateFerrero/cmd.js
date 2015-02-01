@@ -1,10 +1,8 @@
 ### cmd.join
 
-| name     | return value              |
-|----------|-------------------------- |
-| `join`   | `['joined string', ...]`  |
-
-Joins values provided with arguments as glue.
+| name     | return value              | description   |
+|----------|---------------------------|---------------|
+| `join`   | `['joined string', ...]`  | Joins values provided with arguments as glue. |
 
 #### Example
 

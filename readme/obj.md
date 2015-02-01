@@ -1,10 +1,8 @@
 ### cmd.obj
 
-| name     | return value     |
-|----------|----------------- |
-| `obj`   | `[{ ... }, ...]`  |
-
-Zips up an object using arguments as keys and values as values.
+| name     | return value     | description   |
+|----------|------------------|---------------|
+| `obj`   | `[{ ... }, ...]`  | Zips up an object using arguments as keys and values as values. |
 
 #### Example
 

@@ -1,10 +1,8 @@
 ### cmd.exists
 
-| name       | return value            |
-|------------|-------------------------|
-| `exists`   | `[true or false, ...]`  |
-
-Checks if each value passed in exists (not null or undefined).
+| name       | return value            | description   |
+|------------|-------------------------|---------------|
+| `exists`   | `[true or false, ...]`  | Checks if each value passed in exists (not null or undefined). |
 
 #### Example
 

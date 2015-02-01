@@ -1,10 +1,8 @@
 ### cmd.filter
 
-| name       | return value    |
-|------------|---------------- |
-| `filter`   | `[mixed, ...]`  |
-
-Filters out values based on arguments.
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `filter`   | `[mixed, ...]`  | Filters out values based on arguments. |
 
 #### Example
 

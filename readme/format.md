@@ -1,10 +1,8 @@
 ### cmd.format
 
-| name       | return value                 |
-|------------|----------------------------- |
-| `format`   | `['formatted string', ...]`  |
-
-Formats string arguments using positional `{}` targets.
+| name       | return value                 | description   |
+|------------|------------------------------|---------------|
+| `format`   | `['formatted string', ...]`  | Formats string arguments using positional `{}` targets. |
 
 #### Example
 

@@ -151,11 +151,9 @@ Because of this, if you absolutely need to work with an array as-is, pass it in 
 
 ### cmd.alert
 
-| name     | return value        |
-|----------|---------------------|
-| `alert`  | `[undefined, ...]`  |
-
-Causes a browser alert for each value passed in. Does nothing in a Node.js environment.
+| name     | return value        | description   |
+|----------|---------------------|---------------|
+| `alert`  | `[undefined, ...]`  | Causes a browser alert for each value passed in. Does nothing in a Node.js environment. |
 
 #### Example
 
@@ -168,13 +166,11 @@ cmd.alert('Hello World!', 'Will Smith here.');
 
 ### cmd.case.*
 
-| name          | return value                   |
-|---------------|--------------------------------|
-| `case.lower`  | `['change string case', ...]`  |
-| `case.title`  | `['Change String Case', ...]`  |
-| `case.upper`  | `['CHANGE STRING CASE', ...]`  |
-
-Converts strings to various cases.
+| name          | return value                   | description   |
+|---------------|--------------------------------|---------------|
+| `case.lower`  | `['change string case', ...]`  | Convert strings to lower case. |
+| `case.title`  | `['Change String Case', ...]`  | Convert strings to title case. |
+| `case.upper`  | `['CHANGE STRING CASE', ...]`  | Convert strings to upper case. |
 
 #### Example
 
@@ -187,15 +183,14 @@ cmd.case.lower('Hello World!', 'Will Smith here.');
 
 ### cmd.compare
 
-| name       | return value    |
-|------------|-----------------|
-| `compare`  | `-1 or 0 or 1`  |
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `compare`  | `-1 or 0 or 1`  | Compare is a unique command in that it only accepts 2 values. Any further values will be ignored. It is used internally for `cmd.sort` but available for custom sorting as well. |
 
-Compare is a unique command in that it only accepts 2 values. Any further values will be ignored. It is used internally for `cmd.sort` but available for custom sorting as well. It defines a sort order for any two JavaScript types:
 
 #### Example
 
-The following example compares two values.
+The following examples compare two values. Compare defines a sort order for any two JavaScript types:
 
 ```js
 cmd.compare(8, 5);
@@ -213,11 +208,9 @@ cmd.compare('hello', false);
 
 ### cmd.exists
 
-| name       | return value            |
-|------------|-------------------------|
-| `exists`   | `[true or false, ...]`  |
-
-Checks if each value passed in exists (not null or undefined).
+| name       | return value            | description   |
+|------------|-------------------------|---------------|
+| `exists`   | `[true or false, ...]`  | Checks if each value passed in exists (not null or undefined). |
 
 #### Example
 
@@ -230,11 +223,9 @@ cmd.exists(null, undefined, false, '', 0, true);
 
 ### cmd.extend
 
-| name       | return value    |
-|------------|-----------------|
-| `extend`   | `[{...}, ...]`  |
-
-Extends each value with each argument, in order.
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `extend`   | `[{...}, ...]`  | Extends each value with each argument, in order. |
 
 #### Example
 
@@ -247,11 +238,9 @@ cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
 
 ### cmd.filter
 
-| name       | return value    |
-|------------|---------------- |
-| `filter`   | `[mixed, ...]`  |
-
-Filters out values based on arguments.
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `filter`   | `[mixed, ...]`  | Filters out values based on arguments. |
 
 #### Example
 
@@ -268,11 +257,9 @@ cmd.filter(function (x) {
 
 ### cmd.format
 
-| name       | return value                 |
-|------------|----------------------------- |
-| `format`   | `['formatted string', ...]`  |
-
-Formats string arguments using positional `{}` targets.
+| name       | return value                 | description   |
+|------------|------------------------------|---------------|
+| `format`   | `['formatted string', ...]`  | Formats string arguments using positional `{}` targets. |
 
 #### Example
 
@@ -285,11 +272,9 @@ cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 
 
 ### cmd.join
 
-| name     | return value              |
-|----------|-------------------------- |
-| `join`   | `['joined string', ...]`  |
-
-Joins values provided with arguments as glue.
+| name     | return value              | description   |
+|----------|---------------------------|---------------|
+| `join`   | `['joined string', ...]`  | Joins values provided with arguments as glue. |
 
 #### Example
 
@@ -304,11 +289,9 @@ cmd.join('-', '+')('a', 'b', 'c');
 
 ### cmd.obj
 
-| name     | return value     |
-|----------|----------------- |
-| `obj`   | `[{ ... }, ...]`  |
-
-Zips up an object using arguments as keys and values as values.
+| name     | return value     | description   |
+|----------|------------------|---------------|
+| `obj`   | `[{ ... }, ...]`  | Zips up an object using arguments as keys and values as values. |
 
 #### Example
 
@@ -328,11 +311,9 @@ cmd.obj('name', 'age', 'city', 'interests')(
 
 ### cmd.pluck
 
-| name       | return value    |
-|------------|---------------- |
-| `pluck`    | `[mixed, ...]`  |
-
-Surfaces data within a structure of objects or arrays, using arguments as keys.
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `pluck`    | `[mixed, ...]`  | Surfaces data within a structure of objects or arrays, using arguments as keys. |
 
 #### Example
 
@@ -364,11 +345,9 @@ cmd.pluck('pet', 'name')(people);
 
 ### cmd.push.to
 
-| name       | return value    |
-|------------|---------------- |
-| `push.to`  | `[mixed, ...]`  |
-
-Pushes provided values to each argument array. The use of `.to` avoids having to `[[double wrap]]` array arguments.
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `push.to`  | `[mixed, ...]`  | Pushes provided values to each argument array. The use of `.to` avoids having to `[[double wrap]]` array arguments. |
 
 #### Example
 

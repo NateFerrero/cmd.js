@@ -1,10 +1,8 @@
 ### cmd.extend
 
-| name       | return value    |
-|------------|-----------------|
-| `extend`   | `[{...}, ...]`  |
-
-Extends each value with each argument, in order.
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `extend`   | `[{...}, ...]`  | Extends each value with each argument, in order. |
 
 #### Example
 

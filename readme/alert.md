@@ -1,10 +1,8 @@
 ### cmd.alert
 
-| name     | return value        |
-|----------|---------------------|
-| `alert`  | `[undefined, ...]`  |
-
-Causes a browser alert for each value passed in. Does nothing in a Node.js environment.
+| name     | return value        | description   |
+|----------|---------------------|---------------|
+| `alert`  | `[undefined, ...]`  | Causes a browser alert for each value passed in. Does nothing in a Node.js environment. |
 
 #### Example
 
