@@ -6,8 +6,6 @@
 | `case.title`  | `['Change String Case', ...]`  | Convert strings to title case. |
 | `case.upper`  | `['CHANGE STRING CASE', ...]`  | Convert strings to upper case. |
 
-#### Example
-
 The following example converts strings to lowercase:
 
 ```js

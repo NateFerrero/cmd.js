@@ -5,8 +5,6 @@
 | `compare`  | `-1 or 0 or 1`  | Compare is a unique command in that it only accepts 2 values. Any further values will be ignored. It is used internally for `cmd.sort` but available for custom sorting as well. |
 
 
-#### Example
-
 The following examples compare two values. Compare defines a sort order for any two JavaScript types:
 
 ```js

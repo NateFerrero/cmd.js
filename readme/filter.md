@@ -4,8 +4,6 @@
 |------------|-----------------|---------------|
 | `filter`   | `[mixed, ...]`  | Filters out values based on arguments. |
 
-#### Example
-
 The following example filters the values to only even numbers greater than 5:
 
 ```js

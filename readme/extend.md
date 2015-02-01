@@ -4,8 +4,6 @@
 |------------|-----------------|---------------|
 | `extend`   | `[{...}, ...]`  | Extends each value with each argument, in order. |
 
-#### Example
-
 The following example adds the color red to each value passed in:
 
 ```js

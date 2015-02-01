@@ -155,8 +155,6 @@ Because of this, if you absolutely need to work with an array as-is, pass it in 
 |----------|---------------------|---------------|
 | `alert`  | `[undefined, ...]`  | Causes a browser alert for each value passed in. Does nothing in a Node.js environment. |
 
-#### Example
-
 The following example displays two alerts in sequence:
 
 ```js
@@ -172,8 +170,6 @@ cmd.alert('Hello World!', 'Will Smith here.');
 | `case.title`  | `['Change String Case', ...]`  | Convert strings to title case. |
 | `case.upper`  | `['CHANGE STRING CASE', ...]`  | Convert strings to upper case. |
 
-#### Example
-
 The following example converts strings to lowercase:
 
 ```js
@@ -187,8 +183,6 @@ cmd.case.lower('Hello World!', 'Will Smith here.');
 |------------|-----------------|---------------|
 | `compare`  | `-1 or 0 or 1`  | Compare is a unique command in that it only accepts 2 values. Any further values will be ignored. It is used internally for `cmd.sort` but available for custom sorting as well. |
 
-
-#### Example
 
 The following examples compare two values. Compare defines a sort order for any two JavaScript types:
 
@@ -212,8 +206,6 @@ cmd.compare('hello', false);
 |------------|-------------------------|---------------|
 | `exists`   | `[true or false, ...]`  | Checks if each value passed in exists (not null or undefined). |
 
-#### Example
-
 The following example checks the existence of the values. Only null and undefined count as not existing:
 
 ```js
@@ -227,8 +219,6 @@ cmd.exists(null, undefined, false, '', 0, true);
 |------------|-----------------|---------------|
 | `extend`   | `[{...}, ...]`  | Extends each value with each argument, in order. |
 
-#### Example
-
 The following example adds the color red to each value passed in:
 
 ```js
@@ -241,8 +231,6 @@ cmd.extend({color: 'red'})({item: 'wrench'}, {item: 'apple'});
 | name       | return value    | description   |
 |------------|-----------------|---------------|
 | `filter`   | `[mixed, ...]`  | Filters out values based on arguments. |
-
-#### Example
 
 The following example filters the values to only even numbers greater than 5:
 
@@ -261,8 +249,6 @@ cmd.filter(function (x) {
 |------------|------------------------------|---------------|
 | `format`   | `['formatted string', ...]`  | Formats string arguments using positional `{}` targets. |
 
-#### Example
-
 The following example formats two strings using positional targets:
 
 ```js
@@ -275,8 +261,6 @@ cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 
 | name     | return value              | description   |
 |----------|---------------------------|---------------|
 | `join`   | `['joined string', ...]`  | Joins values provided with arguments as glue. |
-
-#### Example
 
 The following example joins the values using the glue provided in initial arguments:
 
@@ -292,8 +276,6 @@ cmd.join('-', '+')('a', 'b', 'c');
 | name     | return value     | description   |
 |----------|------------------|---------------|
 | `obj`   | `[{ ... }, ...]`  | Zips up an object using arguments as keys and values as values. |
-
-#### Example
 
 The following example builds an object with keys and repeated values. Note the `[[wrapped array]]` syntax to avoid spreading the array as arguments:
 
@@ -314,8 +296,6 @@ cmd.obj('name', 'age', 'city', 'interests')(
 | name       | return value    | description   |
 |------------|-----------------|---------------|
 | `pluck`    | `[mixed, ...]`  | Surfaces data within a structure of objects or arrays, using arguments as keys. |
-
-#### Example
 
 The following example plucks object properties:
 
@@ -348,8 +328,6 @@ cmd.pluck('pet', 'name')(people);
 | name       | return value    | description   |
 |------------|-----------------|---------------|
 | `push.to`  | `[mixed, ...]`  | Pushes provided values to each argument array. The use of `.to` avoids having to `[[double wrap]]` array arguments. |
-
-#### Example
 
 The following example pushes to an array:
 
