@@ -24,6 +24,14 @@ cmd.sort(function (x) {
 // Sort objects by a key
 cmd.sort(function (x) {
     return x.price;
-})({name: 'TV', price: 899.00}, {name: 'Car', price: 16999.00}, {name: 'Spoon', price: 1.29});
-// [{name: "Spoon", price: 1.29}, {name: "TV", price: 899}, {name: "Car", price: 16999}]
+})(
+    {name: 'TV', price: 899.00},
+    {name: 'Car', price: 16999.00},
+    {name: 'Spoon', price: 1.29}
+);
+// [
+//  {name: "Spoon", price: 1.29},
+//  {name: "TV", price: 899},
+//  {name: "Car", price: 16999}
+// ]
 ```

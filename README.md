@@ -487,17 +487,25 @@ cmd.sort(function (x) {
 // Sort objects by a key
 cmd.sort(function (x) {
     return x.price;
-})({name: 'TV', price: 899.00}, {name: 'Car', price: 16999.00}, {name: 'Spoon', price: 1.29});
-// [{name: "Spoon", price: 1.29}, {name: "TV", price: 899}, {name: "Car", price: 16999}]
+})(
+    {name: 'TV', price: 899.00},
+    {name: 'Car', price: 16999.00},
+    {name: 'Spoon', price: 1.29}
+);
+// [
+//  {name: "Spoon", price: 1.29},
+//  {name: "TV", price: 899},
+//  {name: "Car", price: 16999}
+// ]
 ```
 
 ### cmd.sum
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `sum`   | `100`         | Returns the sum of all given values. |
+| `sum`       | `100`         | Returns the sum of all given values. |
 
-The following example returns the sum 1 * 2 * 3 * 4 * 5:
+The following example returns the sum 1 + 2 + 3 + 4 + 5:
 
 ```js
 cmd.sum(1, 2, 3, 4, 5);
