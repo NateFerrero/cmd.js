@@ -21,7 +21,7 @@ describe('cmd.match', function () {
         it > 1   && then('You have a few messages');
         it === 1 && then('You have a message');
         it === 0 && then('You have no messages');
-        true     && then('Unknown');
+                    then('Unknown');
     });
 
     it('matches based on value', function () {
