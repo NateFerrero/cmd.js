@@ -28,10 +28,10 @@
                     'filter', 'format',
                     'join',
                     'log', 'logger',
-                    'max', 'min',
+                    'match', 'max', 'min',
                     'obj',
                     'pluck', 'product', 'push',
-                    'sort', 'sum', 'switch'
+                    'sort', 'sum'
                 ];
                 return libs.forEach(function (name) {
                     self.use(name);

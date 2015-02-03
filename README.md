@@ -238,7 +238,7 @@ cmd.compare('hello', false);
 |------------|-------------------------|---------------|
 | `equals`   | `[true or false, ...]`  | Checks if each value passed in equals any of the given arguments. |
 
-The following example checks for values that equal 50:
+The following example checks for values that equal 50 or 30:
 
 ```js
 cmd.equals(30, 50)(100, 20, 50, 30);
@@ -347,6 +347,35 @@ cmd.logger(withDate, 'and the number is: {}')(1, 2, 3);
 // Log at Sat Jan 31 2015 23:05:59 GMT-0800 (PST): 2 and the number is: 2
 // Log at Sat Jan 31 2015 23:05:59 GMT-0800 (PST): 3 and the number is: 3
 // [1, 2, 3]
+```
+
+### cmd.match
+
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `match`    | `[mixed, ...]`  | Matches each item based on a condition and replaces the item with the value provided to `then`. |
+
+The following example uses `cmd.match` to choose an appropriate sentence:
+
+```js
+var msgMatch = cmd.match(function (it, then) {
+    it > 5    && then('You have lots of messages');
+    it === 5  && then('You have five messages');
+    it > 1    && then('You have a few messages');
+    it === 1  && then('You have a message');
+    it === 0  && then('You have no messages');
+    true      && then('Unknown');
+});
+
+msgMatch(0, 1, 2, 3, 4, 5, 6, 'x');
+// ["You have no messages",
+//  "You have a message",
+//  "You have a few messages",
+//  "You have a few messages",
+//  "You have a few messages",
+//  "You have five messages",
+//  "You have lots of messages",
+//  "Unknown"]
 ```
 
 ### cmd.max
@@ -523,33 +552,4 @@ The following example returns the sum 1 + 2 + 3 + 4 + 5:
 ```js
 cmd.sum(1, 2, 3, 4, 5);
 // 15
-```
-
-### cmd.switch
-
-| name       | return value    | description   |
-|------------|-----------------|---------------|
-| `switch`   | `[mixed, ...]`  | Switches based on a matching when condition. |
-
-The following example uses `cmd.switch` to choose an appropriate sentence:
-
-```js
-var msgSwitch = cmd.switch(function (when, x) {
-    when(x > 5,     'You have lots of messages');
-    when(x === 5,   'You have five messages');
-    when(x > 1,     'You have a few messages');
-    when(x === 1,   'You have a message');
-    when(x === 0,   'You have no messages');
-    when(true,      'Unknown');
-});
-
-msgSwitch(0, 1, 2, 3, 4, 5, 6, 'x');
-// ["You have no messages",
-//  "You have a message",
-//  "You have a few messages",
-//  "You have a few messages",
-//  "You have a few messages",
-//  "You have five messages",
-//  "You have lots of messages",
-//  "Unknown"]
 ```
