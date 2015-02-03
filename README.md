@@ -220,7 +220,7 @@ Because of this, if you absolutely need to work with an array as-is, pass it in 
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `add`       | [`100`, ...]  | Returns the sum of all arguments added to each given value. |
+| `add`       | `[100, ...]`  | Returns the sum of all arguments added to each given value. |
 
 The following example adds 10 to each value:
 
@@ -300,7 +300,7 @@ cmd.compare('hello', false);
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `divide`    | [`100`, ...]  | Returns the product of all arguments divided by each given value. |
+| `divide`    | `[100, ...]`  | Returns the product of all arguments divided by each given value. |
 
 The following example divides each value by 10:
 
@@ -485,7 +485,7 @@ cmd.min(1, 2, 3, 4, 5);
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `multiply`  | [`100`, ...]  | Returns the product of all arguments multiplied by each given value. |
+| `multiply`  | `[100, ...]`  | Returns the product of all arguments multiplied by each given value. |
 
 The following example multiplies each value by 10:
 
@@ -635,7 +635,7 @@ cmd.sort(function (x) {
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `subtract`  | [`100`, ...]  | Returns the sum of all arguments subtracted from each given value. |
+| `subtract`  | `[100, ...]`  | Returns the sum of all arguments subtracted from each given value. |
 
 The following example subtracts 10 from each value:
 

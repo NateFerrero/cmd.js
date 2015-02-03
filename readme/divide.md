@@ -2,7 +2,7 @@
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `divide`    | [`100`, ...]  | Returns the product of all arguments divided by each given value. |
+| `divide`    | `[100, ...]`  | Returns the product of all arguments divided by each given value. |
 
 The following example divides each value by 10:
 

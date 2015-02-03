@@ -2,7 +2,7 @@
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `subtract`  | [`100`, ...]  | Returns the sum of all arguments subtracted from each given value. |
+| `subtract`  | `[100, ...]`  | Returns the sum of all arguments subtracted from each given value. |
 
 The following example subtracts 10 from each value:
 

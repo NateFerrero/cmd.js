@@ -2,7 +2,7 @@
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `multiply`  | [`100`, ...]  | Returns the product of all arguments multiplied by each given value. |
+| `multiply`  | `[100, ...]`  | Returns the product of all arguments multiplied by each given value. |
 
 The following example multiplies each value by 10:
 
