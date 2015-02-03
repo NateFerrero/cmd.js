@@ -2,7 +2,7 @@
 
 | name        | return value  | description   |
 |-------------|---------------|---------------|
-| `add`       | `100`         | Returns the sum of all arguments added to each given value. |
+| `add`       | [`100`, ...]  | Returns the sum of all arguments added to each given value. |
 
 The following example adds 10 to each value:
 
