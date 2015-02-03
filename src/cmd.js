@@ -279,10 +279,8 @@
             /**
              * Get the first result unwrapped
              */
-            args.raw = function () {
-                var _args = Array.prototype.slice.apply(arguments);
-                var result = args.apply(null, _args);
-                return result.shift();
+            args.raw = function (first) {
+                return args(first).shift();
             };
 
             if (this.context) {
