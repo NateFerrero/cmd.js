@@ -115,17 +115,84 @@ This project is built with [gulp](http://gulpjs.com/). Make all changes/addition
 
 # API Reference
 
-## Structure of a Command
+## Types of Commands
+
+### "Each" Commands
 
 ```js
-cmd.name(... args ...)(... vals ...);
+cmd.add(...arguments)(...values);
+
+cmd.add(100, 200)(7, 8, 9); // [307, 308, 309]
 ```
 
-Some commands do not accept args, and you are given the command with empty args already provided.
+These commands operate on each value passed in and thus do not have access to each value during processing. This also means that every "each" command returns an array at all times. Both arguments and values are subject to argument merging as described below.
+
+Some commands do not accept arguments, and only the values need to be provided.
 
 ```js
-cmd.sum(... vals ...);
+cmd.exists(...values);
+
+cmd.exists(0, null); // [true, false]
 ```
+
+To chain these commands, just leave off the values until the very end. Some examples:
+
+```js
+cmd.filter(cmd.exists)(1, 2, null, 3); // [1, 2, 3]
+
+cmd.filter(function (x) {
+    return typeof x !== 'string'
+}).and.exists("1", 2, null, "3"); // [true, false]
+```
+
+#### Get Raw Value
+
+Each commands always return an array of values. To get the first value not wrapped in an array instead, just use `.raw` immediately before passing in the values:
+
+```js
+cmd.use('case');
+
+cmd.case.upper.raw('hello world');
+// "HELLO WORLD"
+
+cmd.use('format');
+
+cmd.format('my favorite number is {}').raw(100);
+// "my favorite number is 100"
+```
+
+#### Map Command
+
+What would you do if you needed to add 1 to each value in many arrays independently? Use `.map`:
+
+```js
+cmd.add(1).map([1, 2, 3], [10, 20, 30], [100, 200, 300]);
+// [[2, 3, 4], [11, 21, 31], [101, 201, 301]]
+```
+
+### "All" Commands
+
+Every command is unique, but most all commands take all `...values` and perform some operation that includes all of them. Most "all" commands do not return an array, in direct contrast to "each" commands.
+
+```js
+cmd.sum(...values);
+
+cmd.sum(1, 2, 3); // 6
+```
+
+#### Map Command
+
+What would you do if you needed to sum a bunch of arrays independently? Use `.map`:
+
+```js
+cmd.sum([1, 2, 3], [4, 5, 6], [7, 8, 9]); // 45 - not what we want
+
+cmd.sum.map([1, 2, 3], [4, 5, 6], [7, 8, 9]) // [6, 15, 24] - perfect!
+```
+
+### Special Commands
+
+Some commands do not fall under either of the above categories, and usually take and return very specific arguments. An example of this is `cmd.compare`, which is described below.
 
 ## Argument Merging
 
@@ -147,23 +214,20 @@ cmd.max([1], [2], [3], [4], [5]); // 5
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
 
-## Get Raw Value
+## All Modules
 
-Most commands normally return an array of values. To get the first value not wrapped in an array instead, just use `.raw` immediately before passing in the values:
+### cmd.add
+
+| name        | return value  | description   |
+|-------------|---------------|---------------|
+| `add`       | `100`         | Returns the sum of all arguments added to each given value. |
+
+The following example adds 10 to each value:
 
 ```js
-cmd.use('case');
-
-cmd.case.upper.raw('hello world');
-// "HELLO WORLD"
-
-cmd.use('format');
-
-cmd.format('my favorite number is {}').raw(100);
-// "my favorite number is 100"
+cmd.add(10)(1, 2, 3, 4, 5);
+// [11, 12, 13, 14, 15]
 ```
-
-## All Modules
 
 ### cmd.alert
 
@@ -230,6 +294,19 @@ cmd.compare('boo', 'apple');
 
 cmd.compare('hello', false);
 // 1
+```
+
+### cmd.divide
+
+| name        | return value  | description   |
+|-------------|---------------|---------------|
+| `divide`    | `100`         | Returns the product of all arguments divided by each given value. |
+
+The following example divides each value by 10:
+
+```js
+cmd.divide(10)(1, 2, 3, 4, 5);
+// [0.1, 0.2, 0.3, 0.4, 0.5]
 ```
 
 ### cmd.equals
@@ -404,6 +481,19 @@ cmd.min(1, 2, 3, 4, 5);
 // 1
 ```
 
+### cmd.multiply
+
+| name        | return value  | description   |
+|-------------|---------------|---------------|
+| `multiply`  | `100`         | Returns the product of all arguments multiplied by each given value. |
+
+The following example multiplies each value by 10:
+
+```js
+cmd.multiply(10)(1, 2, 3, 4, 5);
+// [10, 20, 30, 40, 50]
+```
+
 ### cmd.obj
 
 | name     | return value     | description   |
@@ -539,6 +629,19 @@ cmd.sort(function (x) {
 //  {name: "TV", price: 899},
 //  {name: "Car", price: 16999}
 // ]
+```
+
+### cmd.subtract
+
+| name        | return value  | description   |
+|-------------|---------------|---------------|
+| `subtract`  | `100`         | Returns the sum of all arguments subtracted from each given value. |
+
+The following example subtracts 10 from each value:
+
+```js
+cmd.subtract(10)(1, 2, 3, 4, 5);
+// [-9, -8, -7, -6, -5]
 ```
 
 ### cmd.sum

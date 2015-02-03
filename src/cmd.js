@@ -22,16 +22,17 @@
         Array.prototype.forEach.call(arguments, function (name) {
             if (name === '*') {
                 var libs = [
-                    'alert',
+                    'add', 'alert',
                     'case', 'clone', 'compare',
+                    'divide',
                     'equals', 'exists', 'extend',
                     'filter', 'format',
                     'join',
                     'log', 'logger',
-                    'match', 'max', 'min',
+                    'match', 'max', 'min', 'multiply',
                     'obj',
                     'pluck', 'product', 'push',
-                    'sort', 'sum'
+                    'sort', 'subtract', 'sum'
                 ];
                 return libs.forEach(function (name) {
                     self.use(name);
@@ -190,7 +191,7 @@
                 getVals.__defineGetter__('map', function () {
                     return function mappedValsLoader() {
                         return Array.prototype.map.call(arguments, function (x) {
-                            return getVals.apply(null, x);
+                            return getVals.apply(null, Array.isArray(x) ? x : [x]);
                         });
                     }
                 });
