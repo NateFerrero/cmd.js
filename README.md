@@ -364,7 +364,7 @@ var msgMatch = cmd.match(function (it, then) {
     it > 1    && then('You have a few messages');
     it === 1  && then('You have a message');
     it === 0  && then('You have no messages');
-    true      && then('Unknown');
+                 then('Unknown');
 });
 
 msgMatch(0, 1, 2, 3, 4, 5, 6, 'x');
