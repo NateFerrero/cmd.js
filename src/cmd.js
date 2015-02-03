@@ -101,6 +101,17 @@
                     };
                 });
 
+                /**
+                 * Map to operate on multiple value sets
+                 */
+                getVals.__defineGetter__('map', function () {
+                    return function mappedValsLoader() {
+                        return Array.prototype.map.call(arguments, function (x) {
+                            return getVals.apply(null, x);
+                        });
+                    }
+                });
+
                 return getVals;
             };
 
@@ -171,6 +182,17 @@
                     return function rawValsLoader() {
                         return Array.prototype.map.call(arguments, fn.bind(null, args));
                     };
+                });
+
+                /**
+                 * Map to operate on multiple value sets
+                 */
+                getVals.__defineGetter__('map', function () {
+                    return function mappedValsLoader() {
+                        return Array.prototype.map.call(arguments, function (x) {
+                            return getVals.apply(null, x);
+                        });
+                    }
                 });
 
                 return getVals;

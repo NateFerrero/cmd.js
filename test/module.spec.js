@@ -88,6 +88,12 @@ describe('cmd.module', function () {
                 cmd.add([1], [2], [3]).raw([100], [200], [300])
             ).to.deep.equal(106);
         });
+
+        it('works properly when mapping against multiple value sets', function () {
+            expect(
+                cmd.add(1, 2, 3).map([100], [200], [300])
+            ).to.deep.equal([[106], [206], [306]]);
+        });
     });
 
     describe('creates an each command with args predefined', function () {
@@ -139,6 +145,12 @@ describe('cmd.module', function () {
             expect(
                 cmd.add123.raw(100, 200, 300)
             ).to.deep.equal(106);
+        });
+
+        it('works properly when mapping against multiple value sets', function () {
+            expect(
+                cmd.add123.map([100], [200], [300])
+            ).to.deep.equal([[106], [206], [306]]);
         });
     });
 
@@ -197,6 +209,12 @@ describe('cmd.module', function () {
             expect(
                 cmd.addnum._3.raw(100, 200, 300)
             ).to.deep.equal(103);
+        });
+
+        it('works properly when mapping against multiple value sets', function () {
+            expect(
+                cmd.addnum._3.map([100], [200], [300])
+            ).to.deep.equal([[103], [203], [303]]);
         });
     });
 
@@ -273,6 +291,12 @@ describe('cmd.module', function () {
         it('().raw function should not be defined for all-type commands', function () {
             expect(cmd.interlace(['a'], ['b'], ['c']).raw).to.not.be.defined;
         });
+
+        it('works properly when mapping against multiple value sets', function () {
+            expect(
+                cmd.interlace('.').map(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+            ).to.deep.equal(['a.b.c', 'd.e.f', 'g.h.i']);
+        });
     });
 
     describe('creates an all command with args predefined', function () {
@@ -318,6 +342,12 @@ describe('cmd.module', function () {
 
         it('().raw function should not be defined for all-type commands', function () {
             expect(cmd.interlaceUnderscore.raw).to.not.be.defined;
+        });
+
+        it('works properly when mapping against multiple value sets', function () {
+            expect(
+                cmd.interlaceUnderscore.map(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+            ).to.deep.equal(['a_b_c', 'd_e_f', 'g_h_i']);
         });
     });
 
@@ -368,6 +398,12 @@ describe('cmd.module', function () {
 
         it('().raw function should not be defined for all-type commands', function () {
             expect(cmd.interlaceWith.dash.raw).to.not.be.defined;
+        });
+
+        it('works properly when mapping against multiple value sets', function () {
+            expect(
+                cmd.interlaceWith.space.map(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+            ).to.deep.equal(['a b c', 'd e f', 'g h i']);
         });
     });
 
