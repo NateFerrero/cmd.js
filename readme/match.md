@@ -8,12 +8,12 @@ The following example uses `cmd.match` to choose an appropriate sentence:
 
 ```js
 var msgMatch = cmd.match(function (it, then) {
-    it > 5    && then('You have lots of messages');
-    it === 5  && then('You have five messages');
-    it > 1    && then('You have a few messages');
-    it === 1  && then('You have a message');
-    it === 0  && then('You have no messages');
-                 then('Unknown');
+    it > 5   && then('You have lots of messages');
+    it === 5 && then('You have five messages');
+    it > 1   && then('You have a few messages');
+    it === 1 && then('You have a message');
+    it === 0 && then('You have no messages');
+                then('Unknown');
 });
 
 msgMatch(0, 1, 2, 3, 4, 5, 6, 'x');
