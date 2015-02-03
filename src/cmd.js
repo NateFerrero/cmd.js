@@ -62,51 +62,60 @@
             mod.export(this);
         }
         if (mod.all) {
-            this.all(name, mod.all, mod);
+            this.registerAllFn(name, mod.all, mod);
         }
         else if (mod.each) {
-            this.each(name, mod.each, mod);
+            this.registerEachFn(name, mod.each, mod);
         }
         else if (mod.raw) {
-            this.raw(name, mod.raw);
+            this.registerRawFn(name, mod.raw);
         }
     };
 
     /**
-     * Command.all() causes the function to be called on an array of values
+     * Command.registerAllFn() causes the function to be called on an array of values
      * @author Nate Ferrero
      */
-    Command.prototype.all = function cmdAll(name, fn, plugin) {
+    Command.prototype.registerAllFn = function (name, fn, plugin) {
         if (typeof fn !== 'function') {
-            throw new Error('cmd.all(name, fn), fn was not a function, got ' + typeof fn);
+            throw new Error('cmd.registerAllFn(name, fn), fn was not a function, got ' + typeof fn);
         }
 
         Command.prototype.__defineGetter__(name, function () {
             var self = this;
 
             /**
-             * Handle the case where plugin.args is defined
-             */
-            if (Array.isArray(plugin.args)) {
-                return self.getArgs(name, 'vals', function (vals) {
-                    return fn(plugin.args, vals);
-                });
-            }
-
-            /**
              * Values loader
              */
             var valsLoader = function (args) {
-                return self.getArgs(name, 'vals', function (vals) {
+                var getVals = self.args(name, 'vals', function (vals) {
                     return fn(args, vals);
                 });
+
+                /**
+                 * To syntax to avoid merging array values, just use raw values
+                 */
+                getVals.__defineGetter__('to', function () {
+                    return function rawValsLoader() {
+                        return fn.call(null, args, Array.prototype.slice.call(arguments));
+                    };
+                });
+
+                return getVals;
             };
+
+            /**
+             * Handle the case where plugin.args is defined
+             */
+            if (typeof plugin.args !== 'undefined') {
+                return valsLoader(plugin.args);
+            }
 
             /**
              * Expect the arguments to be provided in the form cmd.x(...args...)(...vals...)
              * but still allow default argSets to be used
              */
-            var argsLoader = self.getArgs(name, 'args', function (args) {
+            var argsLoader = self.args(name, 'args', function (args) {
                 return valsLoader(args);
             });
 
@@ -134,44 +143,51 @@
     };
 
     /**
-     * Command.each() causes the function to be called on each value
+     * Command.registerEachFn() causes the function to be called on each value
      * @author Nate Ferrero
      */
-    Command.prototype.each = function cmdEach(name, fn, plugin) {
+    Command.prototype.registerEachFn = function (name, fn, plugin) {
         if (typeof fn !== 'function') {
-            throw new Error('cmd.each(name, fn), fn was not a function, got ' + typeof fn);
+            throw new Error('cmd.registerEachFn(name, fn), fn was not a function, got ' + typeof fn);
         }
 
         Command.prototype.__defineGetter__(name, function () {
             var self = this;
 
             /**
-             * Handle the case where plugin.args is defined
-             */
-            if (Array.isArray(plugin.args)) {
-                return self.getArgs(name, 'vals', function (vals) {
-                    return vals.map(function (val) {
-                        return fn(plugin.args, val);
-                    });
-                });
-            }
-
-            /**
              * Values loader
              */
             var valsLoader = function (args) {
-                return self.getArgs(name, 'vals', function (vals) {
+                var getVals = self.args(name, 'vals', function (vals) {
                     return vals.map(function (val) {
                         return fn(args, val);
                     });
                 });
+
+                /**
+                 * To syntax to avoid merging array values, just use raw values
+                 */
+                getVals.__defineGetter__('to', function () {
+                    return function rawValsLoader() {
+                        return Array.prototype.map.call(arguments, fn.bind(null, args));
+                    };
+                });
+
+                return getVals;
             };
+
+            /**
+             * Handle the case where plugin.args is defined
+             */
+            if (typeof plugin.args !== 'undefined') {
+                return valsLoader(plugin.args);
+            }
 
             /**
              * Expect the arguments to be provided in the form cmd.x(...args...)(...vals...)
              * but still allow default argSets to be used
              */
-            var argsLoader = self.getArgs(name, 'args', function (args) {
+            var argsLoader = self.args(name, 'args', function (args) {
                 return valsLoader(args);
             });
 
@@ -182,7 +198,7 @@
                 return function rawArgsLoader() {
                     return valsLoader(Array.prototype.slice.call(arguments));
                 };
-            })
+            });
 
             if (typeof plugin.argSets === 'object' && plugin.argSets) {
                 Object.keys(plugin.argSets).forEach(function (key) {
@@ -199,11 +215,11 @@
     };
 
     /**
-     * Command.raw() causes to function to be called exactly once with the given arguments
+     * Command.registerRawFn() causes to function to be called exactly once with the given arguments
      */
-    Command.prototype.raw = function cmdRaw(name, fn) {
+    Command.prototype.registerRawFn = function (name, fn) {
         if (typeof fn !== 'function') {
-            throw new Error('cmd.raw(name, fn), fn was not a function, got ' + typeof fn);
+            throw new Error('cmd.registerRawFn(name, fn), fn was not a function, got ' + typeof fn);
         }
         Command.prototype.__defineGetter__(name, function () {
             return fn;
@@ -211,16 +227,14 @@
     };
 
     /**
-     * Command.getArgs()
+     * Command.args()
      * @author Nate Ferrero
      */
-    Command.prototype.getArgs = function getArgsWrapper(name, purpose, done) {
+    Command.prototype.args = function argsWrapper(name, purpose, done) {
 
-        var getArgs = function getArgs() {
-            var args = Array.prototype.slice.apply(arguments);
-
+        var args = function args() {
             var _args = [];
-            args.forEach(function (arg) {
+            Array.prototype.forEach.call(arguments, function (arg) {
                 if (Array.isArray(arg)) {
                     Array.prototype.push.apply(_args, arg);
                 }
@@ -231,29 +245,32 @@
             return done(_args);
         };
 
-        getArgs.$name = name;
-        getArgs.$purpose = purpose;
+        args.$name = name;
+        args.$purpose = purpose;
 
         if (purpose === 'vals') {
-            getArgs.__defineGetter__('and', function () {
-                return new Command(getArgs);
+            args.__defineGetter__('and', function () {
+                return new Command(args);
             });
 
-            getArgs.raw = function () {
-                var args = Array.prototype.slice.apply(arguments);
-                var result = getArgs.apply(null, args);
+            /**
+             * Get the first result unwrapped
+             */
+            args.raw = function () {
+                var _args = Array.prototype.slice.apply(arguments);
+                var result = args.apply(null, _args);
                 return result.shift();
             };
 
             if (this.context) {
                 var context = this.context;
-                return cmd.getArgs(name, 'vals', function (vals) {
-                    return getArgs.apply(null, context(vals));
+                return cmd.args(name, 'vals', function (vals) {
+                    return args.apply(null, context(vals));
                 });
             }
         }
 
-        return getArgs;
+        return args;
     };
 
     var cmd = new Command();
