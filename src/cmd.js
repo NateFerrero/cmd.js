@@ -32,7 +32,8 @@
                     'match', 'max', 'min', 'multiply',
                     'obj',
                     'pluck', 'product', 'push',
-                    'sort', 'subtract', 'sum'
+                    'sort', 'subtract', 'sum',
+                    'tap'
                 ];
                 return libs.forEach(function (name) {
                     self.use(name);
