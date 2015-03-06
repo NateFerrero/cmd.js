@@ -125,7 +125,7 @@ cmd.add(...arguments)(...values);
 cmd.add(100, 200)(7, 8, 9); // [307, 308, 309]
 ```
 
-These commands operate on each value passed in and thus do not have access to each value during processing. This also means that every "each" command returns an array at all times. Both arguments and values are subject to argument merging as described below.
+These commands operate on each value passed in and thus do not have access to other values during processing. This also means that every "each" command returns an array at all times. Both arguments and values are subject to argument merging as described below.
 
 Some commands do not accept arguments, and only the values need to be provided.
 
