@@ -10,7 +10,7 @@
         <script>
             var users = [{id: 1}, {id: 2}, {}, {id: 3}, {id: 4}];
             var userIds =
-                cmd.pluck('id').
+                cmd.get('id').
                 and.filter(cmd.exists).
                 and.join(', ');
 
