@@ -221,6 +221,7 @@ Because of this, if you absolutely need to work with an array as-is, pass it in 
 
 ### C
 
+[call](readme/call.md)
 [case](readme/case.md)
 [clone](readme/clone.md)
 [compare](readme/compare.md)
