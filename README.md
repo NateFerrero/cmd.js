@@ -48,6 +48,89 @@ cmd.log('Hello World');
 </script>
 ```
 
+## Index of Commands
+
+### A
+
+[add](readme/add.md)
+[alert](readme/alert.md)
+
+### C
+
+[call](readme/call.md)
+[case](readme/case.md)
+[clone](readme/clone.md)
+[compare](readme/compare.md)
+[count](readme/count.md)
+
+### D
+
+[default](readme/default.md)
+[divide](readme/divide.md)
+
+### E
+
+[equals](readme/equals.md)
+[exists](readme/exists.md)
+[extend](readme/extend.md)
+
+### F
+
+[filter](readme/filter.md)
+[format](readme/format.md)
+
+### G
+
+[get](readme/get.md)
+
+### H
+
+[has](readme/has.md)
+
+### J
+
+[join](readme/join.md)
+
+### L
+
+[log](readme/log.md)
+[logger](readme/logger.md)
+
+### M
+
+[match](readme/match.md)
+[max](readme/max.md)
+[min](readme/min.md)
+[multiply](readme/multiply.md)
+
+### N
+
+[not](readme/not.md)
+
+### O
+
+[obj](readme/obj.md)
+
+### P
+
+[product](readme/product.md)
+[push](readme/push.md)
+
+### R
+
+[reject](readme/reject.md)
+[reverse](readme/reverse.md)
+
+### S
+
+[sort](readme/sort.md)
+[subtract](readme/subtract.md)
+[sum](readme/sum.md)
+
+### T
+
+[tap](readme/tap.md)
+
 ## Chaining Example
 
 Goal: sort the users by increasing age, and display the name and id of each user.
@@ -211,86 +294,3 @@ cmd.max([1], [2], [3], [4], [5]); // 5
 ```
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
-
-## Command Reference
-
-### A
-
-[add](readme/add.md)
-[alert](readme/alert.md)
-
-### C
-
-[call](readme/call.md)
-[case](readme/case.md)
-[clone](readme/clone.md)
-[compare](readme/compare.md)
-[count](readme/count.md)
-
-### D
-
-[default](readme/default.md)
-[divide](readme/divide.md)
-
-### E
-
-[equals](readme/equals.md)
-[exists](readme/exists.md)
-[extend](readme/extend.md)
-
-### F
-
-[filter](readme/filter.md)
-[format](readme/format.md)
-
-### G
-
-[get](readme/get.md)
-
-### H
-
-[has](readme/has.md)
-
-### J
-
-[join](readme/join.md)
-
-### L
-
-[log](readme/log.md)
-[logger](readme/logger.md)
-
-### M
-
-[match](readme/match.md)
-[max](readme/max.md)
-[min](readme/min.md)
-[multiply](readme/multiply.md)
-
-### N
-
-[not](readme/not.md)
-
-### O
-
-[obj](readme/obj.md)
-
-### P
-
-[product](readme/product.md)
-[push](readme/push.md)
-
-### R
-
-[reject](readme/reject.md)
-[reverse](readme/reverse.md)
-
-### S
-
-[sort](readme/sort.md)
-[subtract](readme/subtract.md)
-[sum](readme/sum.md)
-
-### T
-
-[tap](readme/tap.md)
