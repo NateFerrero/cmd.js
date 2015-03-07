@@ -24,7 +24,7 @@
                 var libs = [
                     'add', 'alert',
                     'case', 'clone', 'compare', 'count',
-                    'divide',
+                    'default', 'divide',
                     'equals', 'exists', 'extend',
                     'filter', 'format',
                     'join',

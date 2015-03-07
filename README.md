@@ -309,6 +309,19 @@ cmd.count(1, [2, 3, 4], 5, [6]);
 // 6
 ```
 
+### cmd.default
+
+| name       | return value            | description   |
+|------------|-------------------------|---------------|
+| `default`  | `[mixed, ...]`          | Returns the default given in place of missing values. |
+
+The following example replaces null and undefined values with 9:
+
+```js
+cmd.default(9)(1, null, 3)
+// [1, 9, 3]
+```
+
 ### cmd.divide
 
 | name        | return value  | description   |
