@@ -2,7 +2,7 @@ var cmd = require('../src/cmd');
 var expect = require('chai').expect;
 
 /**
- * Load the title plugin
+ * Load the case plugin
  */
 cmd.use('case');
 

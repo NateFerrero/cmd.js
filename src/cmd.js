@@ -23,7 +23,7 @@
             if (name === '*') {
                 var libs = [
                     'add', 'alert',
-                    'case', 'clone', 'compare',
+                    'case', 'clone', 'compare', 'count',
                     'divide',
                     'equals', 'exists', 'extend',
                     'filter', 'format',
