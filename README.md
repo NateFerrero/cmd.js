@@ -186,16 +186,6 @@ sortAndPrint(users);
 
 The benefits of this style include reusability, clear logical flow, and less code in general. By chaining commands you create reusable logic isolated from specifc data variables.
 
-### Developer Notes
-
-Development dependencies can be installed with `npm install` or `make install` for convenience.
-
-Testing is accomplished with [mocha](http://mochajs.org/), and can be run with `npm test` or `make test`. There's also a handy `make test-watch` to see live test results during development.
-
-This project is built with [gulp](http://gulpjs.com/). Make all changes/additions in `src/lib/*.js` while running `make build-watch` from the command line.
-
-# API Reference
-
 ## Types of Commands
 
 ### "Each" Commands
@@ -294,3 +284,11 @@ cmd.max([1], [2], [3], [4], [5]); // 5
 ```
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
+
+## Developer Notes
+
+Development dependencies can be installed with `npm install` or `make install` for convenience.
+
+Testing is accomplished with [mocha](http://mochajs.org/), and can be run with `npm test` or `make test`. There's also a handy `make test-watch` to see live test results during development.
+
+This project is built with [gulp](http://gulpjs.com/). Make all changes/additions in `src/lib/*.js` while running `make build-watch` from the command line.
