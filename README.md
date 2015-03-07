@@ -89,10 +89,8 @@ Pretty simple, right? With cmd.js, it's even simpler:
 // Enable all cmd modules
 cmd.use('*');
 
-var pluck = cmd.pluck;
-
-var sortAndPrint = cmd.sort(pluck('age')).
-    and.logger(pluck('name'), pluck('id'));
+var sortAndPrint = cmd.sort(cmd.get('age')).
+    and.logger(cmd.get('name'), cmd.get('id'));
 
 sortAndPrint(users);
 
