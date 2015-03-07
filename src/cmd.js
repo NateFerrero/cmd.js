@@ -28,6 +28,7 @@
                     'equals', 'exists', 'extend',
                     'filter', 'format',
                     'get',
+                    'has',
                     'join',
                     'log', 'logger',
                     'match', 'max', 'min', 'multiply',
