@@ -623,6 +623,19 @@ cmd.reject(function (x) {
 // [1, 2, 3, 4, 5, 7, 9]
 ```
 
+### cmd.reverse
+
+| name        | return value  | description   |
+|-------------|---------------|---------------|
+| `reverse`   | `[100, ...]`  | Returns all values in reverse order. |
+
+The following example reverses all values:
+
+```js
+cmd.reverse(6, [5, 4, 3], 2, [1]);
+// [1, 2, 3, 4, 5, 6]
+```
+
 ### cmd.sort
 
 | name          | return value    | description   |
