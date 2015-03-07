@@ -32,6 +32,7 @@
                     'match', 'max', 'min', 'multiply',
                     'obj',
                     'pluck', 'product', 'push',
+                    'reject', 'reverse',
                     'sort', 'subtract', 'sum',
                     'tap'
                 ];
