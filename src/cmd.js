@@ -30,6 +30,7 @@
                     'join',
                     'log', 'logger',
                     'match', 'max', 'min', 'multiply',
+                    'not',
                     'obj',
                     'pluck', 'product', 'push',
                     'reject', 'reverse',
