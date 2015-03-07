@@ -1,10 +1,10 @@
-### cmd.pluck
+### cmd.get
 
 | name       | return value    | description   |
 |------------|-----------------|---------------|
-| `pluck`    | `[mixed, ...]`  | Surfaces data within a structure of objects or arrays, using arguments as keys. |
+| `get`      | `[mixed, ...]`  | Surfaces data within a structure of objects or arrays, using arguments as keys. |
 
-The following example plucks object properties:
+The following example gets object properties:
 
 ```js
 var people = [{
@@ -26,6 +26,6 @@ var people = [{
         name: 'Maxximus'
     }
 }];
-cmd.pluck('pet', 'name')(people);
+cmd.get('pet', 'name')(people);
 // ["Sherlock", "Rosa", "Maxximus"]
 ```

@@ -4,8 +4,8 @@
     this.export = function (cmd) {
 
         /**
-         * Command: pluck('color')({color: 'red'}) === ['red']
-         *          pluck('color').raw({color: 'red'}) === 'red'
+         * Command: get('color')({color: 'red'}) === ['red']
+         *          get('color').raw({color: 'red'}) === 'red'
          * @author Nate Ferrero
          */
         this.each = function (args, val) {
@@ -18,4 +18,4 @@
             return val;
         };
     };
-}).call(typeof module === 'undefined' ? this['cmd:lib'].pluck = {} : this);
+}).call(typeof module === 'undefined' ? this['cmd:lib'].get = {} : this);

@@ -404,6 +404,38 @@ cmd.format('I love {}pples, {}lueberries, and {}ake', '{} + {} = {}')('a', 'b', 
 // ["I love apples, blueberries, and cake", "a + b = c"]
 ```
 
+### cmd.get
+
+| name       | return value    | description   |
+|------------|-----------------|---------------|
+| `get`      | `[mixed, ...]`  | Surfaces data within a structure of objects or arrays, using arguments as keys. |
+
+The following example gets object properties:
+
+```js
+var people = [{
+    name: 'Adam',
+    pet: {
+        type: 'bird',
+        name: 'Sherlock'
+    }
+}, {
+    name: 'Shannon',
+    pet: {
+        type: 'snake',
+        name: 'Rosa'
+    }
+}, {
+    name: 'Upgrayyed',
+    pet: {
+        type: 'dog',
+        name: 'Maxximus'
+    }
+}];
+cmd.get('pet', 'name')(people);
+// ["Sherlock", "Rosa", "Maxximus"]
+```
+
 ### cmd.join
 
 | name     | return value              | description   |
@@ -551,38 +583,6 @@ cmd.obj('name', 'age', 'city', 'interests')(
 //     "city": "Los Angeles, CA",
 //     "interests": ["tech", "javascript", "node.js", "space"]
 // }]
-```
-
-### cmd.pluck
-
-| name       | return value    | description   |
-|------------|-----------------|---------------|
-| `pluck`    | `[mixed, ...]`  | Surfaces data within a structure of objects or arrays, using arguments as keys. |
-
-The following example plucks object properties:
-
-```js
-var people = [{
-    name: 'Adam',
-    pet: {
-        type: 'bird',
-        name: 'Sherlock'
-    }
-}, {
-    name: 'Shannon',
-    pet: {
-        type: 'snake',
-        name: 'Rosa'
-    }
-}, {
-    name: 'Upgrayyed',
-    pet: {
-        type: 'dog',
-        name: 'Maxximus'
-    }
-}];
-cmd.pluck('pet', 'name')(people);
-// ["Sherlock", "Rosa", "Maxximus"]
 ```
 
 ### cmd.product
