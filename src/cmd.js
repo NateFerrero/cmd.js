@@ -27,7 +27,7 @@
                     'default', 'divide',
                     'equals', 'exists', 'extend',
                     'filter', 'format',
-                    'get',
+                    'get', 'group',
                     'has',
                     'join',
                     'log', 'logger',

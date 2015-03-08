@@ -82,6 +82,7 @@ cmd.log('Hello World');
 ### G
 
 [get](readme/get.md)
+[group](readme/group.md)
 
 ### H
 
