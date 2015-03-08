@@ -11,15 +11,16 @@
             var users = [{id: 1}, {id: 2}, {}, {id: 3}, {id: 4}];
             var userIds =
                 cmd.get('id').
-                and.filter(cmd.exists).
-                and.join(', ');
+                filter(cmd.exists).
+                join(', ');
 
             cmd.format('User ids: {}').
-                and.log(userIds(users));
+                log.with(userIds.with(users));
 
             userIds.
-                and.format('Another format: {}').
-                and.log(users);
+                format('Another format: {}').
+                log.
+                with(users);
         </script>
 
         <script>
@@ -37,7 +38,7 @@
                 args: [],
                 all: function(args, vals) {
                     cmd.obj('label', 'fn').
-                        and.push.to(rows)(vals); // push vals onto rows array
+                        push.to(rows).with(vals); // push vals onto rows array
                 }
             });
 
@@ -46,38 +47,38 @@
                 args: [],
                 all: function(args, vals) {
                     cmd.obj('label', 'fn').
-                        and.push.to(cols)(vals); // push vals onto cols array
+                        push.to(cols).with(vals); // push vals onto cols array
                 }
             });
 
             var row = cmd['save to rows'];
             var col = cmd['save to cols'];
 
-            row('cmd.foo', function () {
+            row.with('cmd.foo', function () {
                 return cmd.foo;
             });
 
-            row('cmd.foo()', function () {
+            row.with('cmd.foo()', function () {
                 return cmd.foo();
             });
 
-            row('cmd.foo(1)', function () {
+            row.with('cmd.foo(1)', function () {
                 return cmd.foo(1);
             });
 
-            row('cmd.foo(1, 2, 3)', function () {
+            row.with('cmd.foo(1, 2, 3)', function () {
                 return cmd.foo(1, 2, 3);
             });
 
-            row('cmd.foo([])', function () {
+            row.with('cmd.foo([])', function () {
                 return cmd.foo([]);
             });
 
-            row('cmd.foo([1])', function () {
+            row.with('cmd.foo([1])', function () {
                 return cmd.foo([1]);
             });
 
-            row('cmd.foo([1, 2], 3)', function () {
+            row.with('cmd.foo([1, 2], 3)', function () {
                 return cmd.foo([1, 2], 3);
             });
 
