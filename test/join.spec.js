@@ -16,13 +16,13 @@ describe('cmd.join', function () {
     });
 
     it('joins values', function () {
-        expect(cmd.join('::')(0, 1, 2, 3, 4)).to.deep.equal([
+        expect(cmd.join('::').with(0, 1, 2, 3, 4)).to.deep.equal([
             '0::1::2::3::4'
         ]);
     });
 
     it('joins values with multiple args', function () {
-        expect(cmd.join('::', ', ')(0, 1, 2, 3, 4)).to.deep.equal([
+        expect(cmd.join('::', ', ').with(0, 1, 2, 3, 4)).to.deep.equal([
             '0::1::2::3::4',
             '0, 1, 2, 3, 4'
         ]);

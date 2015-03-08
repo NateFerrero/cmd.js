@@ -16,7 +16,7 @@ describe('cmd.default', function () {
     });
 
     it('returns the default arg in place of null or undefined', function () {
-        expect(cmd.default(9)(1, null, 3)).to.deep.equal([1, 9, 3]);
+        expect(cmd.default(9).with(1, null, 3)).to.deep.equal([1, 9, 3]);
     });
 
 });

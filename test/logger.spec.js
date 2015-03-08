@@ -27,7 +27,7 @@ describe('cmd.logger', function () {
     it('logger logs values', function () {
         cmd.logger('log', function (x) {
             return x.toUpperCase();
-        })('a', 'b', 'c');
+        }).with('a', 'b', 'c');
 
         expect(cmd.$loggerInterface.logs).to.deep.equal([
             ['log', 'A'],

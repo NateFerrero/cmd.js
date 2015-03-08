@@ -7,7 +7,7 @@ var expect = require('chai').expect;
 describe('cmd.use', function () {
 
     it('is a function', function () {
-        expect(cmd.alert).to.be.a('function');
+        expect(cmd.use).to.be.a('function');
     });
 
     it('can load all modules', function () {

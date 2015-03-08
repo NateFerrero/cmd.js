@@ -16,7 +16,7 @@ describe('cmd.group', function () {
     });
 
     it('groups values into buckets of a particular size', function () {
-        expect(cmd.group(2)(1, 2, 3, 4)).to.deep.equal([
+        expect(cmd.group(2).with(1, 2, 3, 4)).to.deep.equal([
             [1, 2], [3, 4]
         ]);
     });
@@ -24,7 +24,7 @@ describe('cmd.group', function () {
     it('groups values into buckets based on the result of a function', function () {
         expect(cmd.group(function (x) {
             return x > 2;
-        })(1, 2, 3, 4)).to.deep.equal([
+        }).with(1, 2, 3, 4)).to.deep.equal([
             [1, 2], [3, 4]
         ]);
     });

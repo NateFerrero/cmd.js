@@ -16,15 +16,15 @@ describe('cmd.equals', function () {
     });
 
     it('returns true for equal values', function () {
-        expect(cmd.equals(100)(100)).to.deep.equal([true]);
+        expect(cmd.equals(100).with(100)).to.deep.equal([true]);
     });
 
     it('returns false for different objects', function () {
-        expect(cmd.equals({})({})).to.deep.equal([false]);
+        expect(cmd.equals({}).with({})).to.deep.equal([false]);
     });
 
     it('returns false for different arrays', function () {
-        expect(cmd.equals([[]])([[]])).to.deep.equal([false]);
+        expect(cmd.equals([[]]).with([[]])).to.deep.equal([false]);
     });
 
 });

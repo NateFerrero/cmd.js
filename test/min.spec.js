@@ -12,11 +12,11 @@ cmd.use('min');
 describe('cmd.min', function () {
 
     it('is a function', function () {
-        expect(cmd.min).to.be.a('function');
+        expect(cmd.min).to.be.an('object');
     });
 
     it('returns the min value', function () {
-        expect(cmd.min(2, 4, 6, 8, 10, 9, 7, 5, 3, 1)).to.deep.equal(1);
+        expect(cmd.min.with(2, 4, 6, 8, 10, 9, 7, 5, 3, 1)).to.deep.equal(1);
     });
 
 });

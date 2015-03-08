@@ -12,11 +12,11 @@ cmd.use('product');
 describe('cmd.product', function () {
 
     it('is a function', function () {
-        expect(cmd.product).to.be.a('function');
+        expect(cmd.product).to.be.an('object');
     });
 
     it('returns the product of values', function () {
-        expect(cmd.product(2, 4, 6, 8, 10, 9, 7, 5, 3, 1)).to.deep.equal(3628800);
+        expect(cmd.product.with(2, 4, 6, 8, 10, 9, 7, 5, 3, 1)).to.deep.equal(3628800);
     });
 
 });

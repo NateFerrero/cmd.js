@@ -25,11 +25,11 @@ describe('cmd.match', function () {
     });
 
     it('matches based on value', function () {
-        expect(msgMatch(5)).to.deep.equal(['You have five messages']);
+        expect(msgMatch.with(5)).to.deep.equal(['You have five messages']);
     });
 
     it('returns default when no match', function () {
-        expect(msgMatch('failure')).to.deep.equal(['Unknown']);
+        expect(msgMatch.with('failure')).to.deep.equal(['Unknown']);
     });
 
 });

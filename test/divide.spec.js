@@ -16,7 +16,7 @@ describe('cmd.divide', function () {
     });
 
     it('returns the sum of arguments plus each value', function () {
-        expect(cmd.divide(1, 2, 3)(6, 60, 600)).to.deep.equal([1, 10, 100]);
+        expect(cmd.divide(1, 2, 3).with(6, 60, 600)).to.deep.equal([1, 10, 100]);
     });
 
 });

@@ -15,7 +15,7 @@
          */
         this.all = function (args, vals) {
             var direction = 1;
-            var local = cmd.clone(args);
+            var local = cmd.clone.with(args);
 
             if (local && local.length && typeof local[0] === 'number') {
                 direction = local.shift();

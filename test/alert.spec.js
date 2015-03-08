@@ -12,11 +12,11 @@ cmd.use('alert');
 describe('cmd.alert', function () {
 
     it('is a function', function () {
-        expect(cmd.alert).to.be.a('function');
+        expect(cmd.alert).to.be.an('object');
     });
 
     it('returns [undefined]', function () {
-        expect(cmd.alert('Test Alert')).to.deep.equal([undefined]);
+        expect(cmd.alert.with('Test Alert')).to.deep.equal([undefined]);
     });
 
 });

@@ -16,7 +16,7 @@ describe('cmd.subtract', function () {
     });
 
     it('returns the sum of arguments plus each value', function () {
-        expect(cmd.subtract(1, 2, 3)(4, 40, 400)).to.deep.equal([-2, 34, 394]);
+        expect(cmd.subtract(1, 2, 3).with(4, 40, 400)).to.deep.equal([-2, 34, 394]);
     });
 
 });

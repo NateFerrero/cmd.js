@@ -16,7 +16,7 @@ describe('cmd.obj', function () {
     });
 
     it('creates an object with keys and values', function () {
-        expect(cmd.obj('a', 'b', 'c')(1, 2, 3)).to.deep.equal([
+        expect(cmd.obj('a', 'b', 'c').with(1, 2, 3)).to.deep.equal([
             {a: 1, b: 2, c: 3}
         ]);
     });

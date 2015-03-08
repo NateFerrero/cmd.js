@@ -12,11 +12,11 @@ cmd.use('max');
 describe('cmd.max', function () {
 
     it('is a function', function () {
-        expect(cmd.max).to.be.a('function');
+        expect(cmd.max).to.be.an('object');
     });
 
     it('returns the max value', function () {
-        expect(cmd.max(2, 4, 6, 8, 10, 9, 7, 5, 3, 1)).to.deep.equal(10);
+        expect(cmd.max.with(2, 4, 6, 8, 10, 9, 7, 5, 3, 1)).to.deep.equal(10);
     });
 
 });

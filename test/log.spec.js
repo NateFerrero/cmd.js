@@ -21,12 +21,12 @@ describe('cmd.log', function () {
     });
 
     it('is a function', function () {
-        expect(cmd.log).to.be.a('function');
+        expect(cmd.log).to.be.an('object');
     });
 
     it('log logs values', function () {
-        cmd.log('log1', 'log2');
-        cmd.log('log3', 'log4');
+        cmd.log.with('log1', 'log2');
+        cmd.log.with('log3', 'log4');
 
         expect(cmd.$logInterface.logs).to.deep.equal([
             ['log1'],

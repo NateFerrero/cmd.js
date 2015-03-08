@@ -16,7 +16,7 @@ describe('cmd.add', function () {
     });
 
     it('returns the sum of arguments plus each value', function () {
-        expect(cmd.add(1, 2, 3)(4, 40, 400)).to.deep.equal([10, 46, 406]);
+        expect(cmd.add(1, 2, 3).with(4, 40, 400)).to.deep.equal([10, 46, 406]);
     });
 
 });

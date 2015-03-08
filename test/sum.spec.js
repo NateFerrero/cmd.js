@@ -12,11 +12,11 @@ cmd.use('sum');
 describe('cmd.sum', function () {
 
     it('is a function', function () {
-        expect(cmd.sum).to.be.a('function');
+        expect(cmd.sum).to.be.an('object');
     });
 
     it('returns the sum of values', function () {
-        expect(cmd.sum(2, 4, 6, 8, 10, 9, 7, 5, 3, 1)).to.deep.equal(55);
+        expect(cmd.sum.with(2, 4, 6, 8, 10, 9, 7, 5, 3, 1)).to.deep.equal(55);
     });
 
 });

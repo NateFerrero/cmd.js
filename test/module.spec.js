@@ -29,51 +29,51 @@ describe('cmd.module', function () {
         });
 
         it('works when no arguments are given', function () {
-            expect(cmd.add()()).to.deep.equal([]);
+            expect(cmd.add().with()).to.deep.equal([]);
         });
 
         it('works when multiple arguments and no values are given', function () {
             expect(
-                cmd.add(1)()                          ).to.deep.equal([]);
+                cmd.add(1).with()                          ).to.deep.equal([]);
             expect(
-                cmd.add(1, 2, 3)()                    ).to.deep.equal([]);
+                cmd.add(1, 2, 3).with()                    ).to.deep.equal([]);
             expect(
-                cmd.add(1, [2, 3])()                  ).to.deep.equal([]);
+                cmd.add(1, [2, 3]).with()                  ).to.deep.equal([]);
             expect(
-                cmd.add([1, 2, 3])()                  ).to.deep.equal([]);
+                cmd.add([1, 2, 3]).with()                  ).to.deep.equal([]);
             expect(
-                cmd.add([1], [2], [3])()              ).to.deep.equal([]);
+                cmd.add([1], [2], [3]).with()              ).to.deep.equal([]);
         });
 
         it('works when multiple values and no arguments are given', function () {
             expect(
-                cmd.add()(1)                          ).to.deep.equal([1]);
+                cmd.add().with(1)                          ).to.deep.equal([1]);
             expect(
-                cmd.add()(1, 2, 3)                    ).to.deep.equal([1, 2, 3]);
+                cmd.add().with(1, 2, 3)                    ).to.deep.equal([1, 2, 3]);
             expect(
-                cmd.add()(1, [2, 3])                  ).to.deep.equal([1, 2, 3]);
+                cmd.add().with(1, [2, 3])                  ).to.deep.equal([1, 2, 3]);
             expect(
-                cmd.add()([1, 2, 3])                  ).to.deep.equal([1, 2, 3]);
+                cmd.add().with([1, 2, 3])                  ).to.deep.equal([1, 2, 3]);
             expect(
-                cmd.add()([1], [2], [3])              ).to.deep.equal([1, 2, 3]);
+                cmd.add().with([1], [2], [3])              ).to.deep.equal([1, 2, 3]);
         });
 
         it('works when multiple values and multiple arguments are given', function () {
             expect(
-                cmd.add(1)(1)                         ).to.deep.equal([2]);
+                cmd.add(1).with(1)                         ).to.deep.equal([2]);
             expect(
-                cmd.add(1, 2, 3)(1, 2, 3)             ).to.deep.equal([7, 8, 9]);
+                cmd.add(1, 2, 3).with(1, 2, 3)             ).to.deep.equal([7, 8, 9]);
             expect(
-                cmd.add(1, [2, 3])(1, [2, 3])         ).to.deep.equal([7, 8, 9]);
+                cmd.add(1, [2, 3]).with(1, [2, 3])         ).to.deep.equal([7, 8, 9]);
             expect(
-                cmd.add([1, 2, 3])([1, 2, 3])         ).to.deep.equal([7, 8, 9]);
+                cmd.add([1, 2, 3]).with([1, 2, 3])         ).to.deep.equal([7, 8, 9]);
             expect(
-                cmd.add([1], [2], [3])([1], [2], [3]) ).to.deep.equal([7, 8, 9]);
+                cmd.add([1], [2], [3]).with([1], [2], [3]) ).to.deep.equal([7, 8, 9]);
         });
 
         it('.to does not merge argument arrays', function () {
             expect(
-                cmd.add.to([1], [2], [3])([100], [200], [300])
+                cmd.add.to([1], [2], [3]).with([100], [200], [300])
             ).to.deep.equal(['100123', '200123', '300123']);
         });
 
@@ -91,7 +91,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.add(1, 2, 3).map([100], [200], [300])
+                cmd.add(1, 2, 3).map.with([100], [200], [300])
             ).to.deep.equal([[106], [206], [306]]);
         });
     });
@@ -112,24 +112,24 @@ describe('cmd.module', function () {
         });
 
         it('called "add123"', function () {
-            expect(cmd.add123).to.be.a('function');
+            expect(cmd.add123).to.be.an('object');
         });
 
         it('works when no values are given', function () {
-            expect(cmd.add123()).to.deep.equal([]);
+            expect(cmd.add123.with()).to.deep.equal([]);
         });
 
         it('works when multiple values are given', function () {
             expect(
-                cmd.add123(1)             ).to.deep.equal([7]);
+                cmd.add123.with(1)             ).to.deep.equal([7]);
             expect(
-                cmd.add123(1, 2, 3)       ).to.deep.equal([7, 8, 9]);
+                cmd.add123.with(1, 2, 3)       ).to.deep.equal([7, 8, 9]);
             expect(
-                cmd.add123(1, [2, 3])     ).to.deep.equal([7, 8, 9]);
+                cmd.add123.with(1, [2, 3])     ).to.deep.equal([7, 8, 9]);
             expect(
-                cmd.add123([1, 2, 3])     ).to.deep.equal([7, 8, 9]);
+                cmd.add123.with([1, 2, 3])     ).to.deep.equal([7, 8, 9]);
             expect(
-                cmd.add123([1], [2], [3]) ).to.deep.equal([7, 8, 9]);
+                cmd.add123.with([1], [2], [3]) ).to.deep.equal([7, 8, 9]);
         });
 
         it('.to operates directly on array values provided', function () {
@@ -149,7 +149,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.add123.map([100], [200], [300])
+                cmd.add123.map.with([100], [200], [300])
             ).to.deep.equal([[106], [206], [306]]);
         });
     });
@@ -178,22 +178,22 @@ describe('cmd.module', function () {
         });
 
         it('works when no values are given', function () {
-            expect(cmd.addnum._1()).to.deep.equal([]);
-            expect(cmd.addnum._2()).to.deep.equal([]);
-            expect(cmd.addnum._3()).to.deep.equal([]);
+            expect(cmd.addnum._1.with()).to.deep.equal([]);
+            expect(cmd.addnum._2.with()).to.deep.equal([]);
+            expect(cmd.addnum._3.with()).to.deep.equal([]);
         });
 
         it('works when multiple values are given', function () {
             expect(
-                cmd.addnum._3(1)             ).to.deep.equal([4]);
+                cmd.addnum._3.with(1)             ).to.deep.equal([4]);
             expect(
-                cmd.addnum._3(1, 2, 3)       ).to.deep.equal([4, 5, 6]);
+                cmd.addnum._3.with(1, 2, 3)       ).to.deep.equal([4, 5, 6]);
             expect(
-                cmd.addnum._3(1, [2, 3])     ).to.deep.equal([4, 5, 6]);
+                cmd.addnum._3.with(1, [2, 3])     ).to.deep.equal([4, 5, 6]);
             expect(
-                cmd.addnum._3([1, 2, 3])     ).to.deep.equal([4, 5, 6]);
+                cmd.addnum._3.with([1, 2, 3])     ).to.deep.equal([4, 5, 6]);
             expect(
-                cmd.addnum._3([1], [2], [3]) ).to.deep.equal([4, 5, 6]);
+                cmd.addnum._3.with([1], [2], [3]) ).to.deep.equal([4, 5, 6]);
         });
 
         it('.to operates directly on array values provided', function () {
@@ -213,7 +213,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.addnum._3.map([100], [200], [300])
+                cmd.addnum._3.map.with([100], [200], [300])
             ).to.deep.equal([[103], [203], [303]]);
         });
     });
@@ -236,51 +236,51 @@ describe('cmd.module', function () {
         });
 
         it('works when no arguments are given', function () {
-            expect(cmd.interlace()()).to.deep.equal('');
+            expect(cmd.interlace().with()).to.deep.equal('');
         });
 
         it('works when multiple arguments and no values are given', function () {
             expect(
-                cmd.interlace('a')()                 ).to.deep.equal('');
+                cmd.interlace('a').with()                 ).to.deep.equal('');
             expect(
-                cmd.interlace('a', 'b', 'c')()       ).to.deep.equal('');
+                cmd.interlace('a', 'b', 'c').with()       ).to.deep.equal('');
             expect(
-                cmd.interlace('a', ['b', 'c'])()     ).to.deep.equal('');
+                cmd.interlace('a', ['b', 'c']).with()     ).to.deep.equal('');
             expect(
-                cmd.interlace(['a', 'b', 'c'])()     ).to.deep.equal('');
+                cmd.interlace(['a', 'b', 'c']).with()     ).to.deep.equal('');
             expect(
-                cmd.interlace(['a'], ['b'], ['c'])() ).to.deep.equal('');
+                cmd.interlace(['a'], ['b'], ['c']).with() ).to.deep.equal('');
         });
 
         it('works when multiple values and no arguments are given', function () {
             expect(
-                cmd.interlace()('a')                 ).to.deep.equal('a');
+                cmd.interlace().with('a')                 ).to.deep.equal('a');
             expect(
-                cmd.interlace()('a', 'b', 'c')       ).to.deep.equal('abc');
+                cmd.interlace().with('a', 'b', 'c')       ).to.deep.equal('abc');
             expect(
-                cmd.interlace()('a', ['b', 'c'])     ).to.deep.equal('abc');
+                cmd.interlace().with('a', ['b', 'c'])     ).to.deep.equal('abc');
             expect(
-                cmd.interlace()(['a', 'b', 'c'])     ).to.deep.equal('abc');
+                cmd.interlace().with(['a', 'b', 'c'])     ).to.deep.equal('abc');
             expect(
-                cmd.interlace()(['a'], ['b'], ['c']) ).to.deep.equal('abc');
+                cmd.interlace().with(['a'], ['b'], ['c']) ).to.deep.equal('abc');
         });
 
         it('works when multiple values and multiple arguments are given', function () {
             expect(
-                cmd.interlace('a')('A')                                 ).to.deep.equal('A');
+                cmd.interlace('a').with('A')                                 ).to.deep.equal('A');
             expect(
-                cmd.interlace('a', 'b', 'c')('A', 'B', 'C')             ).to.deep.equal('AabcBabcC');
+                cmd.interlace('a', 'b', 'c').with('A', 'B', 'C')             ).to.deep.equal('AabcBabcC');
             expect(
-                cmd.interlace('a', ['b', 'c'])('A', ['B', 'C'])         ).to.deep.equal('AabcBabcC');
+                cmd.interlace('a', ['b', 'c']).with('A', ['B', 'C'])         ).to.deep.equal('AabcBabcC');
             expect(
-                cmd.interlace(['a', 'b', 'c'])(['A', 'B', 'C'])         ).to.deep.equal('AabcBabcC');
+                cmd.interlace(['a', 'b', 'c']).with(['A', 'B', 'C'])         ).to.deep.equal('AabcBabcC');
             expect(
-                cmd.interlace(['a'], ['b'], ['c'])(['A'], ['B'], ['C']) ).to.deep.equal('AabcBabcC');
+                cmd.interlace(['a'], ['b'], ['c']).with(['A'], ['B'], ['C']) ).to.deep.equal('AabcBabcC');
         });
 
         it('.to does not merge argument arrays', function () {
             expect(
-                cmd.interlace.to(['a'], ['b'], ['c'])(['A'], ['B'], ['C'])
+                cmd.interlace.to(['a'], ['b'], ['c']).with(['A'], ['B'], ['C'])
             ).to.deep.equal('AabcBabcC');
         });
 
@@ -294,7 +294,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.interlace('.').map(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+                cmd.interlace('.').map.with(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
             ).to.deep.equal(['a.b.c', 'd.e.f', 'g.h.i']);
         });
     });
@@ -314,24 +314,24 @@ describe('cmd.module', function () {
         });
 
         it('called "interlaceUnderscore"', function () {
-            expect(cmd.interlaceUnderscore).to.be.a('function');
+            expect(cmd.interlaceUnderscore).to.be.an('object');
         });
 
         it('works when no values are given', function () {
-            expect(cmd.interlaceUnderscore()).to.deep.equal('');
+            expect(cmd.interlaceUnderscore.with()).to.deep.equal('');
         });
 
         it('works when multiple values are given', function () {
             expect(
-                cmd.interlaceUnderscore('a')                 ).to.deep.equal('a');
+                cmd.interlaceUnderscore.with('a')                 ).to.deep.equal('a');
             expect(
-                cmd.interlaceUnderscore('a', 'b', 'c')       ).to.deep.equal('a_b_c');
+                cmd.interlaceUnderscore.with('a', 'b', 'c')       ).to.deep.equal('a_b_c');
             expect(
-                cmd.interlaceUnderscore('a', ['b', 'c'])     ).to.deep.equal('a_b_c');
+                cmd.interlaceUnderscore.with('a', ['b', 'c'])     ).to.deep.equal('a_b_c');
             expect(
-                cmd.interlaceUnderscore(['a', 'b', 'c'])     ).to.deep.equal('a_b_c');
+                cmd.interlaceUnderscore.with(['a', 'b', 'c'])     ).to.deep.equal('a_b_c');
             expect(
-                cmd.interlaceUnderscore(['a'], ['b'], ['c']) ).to.deep.equal('a_b_c');
+                cmd.interlaceUnderscore.with(['a'], ['b'], ['c']) ).to.deep.equal('a_b_c');
         });
 
         it('.to operates directly on array values provided', function () {
@@ -346,7 +346,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.interlaceUnderscore.map(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+                cmd.interlaceUnderscore.map.with(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
             ).to.deep.equal(['a_b_c', 'd_e_f', 'g_h_i']);
         });
     });
@@ -373,21 +373,21 @@ describe('cmd.module', function () {
         });
 
         it('works when no values are given', function () {
-            expect(cmd.interlaceWith.space()).to.deep.equal('');
-            expect(cmd.interlaceWith.dash()).to.deep.equal('');
+            expect(cmd.interlaceWith.space.with()).to.deep.equal('');
+            expect(cmd.interlaceWith.dash.with()).to.deep.equal('');
         });
 
         it('works when multiple values are given', function () {
             expect(
-                cmd.interlaceWith.dash('a')                 ).to.deep.equal('a');
+                cmd.interlaceWith.dash.with('a')                 ).to.deep.equal('a');
             expect(
-                cmd.interlaceWith.dash('a', 'b', 'c')       ).to.deep.equal('a-b-c');
+                cmd.interlaceWith.dash.with('a', 'b', 'c')       ).to.deep.equal('a-b-c');
             expect(
-                cmd.interlaceWith.dash('a', ['b', 'c'])     ).to.deep.equal('a-b-c');
+                cmd.interlaceWith.dash.with('a', ['b', 'c'])     ).to.deep.equal('a-b-c');
             expect(
-                cmd.interlaceWith.dash(['a', 'b', 'c'])     ).to.deep.equal('a-b-c');
+                cmd.interlaceWith.dash.with(['a', 'b', 'c'])     ).to.deep.equal('a-b-c');
             expect(
-                cmd.interlaceWith.dash(['a'], ['b'], ['c']) ).to.deep.equal('a-b-c');
+                cmd.interlaceWith.dash.with(['a'], ['b'], ['c']) ).to.deep.equal('a-b-c');
         });
 
         it('.to operates directly on array values provided', function () {
@@ -402,7 +402,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.interlaceWith.space.map(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+                cmd.interlaceWith.space.map.with(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
             ).to.deep.equal(['a b c', 'd e f', 'g h i']);
         });
     });

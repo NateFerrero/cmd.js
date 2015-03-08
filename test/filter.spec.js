@@ -18,7 +18,7 @@ describe('cmd.filter', function () {
     it('filters values', function () {
         expect(cmd.filter(function (x) {
             return x % 2 == 0;
-        })(0, 1, 2, 3, 4)).to.deep.equal([0, 2, 4]);
+        }).with(0, 1, 2, 3, 4)).to.deep.equal([0, 2, 4]);
     });
 
     it('filters values over multiple arg passes', function () {
@@ -26,7 +26,7 @@ describe('cmd.filter', function () {
             return x % 2 == 0;
         }, function (x) {
             return x !== 2;
-        })(0, 1, 2, 3, 4)).to.deep.equal([0, 4]);
+        }).with(0, 1, 2, 3, 4)).to.deep.equal([0, 4]);
     });
 
 });

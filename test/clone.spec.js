@@ -12,7 +12,7 @@ cmd.use('clone');
 describe('cmd.clone', function () {
 
     it('is a function', function () {
-        expect(cmd.clone).to.be.a('function');
+        expect(cmd.clone).to.be.an('object');
     });
 
     it('clones an object', function () {

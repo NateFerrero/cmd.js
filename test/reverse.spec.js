@@ -12,11 +12,11 @@ cmd.use('reverse');
 describe('cmd.reverse', function () {
 
     it('is a function', function () {
-        expect(cmd.reverse).to.be.a('function');
+        expect(cmd.reverse).to.be.an('object');
     });
 
     it('returns the reverse of values', function () {
-        expect(cmd.reverse(6, [5, 4, 3], 2, [1])).to.deep.equal([1, 2, 3, 4, 5, 6]);
+        expect(cmd.reverse.with(6, [5, 4, 3], 2, [1])).to.deep.equal([1, 2, 3, 4, 5, 6]);
     });
 
 });

@@ -1,5 +1,5 @@
 /**
- * Command: new Command(function () { ... })
+ * Command
  * @author Nate Ferrero
  */
 (function () {
@@ -10,8 +10,9 @@
     /**
      * Command class
      */
-    var Command = function (context) {
-        this.context = context;
+    var Command = function (_fn, name) {
+        this.fn = _fn;
+        this.name = name;
     };
 
     /**
@@ -94,7 +95,7 @@
              * Values loader
              */
             var valsLoader = function (args) {
-                return self.args(name, 'vals', function (vals) {
+                return self.vals(name, function (vals) {
                     return fn(args, vals);
                 });
             };
@@ -110,7 +111,7 @@
              * Expect the arguments to be provided in the form cmd.x(...args...)(...vals...)
              * but still allow default argSets to be used
              */
-            var argsLoader = self.args(name, 'args', function (args) {
+            var argsLoader = self.args(name, function (args) {
                 return valsLoader(args);
             });
 
@@ -144,7 +145,7 @@
              * Values loader
              */
             var valsLoader = function (args) {
-                return self.args(name, 'vals', function (vals) {
+                return self.vals(name, function (vals) {
                     return vals.map(function (val) {
                         return fn(args, val);
                     });
@@ -162,7 +163,7 @@
              * Expect the arguments to be provided in the form cmd.x(...args...)(...vals...)
              * but still allow default argSets to be used
              */
-            var argsLoader = self.args(name, 'args', function (args) {
+            var argsLoader = self.args(name, function (args) {
                 return valsLoader(args);
             });
 
@@ -193,11 +194,60 @@
     };
 
     /**
-     * Command.args()
+     * Command.with
+     */
+    Command.prototype.with = function () {
+        if (!this.fn) {
+            throw new Error('Inappropriate place to call .with()')
+        }
+        return this.args('with', this.fn).apply(null, Array.prototype.slice.call(arguments));
+    };
+
+    /**
+     * Command.to
+     */
+    Command.prototype.to = function () {
+        if (!this.fn) {
+            throw new Error('Inappropriate place to call .to()')
+        }
+        return this.fn(Array.prototype.slice.call(arguments));
+    };
+
+    /**
+     * Command.raw
+     */
+    Command.prototype.__defineGetter__('raw', function () {
+        var self = this;
+        return function (value) {
+            if (!self.fn) {
+                throw new Error('Inappropriate place to call .raw()')
+            }
+            return self.fn([value])[0];
+        };
+    });
+
+    /**
+     * Command.map
+     */
+    Command.prototype.__defineGetter__('map', function () {
+        var last = this.fn;
+
+        if (!last) {
+            throw new Error('Inappropriate place to call .map');
+        }
+
+        return new Command(function (args) {
+            return args.map(function (x) {
+                return last(Array.isArray(x) ? x : [x]);
+            });
+        });
+    });
+
+    /**
+     * Command.vals()
      * @author Nate Ferrero
      */
-    Command.prototype.args = function argsWrapper(name, purpose, done) {
-
+    Command.prototype.args = function argsWrapper(name, done) {
         var args = function args() {
             var _args = [];
             Array.prototype.forEach.call(arguments, function (arg) {
@@ -210,51 +260,33 @@
             });
             return done(_args);
         };
-
         args.$name = name;
-        args.$purpose = purpose;
 
         /**
-         * To syntax to avoid merging array values, just use raw values
+         * Skip argument merging with .to()
          */
         args.__defineGetter__('to', function () {
-            return function rawValsLoader() {
+            return function unmergedArgs() {
                 return done(Array.prototype.slice.call(arguments));
             };
         });
 
-        /**
-         * Map to operate on multiple value sets
-         */
-        args.__defineGetter__('map', function () {
-            return function mappedValsLoader() {
-                return Array.prototype.map.call(arguments, function (x) {
-                    return done(Array.isArray(x) ? x : [x]);
-                });
-            }
-        });
-
-        if (purpose === 'vals') {
-            args.__defineGetter__('and', function () {
-                return new Command(args);
-            });
-
-            /**
-             * Get the first result unwrapped
-             */
-            args.raw = function (first) {
-                return args(first).shift();
-            };
-
-            if (this.context) {
-                var context = this.context;
-                return cmd.args(name, 'vals', function (vals) {
-                    return args.apply(null, context(vals));
-                });
-            }
-        }
-
         return args;
+    };
+
+    /**
+     * Command.vals()
+     * @author Nate Ferrero
+     */
+    Command.prototype.vals = function valsWrapper(name, done) {
+        var last = this.fn;
+
+        return new Command(function (args) {
+            if (last) {
+                args = last(args);
+            }
+            return done(args);
+        }, name);
     };
 
     var cmd = new Command();

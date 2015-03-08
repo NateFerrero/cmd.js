@@ -16,19 +16,19 @@ describe('cmd.has', function () {
     });
 
     it('has returns true for valid properties', function () {
-        expect(cmd.has('a')({a: 1})).to.deep.equal([
+        expect(cmd.has('a').with({a: 1})).to.deep.equal([
             true
         ]);
     });
 
     it('has returns false for invalid properties', function () {
-        expect(cmd.has('b')({a: 1})).to.deep.equal([
+        expect(cmd.has('b').with({a: 1})).to.deep.equal([
             false
         ]);
     });
 
     it('has returns true for deep valid properties', function () {
-        expect(cmd.has('a', 'length')({a: 'something'}, {b: 'something'})).to.deep.equal([
+        expect(cmd.has('a', 'length').with({a: 'something'}, {b: 'something'})).to.deep.equal([
             true, false
         ]);
     });

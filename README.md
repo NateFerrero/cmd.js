@@ -284,6 +284,31 @@ cmd.max([1], 2, [3, 4, 5]); // 5
 cmd.max([1], [2], [3], [4], [5]); // 5
 ```
 
+## Tutorial
+
+Let's start with some data:
+
+```js
+var products = [
+    {name: 'apple',  type: 'fruit',     q: 5, price: 1.99},
+    {name: 'pear',   type: 'fruit',     q: 3, price: 2.59},
+    {name: 'carrot', type: 'vegetable', q: 7, price: 0.59}
+];
+```
+
+How many products are there in total?
+
+```js
+cmd.get('q').sum(products);
+// 15
+```
+
+How many apples are there?
+
+```js
+cmd.filter(cmd.get('name').equals('apple')).get('q').raw(products);
+// 5
+
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
 
 ## Developer Notes
