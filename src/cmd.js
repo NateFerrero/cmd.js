@@ -94,31 +94,9 @@
              * Values loader
              */
             var valsLoader = function (args) {
-                var getVals = self.args(name, 'vals', function (vals) {
+                return self.args(name, 'vals', function (vals) {
                     return fn(args, vals);
                 });
-
-                /**
-                 * To syntax to avoid merging array values, just use raw values
-                 */
-                getVals.__defineGetter__('to', function () {
-                    return function rawValsLoader() {
-                        return fn.call(null, args, Array.prototype.slice.call(arguments));
-                    };
-                });
-
-                /**
-                 * Map to operate on multiple value sets
-                 */
-                getVals.__defineGetter__('map', function () {
-                    return function mappedValsLoader() {
-                        return Array.prototype.map.call(arguments, function (x) {
-                            return getVals.apply(null, x);
-                        });
-                    }
-                });
-
-                return getVals;
             };
 
             /**
@@ -135,15 +113,6 @@
             var argsLoader = self.args(name, 'args', function (args) {
                 return valsLoader(args);
             });
-
-            /**
-             * To syntax to avoid merging array arguments, just use raw arguments
-             */
-            argsLoader.__defineGetter__('to', function () {
-                return function rawArgsLoader() {
-                    return valsLoader(Array.prototype.slice.call(arguments));
-                };
-            })
 
             if (typeof plugin.argSets === 'object' && plugin.argSets) {
                 Object.keys(plugin.argSets).forEach(function (key) {
@@ -175,33 +144,11 @@
              * Values loader
              */
             var valsLoader = function (args) {
-                var getVals = self.args(name, 'vals', function (vals) {
+                return self.args(name, 'vals', function (vals) {
                     return vals.map(function (val) {
                         return fn(args, val);
                     });
                 });
-
-                /**
-                 * To syntax to avoid merging array values, just use raw values
-                 */
-                getVals.__defineGetter__('to', function () {
-                    return function rawValsLoader() {
-                        return Array.prototype.map.call(arguments, fn.bind(null, args));
-                    };
-                });
-
-                /**
-                 * Map to operate on multiple value sets
-                 */
-                getVals.__defineGetter__('map', function () {
-                    return function mappedValsLoader() {
-                        return Array.prototype.map.call(arguments, function (x) {
-                            return getVals.apply(null, Array.isArray(x) ? x : [x]);
-                        });
-                    }
-                });
-
-                return getVals;
             };
 
             /**
@@ -217,15 +164,6 @@
              */
             var argsLoader = self.args(name, 'args', function (args) {
                 return valsLoader(args);
-            });
-
-            /**
-             * To syntax to avoid merging array arguments, just use raw arguments
-             */
-            argsLoader.__defineGetter__('to', function () {
-                return function rawArgsLoader() {
-                    return valsLoader(Array.prototype.slice.call(arguments));
-                };
             });
 
             if (typeof plugin.argSets === 'object' && plugin.argSets) {
@@ -275,6 +213,26 @@
 
         args.$name = name;
         args.$purpose = purpose;
+
+        /**
+         * To syntax to avoid merging array values, just use raw values
+         */
+        args.__defineGetter__('to', function () {
+            return function rawValsLoader() {
+                return done(Array.prototype.slice.call(arguments));
+            };
+        });
+
+        /**
+         * Map to operate on multiple value sets
+         */
+        args.__defineGetter__('map', function () {
+            return function mappedValsLoader() {
+                return Array.prototype.map.call(arguments, function (x) {
+                    return done(Array.isArray(x) ? x : [x]);
+                });
+            }
+        });
 
         if (purpose === 'vals') {
             args.__defineGetter__('and', function () {
