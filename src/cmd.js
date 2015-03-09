@@ -246,7 +246,7 @@
     });
 
     /**
-     * Command.vals()
+     * Command.args()
      * @author Nate Ferrero
      */
     Command.prototype.args = function argsWrapper(name, done) {
