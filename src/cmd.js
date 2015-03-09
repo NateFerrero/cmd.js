@@ -191,6 +191,8 @@
         Command.prototype.__defineGetter__(name, function () {
             return fn;
         });
+		
+		return cmd[name];
     };
 
     /**
@@ -222,7 +224,7 @@
             if (!self.fn) {
                 throw new Error('Inappropriate place to call .raw()')
             }
-            return self.fn([value])[0];
+            return self.fn(Array.isArray(value) ? value : [value])[0];
         };
     });
 
