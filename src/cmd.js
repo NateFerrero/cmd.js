@@ -191,8 +191,8 @@
         Command.prototype.__defineGetter__(name, function () {
             return fn;
         });
-		
-		return cmd[name];
+
+        return cmd[name];
     };
 
     /**
