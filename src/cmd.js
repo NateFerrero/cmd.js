@@ -8,6 +8,22 @@
     var scope = this;
 
     /**
+     * Helper to merge array arguments
+     */
+    var merge = function (args) {
+        var _args = [];
+        Array.prototype.forEach.call(args, function (arg) {
+            if (Array.isArray(arg)) {
+                Array.prototype.push.apply(_args, arg);
+            }
+            else {
+                _args.push(arg);
+            }
+        });
+        return _args;
+    };
+
+    /**
      * Command class
      */
     var Command = function (_fn, name) {
@@ -25,7 +41,7 @@
                 var libs = [
                     'add', 'alert',
                     'call', 'case', 'clone', 'compare', 'count',
-                    'default', 'divide',
+                    'default', 'divide', 'do',
                     'equals', 'exists', 'extend',
                     'filter', 'format',
                     'get', 'group',
@@ -233,13 +249,14 @@
     Command.prototype.__defineGetter__('map', function () {
         var last = this.fn;
 
-        if (!last) {
-            throw new Error('Inappropriate place to call .map');
-        }
-
         return new Command(function (args) {
             return args.map(function (x) {
-                return last(Array.isArray(x) ? x : [x]);
+                if (last) {
+                    return last(Array.isArray(x) ? x : [x]);
+                }
+                else {
+                    return Array.isArray(x) ? x : [x];
+                }
             });
         });
     });
@@ -250,16 +267,7 @@
      */
     Command.prototype.args = function argsWrapper(name, done) {
         var args = function args() {
-            var _args = [];
-            Array.prototype.forEach.call(arguments, function (arg) {
-                if (Array.isArray(arg)) {
-                    Array.prototype.push.apply(_args, arg);
-                }
-                else {
-                    _args.push(arg);
-                }
-            });
-            return done(_args);
+            return done(merge(arguments));
         };
         args.$name = name;
 

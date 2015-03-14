@@ -284,6 +284,8 @@ cmd.max([1], 2, [3, 4, 5]); // 5
 cmd.max([1], [2], [3], [4], [5]); // 5
 ```
 
+Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
+
 ## Tutorial
 
 Let's start with some data:
@@ -296,20 +298,32 @@ var products = [
 ];
 ```
 
-How many products are there in total?
+How many products are there in total? Luckily, `.sum` takes an array and returns a single number:
 
 ```js
-cmd.get('q').sum(products);
+cmd.get('q').sum.with(products);
 // 15
 ```
 
-How many apples are there?
+How many apples are there? Use `.raw` to get just the first result unwrapped:
 
 ```js
 cmd.filter(cmd.get('name').equals('apple')).get('q').raw(products);
 // 5
 
-Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
+How many fruits are there? Use `.filter` and `.sum` together:
+
+```js
+cmd.filter(cmd.get('type').equals('fruit')).get('q').sum.with(products);
+// 8
+```
+
+What is the total extended cost of all items?
+
+```js
+cmd.do(cmd.get('q'), cmd.get('price')).product.map.sum.call('toFixed', 2).with(products);
+// 21.849999999999998
+```
 
 ## Developer Notes
 
