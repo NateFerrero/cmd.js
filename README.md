@@ -310,6 +310,7 @@ How many apples are there? Use `.raw` to get just the first result unwrapped:
 ```js
 cmd.filter(cmd.get('name').equals('apple')).get('q').raw(products);
 // 5
+```
 
 How many fruits are there? Use `.filter` and `.sum` together:
 
