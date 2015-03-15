@@ -19,6 +19,9 @@
         this.each = function (args, val) {
             var logs = [];
             args.forEach(function (arg) {
+                if (arg && arg.constructor === cmd.constructor) {
+                    arg = arg.raw(val);
+                }
                 var log = typeof arg === 'function' ? arg(val) : (
                     typeof arg === 'string' ? cmd.format(arg).raw(val) : arg
                 );

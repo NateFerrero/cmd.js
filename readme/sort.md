@@ -18,13 +18,13 @@ cmd.sort.desc('c', 'a', 'b', 3, 1, 2);
 // Sort by type, leaving order preserved within a type
 cmd.sort(function (x) {
     return typeof x;
-})('c', 'a', 'b', 3, 1, 2);
+}).with('c', 'a', 'b', 3, 1, 2);
 // [3, 1, 2, "c", "a", "b"]
 
 // Sort objects by a key
 cmd.sort(function (x) {
     return x.price;
-})(
+}).with(
     {name: 'TV', price: 899.00},
     {name: 'Car', price: 16999.00},
     {name: 'Spoon', price: 1.29}

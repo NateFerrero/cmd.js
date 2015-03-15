@@ -10,7 +10,7 @@ The following example logs each value wrapped in a custom log format to the cons
 var withDate = function (x) {
     return 'Log at ' + (new Date()) + ': ' + x;
 };
-cmd.logger(withDate, 'and the number is: {}')(1, 2, 3);
+cmd.logger(withDate, 'and the number is: {}').with(1, 2, 3);
 // Log at Sat Jan 31 2015 23:05:59 GMT-0800 (PST): 1 and the number is: 1
 // Log at Sat Jan 31 2015 23:05:59 GMT-0800 (PST): 2 and the number is: 2
 // Log at Sat Jan 31 2015 23:05:59 GMT-0800 (PST): 3 and the number is: 3

@@ -3,7 +3,6 @@
 ### JavaScript Logic Framework
 
 [![cmd.js on npm](https://nodei.co/npm/cmd.js.png?downloads=true&stars=true)](https://nodei.co/npm/cmd.js/)
-[![cmd.js on npm](https://nodei.co/npm-dl/cmd.js.png?months=6&height=2)](https://nodei.co/npm/cmd.js/)
 
 [![Github Stars](https://img.shields.io/github/stars/NateFerrero/cmd.js.svg)](https://github.com/NateFerrero/cmd.js)
 [![Package Version](https://img.shields.io/npm/v/cmd.js.svg)](https://www.npmjs.com/package/cmd.js)
@@ -31,7 +30,7 @@ var cmd = require('cmd.js');
 cmd.use('*');
 
 // Test
-cmd.log('Hello World');
+cmd.log.with('Hello World');
 ```
 
 ### Browser
@@ -44,7 +43,7 @@ cmd.log('Hello World');
     cmd.use('*');
 
     // Test
-    cmd.log('Hello World');
+    cmd.log.with('Hello World');
 </script>
 ```
 
@@ -174,9 +173,9 @@ Pretty simple, right? With cmd.js, it's even simpler:
 cmd.use('*');
 
 var sortAndPrint = cmd.sort(cmd.get('age')).
-    and.logger(cmd.get('name'), cmd.get('id'));
+    logger(cmd.get('name'), cmd.get('id'));
 
-sortAndPrint(users);
+sortAndPrint.with(users);
 
 // The output:
 // Justin 4
@@ -192,9 +191,9 @@ The benefits of this style include reusability, clear logical flow, and less cod
 ### "Each" Commands
 
 ```js
-cmd.add(...arguments)(...values);
+cmd.add(...arguments).with(...values);
 
-cmd.add(100, 200)(7, 8, 9); // [307, 308, 309]
+cmd.add(100, 200).with(7, 8, 9); // [307, 308, 309]
 ```
 
 These commands operate on each value passed in and thus do not have access to other values during processing. This also means that every "each" command returns an array at all times. Both arguments and values are subject to argument merging as described below.
@@ -202,19 +201,19 @@ These commands operate on each value passed in and thus do not have access to ot
 Some commands do not accept arguments, and only the values need to be provided.
 
 ```js
-cmd.exists(...values);
+cmd.exists.with(...values);
 
-cmd.exists(0, null); // [true, false]
+cmd.exists.with(0, null); // [true, false]
 ```
 
 To chain these commands, just leave off the values until the very end. Some examples:
 
 ```js
-cmd.filter(cmd.exists)(1, 2, null, 3); // [1, 2, 3]
+cmd.filter(cmd.exists).with(1, 2, null, 3); // [1, 2, 3]
 
 cmd.filter(function (x) {
     return typeof x !== 'string'
-}).and.exists("1", 2, null, "3"); // [true, false]
+}).exists.with("1", 2, null, "3"); // [true, false]
 ```
 
 #### Get Raw Value
@@ -238,7 +237,7 @@ cmd.format('my favorite number is {}').raw(100);
 What would you do if you needed to add 1 to each value in many arrays independently? Use `.map`:
 
 ```js
-cmd.add(1).map([1, 2, 3], [10, 20, 30], [100, 200, 300]);
+cmd.add(1).map.with([1, 2, 3], [10, 20, 30], [100, 200, 300]);
 // [[2, 3, 4], [11, 21, 31], [101, 201, 301]]
 ```
 
@@ -247,9 +246,9 @@ cmd.add(1).map([1, 2, 3], [10, 20, 30], [100, 200, 300]);
 Every command is unique, but most all commands take all `...values` and perform some operation that includes all of them. Most "all" commands do not return an array, in direct contrast to "each" commands.
 
 ```js
-cmd.sum(...values);
+cmd.sum.with(...values);
 
-cmd.sum(1, 2, 3); // 6
+cmd.sum.with(1, 2, 3); // 6
 ```
 
 #### Map Command
@@ -257,9 +256,9 @@ cmd.sum(1, 2, 3); // 6
 What would you do if you needed to sum a bunch of arrays independently? Use `.map`:
 
 ```js
-cmd.sum([1, 2, 3], [4, 5, 6], [7, 8, 9]); // 45 - not what we want
+cmd.sum.with([1, 2, 3], [4, 5, 6], [7, 8, 9]); // 45 - not what we want
 
-cmd.sum.map([1, 2, 3], [4, 5, 6], [7, 8, 9]) // [6, 15, 24] - perfect!
+cmd.sum.map.with([1, 2, 3], [4, 5, 6], [7, 8, 9]); // [6, 15, 24] - perfect!
 ```
 
 ### Special Commands
@@ -273,15 +272,15 @@ Arguments are automatically merged one level deep for maximum convenience. For e
 ```js
 cmd.use('max');
 
-cmd.max(1, 2, 3, 4, 5); // 5
+cmd.max.with(1, 2, 3, 4, 5); // 5
 
-cmd.max([1, 2, 3, 4, 5]); // 5
+cmd.max.with([1, 2, 3, 4, 5]); // 5
 
-cmd.max(1, [2, 3], 4, 5); // 5
+cmd.max.with(1, [2, 3], 4, 5); // 5
 
-cmd.max([1], 2, [3, 4, 5]); // 5
+cmd.max.with([1], 2, [3, 4, 5]); // 5
 
-cmd.max([1], [2], [3], [4], [5]); // 5
+cmd.max.with([1], [2], [3], [4], [5]); // 5
 ```
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
@@ -310,6 +309,7 @@ How many apples are there? Use `.raw` to get just the first result unwrapped:
 ```js
 cmd.filter(cmd.get('name').equals('apple')).get('q').raw(products);
 // 5
+```
 
 How many fruits are there? Use `.filter` and `.sum` together:
 
@@ -321,8 +321,8 @@ cmd.filter(cmd.get('type').equals('fruit')).get('q').sum.with(products);
 What is the total extended cost of all items?
 
 ```js
-cmd.do(cmd.get('q'), cmd.get('price')).product.map.sum.call('toFixed', 2).with(products);
-// 21.849999999999998
+cmd.do(cmd.get('q'), cmd.get('price')).map.product.sum.call('toFixed', 2).with(products);
+// '21.85'
 ```
 
 ## Developer Notes

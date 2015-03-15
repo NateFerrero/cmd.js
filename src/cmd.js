@@ -27,7 +27,7 @@
      * Command class
      */
     var Command = function (_fn, name) {
-        this.fn = _fn;
+        this.fn = _fn ? _fn.bind(this) : null;
         this.name = name;
     };
 
@@ -112,6 +112,17 @@
              */
             var valsLoader = function (args) {
                 return self.vals(name, function (vals) {
+                    if (!Array.isArray(vals)) {
+                        vals = [vals];
+                    }
+                    if (self._map) {
+                        return vals.map(function (val) {
+                            if (!Array.isArray(val)) {
+                                val = [val];
+                            }
+                            return fn(args, val);
+                        });
+                    }
                     return fn(args, vals);
                 });
             };
@@ -162,9 +173,24 @@
              */
             var valsLoader = function (args) {
                 return self.vals(name, function (vals) {
-                    return vals.map(function (val) {
+                    var eachFn = function (val) {
+                        if (self._map) {
+                            if (!Array.isArray(val)) {
+                                val = [val];
+                            }
+                            return val.map(function (v) {
+                                if (!Array.isArray(v)) {
+                                    v = [v];
+                                }
+                                return fn(args, v);
+                            });
+                        }
                         return fn(args, val);
-                    });
+                    };
+                    if (!Array.isArray(vals)) {
+                        return eachFn(vals);
+                    }
+                    return vals.map(eachFn);
                 });
             };
 
@@ -217,6 +243,20 @@
         if (!this.fn) {
             throw new Error('Inappropriate place to call .with()')
         }
+
+        /**
+         * Merge multiple subsets of arguments
+         */
+        if (this._map) {
+            var self = this;
+            return Array.prototype.map.call(arguments, function (args) {
+                if (!Array.isArray(args)) {
+                    args = [args];
+                }
+                return self.args('with', self.fn).apply(self, args);
+            });
+        }
+
         return this.args('with', this.fn).apply(null, Array.prototype.slice.call(arguments));
     };
 
@@ -247,18 +287,8 @@
      * Command.map
      */
     Command.prototype.__defineGetter__('map', function () {
-        var last = this.fn;
-
-        return new Command(function (args) {
-            return args.map(function (x) {
-                if (last) {
-                    return last(Array.isArray(x) ? x : [x]);
-                }
-                else {
-                    return Array.isArray(x) ? x : [x];
-                }
-            });
-        });
+        this._map = true;
+        return this;
     });
 
     /**

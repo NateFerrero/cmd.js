@@ -31,10 +31,16 @@
                 }
                 return direction * cmd.compare(
                     local.map(function (arg) {
-                        return arg(a);
+                        if (arg && arg.constructor === cmd.constructor) {
+                            return arg.raw(a);
+                        }
+                        return (arg.raw || arg)(a);
                     }),
                     local.map(function (arg) {
-                        return arg(b);
+                        if (arg && arg.constructor === cmd.constructor) {
+                            return arg.raw(b);
+                        }
+                        return (arg.raw || arg)(b);
                     })
                 );
             });

@@ -7,6 +7,6 @@
 The following example joins the values using the glue provided in initial arguments:
 
 ```js
-cmd.join('-', '+')('a', 'b', 'c');
+cmd.join('-', '+').with('a', 'b', 'c');
 // ["a-b-c", "a+b+c"]
 ```
