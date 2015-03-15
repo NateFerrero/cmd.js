@@ -238,7 +238,7 @@ cmd.format('my favorite number is {}').raw(100);
 What would you do if you needed to add 1 to each value in many arrays independently? Use `.map`:
 
 ```js
-cmd.add(1).map([1, 2, 3], [10, 20, 30], [100, 200, 300]);
+cmd.add(1).map.with([1, 2, 3], [10, 20, 30], [100, 200, 300]);
 // [[2, 3, 4], [11, 21, 31], [101, 201, 301]]
 ```
 
@@ -247,9 +247,9 @@ cmd.add(1).map([1, 2, 3], [10, 20, 30], [100, 200, 300]);
 Every command is unique, but most all commands take all `...values` and perform some operation that includes all of them. Most "all" commands do not return an array, in direct contrast to "each" commands.
 
 ```js
-cmd.sum(...values);
+cmd.sum.with(...values);
 
-cmd.sum(1, 2, 3); // 6
+cmd.sum.with(1, 2, 3); // 6
 ```
 
 #### Map Command
@@ -257,9 +257,9 @@ cmd.sum(1, 2, 3); // 6
 What would you do if you needed to sum a bunch of arrays independently? Use `.map`:
 
 ```js
-cmd.sum([1, 2, 3], [4, 5, 6], [7, 8, 9]); // 45 - not what we want
+cmd.sum.with([1, 2, 3], [4, 5, 6], [7, 8, 9]); // 45 - not what we want
 
-cmd.sum.map([1, 2, 3], [4, 5, 6], [7, 8, 9]) // [6, 15, 24] - perfect!
+cmd.sum.map.with([1, 2, 3], [4, 5, 6], [7, 8, 9]); // [6, 15, 24] - perfect!
 ```
 
 ### Special Commands
@@ -273,15 +273,15 @@ Arguments are automatically merged one level deep for maximum convenience. For e
 ```js
 cmd.use('max');
 
-cmd.max(1, 2, 3, 4, 5); // 5
+cmd.max.with(1, 2, 3, 4, 5); // 5
 
-cmd.max([1, 2, 3, 4, 5]); // 5
+cmd.max.with([1, 2, 3, 4, 5]); // 5
 
-cmd.max(1, [2, 3], 4, 5); // 5
+cmd.max.with(1, [2, 3], 4, 5); // 5
 
-cmd.max([1], 2, [3, 4, 5]); // 5
+cmd.max.with([1], 2, [3, 4, 5]); // 5
 
-cmd.max([1], [2], [3], [4], [5]); // 5
+cmd.max.with([1], [2], [3], [4], [5]); // 5
 ```
 
 Because of this, if you absolutely need to work with an array as-is, pass it in like `[[1, 2, 3]]` to avoid automatic argument merging.
