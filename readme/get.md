@@ -26,6 +26,6 @@ var people = [{
         name: 'Maxximus'
     }
 }];
-cmd.get('pet', 'name')(people);
+cmd.get('pet', 'name').with(people);
 // ["Sherlock", "Rosa", "Maxximus"]
 ```

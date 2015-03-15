@@ -7,6 +7,6 @@
 The following example multiplies each value by 10:
 
 ```js
-cmd.multiply(10)(1, 2, 3, 4, 5);
+cmd.multiply(10).with(1, 2, 3, 4, 5);
 // [10, 20, 30, 40, 50]
 ```

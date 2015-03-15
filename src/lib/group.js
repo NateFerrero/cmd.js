@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    this.export = function () {
+    this.export = function (cmd) {
 
         var arraysEqual = function (a, b) {
             if (a.length !== b.length) {
@@ -25,6 +25,9 @@
 
             vals.forEach(function (val, i) {
                 var by = args.map(function (arg) {
+                    if (arg && arg.constructor === cmd.constructor) {
+                        return arg.raw(val);
+                    }
                     switch (typeof arg) {
                     case 'number':
                         return Math.floor(i / arg);

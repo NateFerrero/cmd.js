@@ -7,6 +7,6 @@
 The following example checks for values that equal 50 or 30:
 
 ```js
-cmd.equals(30, 50)(100, 20, 50, 30);
+cmd.equals(30, 50).with(100, 20, 50, 30);
 // [false, false, true, true]
 ```

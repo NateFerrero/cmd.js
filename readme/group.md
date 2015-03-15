@@ -7,11 +7,11 @@
 The following examples group numbers in two different ways:
 
 ```js
-cmd.group(2)(1, 2, 3, 4);
+cmd.group(2).with(1, 2, 3, 4);
 // [[1, 2], [3, 4]]
 
 cmd.group(function (x) {
     return x > 2;
-})(1, 2, 3, 4));
+}).with(1, 2, 3, 4);
 // [[1, 2], [3, 4]]
 ```

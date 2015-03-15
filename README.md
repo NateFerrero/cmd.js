@@ -31,7 +31,7 @@ var cmd = require('cmd.js');
 cmd.use('*');
 
 // Test
-cmd.log('Hello World');
+cmd.log.with('Hello World');
 ```
 
 ### Browser
@@ -44,7 +44,7 @@ cmd.log('Hello World');
     cmd.use('*');
 
     // Test
-    cmd.log('Hello World');
+    cmd.log.with('Hello World');
 </script>
 ```
 
@@ -174,9 +174,9 @@ Pretty simple, right? With cmd.js, it's even simpler:
 cmd.use('*');
 
 var sortAndPrint = cmd.sort(cmd.get('age')).
-    and.logger(cmd.get('name'), cmd.get('id'));
+    logger(cmd.get('name'), cmd.get('id'));
 
-sortAndPrint(users);
+sortAndPrint.with(users);
 
 // The output:
 // Justin 4
@@ -192,9 +192,9 @@ The benefits of this style include reusability, clear logical flow, and less cod
 ### "Each" Commands
 
 ```js
-cmd.add(...arguments)(...values);
+cmd.add(...arguments).with(...values);
 
-cmd.add(100, 200)(7, 8, 9); // [307, 308, 309]
+cmd.add(100, 200).with(7, 8, 9); // [307, 308, 309]
 ```
 
 These commands operate on each value passed in and thus do not have access to other values during processing. This also means that every "each" command returns an array at all times. Both arguments and values are subject to argument merging as described below.
@@ -210,7 +210,7 @@ cmd.exists(0, null); // [true, false]
 To chain these commands, just leave off the values until the very end. Some examples:
 
 ```js
-cmd.filter(cmd.exists)(1, 2, null, 3); // [1, 2, 3]
+cmd.filter(cmd.exists).with(1, 2, null, 3); // [1, 2, 3]
 
 cmd.filter(function (x) {
     return typeof x !== 'string'

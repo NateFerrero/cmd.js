@@ -7,6 +7,6 @@
 The following example subtracts 10 from each value:
 
 ```js
-cmd.subtract(10)(1, 2, 3, 4, 5);
+cmd.subtract(10).with(1, 2, 3, 4, 5);
 // [-9, -8, -7, -6, -5]
 ```
