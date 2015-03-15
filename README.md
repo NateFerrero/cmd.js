@@ -202,9 +202,9 @@ These commands operate on each value passed in and thus do not have access to ot
 Some commands do not accept arguments, and only the values need to be provided.
 
 ```js
-cmd.exists(...values);
+cmd.exists.with(...values);
 
-cmd.exists(0, null); // [true, false]
+cmd.exists.with(0, null); // [true, false]
 ```
 
 To chain these commands, just leave off the values until the very end. Some examples:
@@ -214,7 +214,7 @@ cmd.filter(cmd.exists).with(1, 2, null, 3); // [1, 2, 3]
 
 cmd.filter(function (x) {
     return typeof x !== 'string'
-}).and.exists("1", 2, null, "3"); // [true, false]
+}).exists.with("1", 2, null, "3"); // [true, false]
 ```
 
 #### Get Raw Value
