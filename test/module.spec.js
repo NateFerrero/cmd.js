@@ -294,7 +294,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.interlace('.').map.to(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+                cmd.interlace('.').map.with(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
             ).to.deep.equal(['a.b.c', 'd.e.f', 'g.h.i']);
         });
     });
@@ -346,7 +346,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.interlaceUnderscore.map.to(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+                cmd.interlaceUnderscore.map.with(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
             ).to.deep.equal(['a_b_c', 'd_e_f', 'g_h_i']);
         });
     });
@@ -402,7 +402,7 @@ describe('cmd.module', function () {
 
         it('works properly when mapping against multiple value sets', function () {
             expect(
-                cmd.interlaceWith.space.map.to(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
+                cmd.interlaceWith.space.map.with(['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h', 'i'])
             ).to.deep.equal(['a b c', 'd e f', 'g h i']);
         });
     });

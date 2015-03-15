@@ -321,8 +321,8 @@ cmd.filter(cmd.get('type').equals('fruit')).get('q').sum.with(products);
 What is the total extended cost of all items?
 
 ```js
-cmd.do(cmd.get('q'), cmd.get('price')).product.map.sum.call('toFixed', 2).with(products);
-// 21.849999999999998
+cmd.do(cmd.get('q'), cmd.get('price')).map.product.sum.call('toFixed', 2).with(products);
+// '21.85'
 ```
 
 ## Developer Notes
