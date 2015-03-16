@@ -9,10 +9,10 @@
 The following example sorts the values with various sort orders and parameters:
 
 ```js
-cmd.sort.asc('c', 'a', 'b', 3, 1, 2);
+cmd.sort.asc.with('c', 'a', 'b', 3, 1, 2);
 // [1, 2, 3, "a", "b", "c"]
 
-cmd.sort.desc('c', 'a', 'b', 3, 1, 2);
+cmd.sort.desc.with('c', 'a', 'b', 3, 1, 2);
 // ["c", "b", "a", 3, 2, 1]
 
 // Sort by type, leaving order preserved within a type

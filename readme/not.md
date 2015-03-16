@@ -7,6 +7,6 @@
 The following example returns the logical inverse of each value:
 
 ```js
-cmd.not(null, undefined, false, '', 0, true);
+cmd.not.with(null, undefined, false, '', 0, true);
 // [true, true, true, false, false, false]
 ```

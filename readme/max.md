@@ -7,6 +7,6 @@
 The following example returns the maximum value:
 
 ```js
-cmd.max(1, 2, 3, 4, 5);
+cmd.max.with(1, 2, 3, 4, 5);
 // 5
 ```

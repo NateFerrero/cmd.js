@@ -11,6 +11,6 @@ var doublePlus1 = cmd.tap(function (x) {
     return 2 * x + 1;
 });
 
-doublePlus1(1, 2, 3, 4, 5);
+doublePlus1.with(1, 2, 3, 4, 5);
 // [3, 5, 7, 9, 11]
 ```

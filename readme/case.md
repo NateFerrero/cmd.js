@@ -9,6 +9,6 @@
 The following example converts strings to lowercase:
 
 ```js
-cmd.case.lower('Hello World!', 'Will Smith here.');
+cmd.case.lower.with('Hello World!', 'Will Smith here.');
 // ["hello world!", "will smith here."]
 ```

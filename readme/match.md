@@ -16,7 +16,7 @@ var msgMatch = cmd.match(function (it, then) {
                 then('Unknown');
 });
 
-msgMatch(0, 1, 2, 3, 4, 5, 6, 'x');
+msgMatch.with(0, 1, 2, 3, 4, 5, 6, 'x');
 // ["You have no messages",
 //  "You have a message",
 //  "You have a few messages",
