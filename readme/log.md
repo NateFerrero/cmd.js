@@ -7,7 +7,7 @@
 The following example logs each value to the console and returns the values:
 
 ```js
-cmd.log(1, 2, 3);
+cmd.log.with(1, 2, 3);
 // 1
 // 2
 // 3

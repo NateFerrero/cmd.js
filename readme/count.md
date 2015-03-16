@@ -7,6 +7,6 @@
 The following example counts the number of values provided:
 
 ```js
-cmd.count(1, [2, 3, 4], 5, [6]);
+cmd.count.with(1, [2, 3, 4], 5, [6]);
 // 6
 ```

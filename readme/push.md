@@ -10,11 +10,11 @@ The following example pushes to an array:
 var people = [];
 var add = cmd.push.to(people);
 
-add({
+add.with({
     name: 'Adam'
 });
 
-add({
+add.with({
     name: 'Blake'
 });
 
