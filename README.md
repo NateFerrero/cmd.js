@@ -4,12 +4,12 @@
 
 [![cmd.js on npm](https://nodei.co/npm/cmd.js.png?downloads=true&stars=true)](https://nodei.co/npm/cmd.js/)
 
-[![Github Stars](https://img.shields.io/github/stars/NateFerrero/cmd.js.svg)](https://github.com/NateFerrero/cmd.js)
+[![Github Stars](https://img.shields.io/github/stars/SnappLab/cmd.js.svg)](https://github.com/SnappLab/cmd.js)
 [![Package Version](https://img.shields.io/npm/v/cmd.js.svg)](https://www.npmjs.com/package/cmd.js)
 [![Package License](https://img.shields.io/npm/l/cmd.js.svg)](https://www.npmjs.com/package/cmd.js)
-[![Code Climate](https://img.shields.io/codeclimate/github/NateFerrero/cmd.js.svg)](https://codeclimate.com/github/NateFerrero/cmd.js)
-[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/NateFerrero/cmd.js.svg)](https://codeclimate.com/github/NateFerrero/cmd.js)
-[![Build Status](https://img.shields.io/travis/NateFerrero/cmd.js.svg)](https://travis-ci.org/NateFerrero/cmd.js)
+[![Code Climate](https://img.shields.io/codeclimate/github/SnappLab/cmd.js.svg)](https://codeclimate.com/github/SnappLab/cmd.js)
+[![Test Coverage](https://img.shields.io/codeclimate/coverage/github/SnappLab/cmd.js.svg)](https://codeclimate.com/github/SnappLab/cmd.js)
+[![Build Status](https://img.shields.io/travis/SnappLab/cmd.js.svg)](https://travis-ci.org/SnappLab/cmd.js)
 
 Ever find yourself handling complex data structures in JavaScript? With cmd.js, one can assemble small blocks of logic, and easily pass data through them for processing.
 
