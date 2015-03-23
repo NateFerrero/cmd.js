@@ -43,7 +43,7 @@
                     'call', 'case', 'clone', 'compare', 'count',
                     'default', 'divide', 'do',
                     'equals', 'exists', 'extend',
-                    'filter', 'format',
+                    'filter', 'first', 'format',
                     'get', 'group',
                     'has',
                     'join',
