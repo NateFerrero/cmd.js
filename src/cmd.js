@@ -47,7 +47,7 @@
                     'get', 'group',
                     'has',
                     'join',
-                    'log', 'logger',
+                    'last', 'log', 'logger',
                     'match', 'max', 'min', 'multiply',
                     'not',
                     'obj',
