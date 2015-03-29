@@ -45,7 +45,7 @@
                     'equals', 'exists', 'extend',
                     'filter', 'first', 'format',
                     'get', 'group',
-                    'has',
+                    'has', 'head',
                     'join',
                     'last', 'log', 'logger',
                     'match', 'max', 'min', 'multiply',
