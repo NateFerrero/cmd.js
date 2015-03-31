@@ -4,7 +4,7 @@
     this.export = function () {
 
         /**
-         * Command: head(2) - returns first values
+         * Command: head(2) - returns the first number of values
          * @author Alexey Ershov
          */
         this.all = function (args, vals) {
