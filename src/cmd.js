@@ -53,8 +53,8 @@
                     'obj',
                     'product', 'push',
                     'reject', 'reverse',
-                    'sort', 'subtract', 'sum',
-                    'tap'
+                    'slice', 'sort', 'subtract', 'sum',
+                    'tail', 'tap'
                 ];
                 return libs.forEach(function (name) {
                     self.use(name);
