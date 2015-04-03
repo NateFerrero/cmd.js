@@ -19,8 +19,8 @@ describe('cmd.tail', function () {
         expect(cmd.tail(2).with(1, 2, 3)).to.deep.equal([2, 3]);
     });
 
-    it('returns last two values when negative argument was given', function () {
-        expect(cmd.tail(-2).with(1, 2, 3)).to.deep.equal([2, 3]);
+    it('returns last value when negative argument was given', function () {
+        expect(cmd.tail(-2).with(1, 2, 3)).to.deep.equal([3]);
     });
 
     it('returns all the values if number is bigger than amount of arguments', function () {
@@ -33,10 +33,6 @@ describe('cmd.tail', function () {
 
     it('ignores extra arguments', function () {
         expect(cmd.tail(1, 2).with(1, 2, 3)).to.deep.equal([3]);
-    });
-
-    it('returns an empty array if no arguments were provided', function () {
-        expect(cmd.tail().with(1, 2, 3)).to.deep.equal([]);
     });
 
 });
