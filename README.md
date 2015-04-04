@@ -76,6 +76,7 @@ cmd.log.with('Hello World');
 ### F
 
 [filter](readme/filter.md)
+[first](readme/first.md)
 [format](readme/format.md)
 
 ### G
@@ -86,6 +87,7 @@ cmd.log.with('Hello World');
 ### H
 
 [has](readme/has.md)
+[head](readme/head.md)
 
 ### J
 
@@ -123,12 +125,14 @@ cmd.log.with('Hello World');
 
 ### S
 
+[slice](readme/slice.md)
 [sort](readme/sort.md)
 [subtract](readme/subtract.md)
 [sum](readme/sum.md)
 
 ### T
 
+[tail](readme/tail.md)
 [tap](readme/tap.md)
 
 ## Chaining Example
