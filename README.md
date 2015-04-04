@@ -95,6 +95,7 @@ cmd.log.with('Hello World');
 
 ### L
 
+[last](readme/last.md)
 [log](readme/log.md)
 [logger](readme/logger.md)
 
