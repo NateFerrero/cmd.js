@@ -9,7 +9,7 @@ describe('cmd.lte', function () {
         expect(cmd.lte).to.be.a('function');
     });
 
-    it('evaluates the >= comparison with numbers', function() {
+    it('evaluates the <= comparison with numbers', function() {
         expect(cmd.lte(1).with(1, 2, 3)).to.deep.equal([true, false, false]);
 
         expect(cmd.lte(2).with(1, 2, 3)).to.deep.equal([true, true, false]);
