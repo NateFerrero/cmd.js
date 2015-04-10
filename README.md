@@ -83,6 +83,8 @@ cmd.log.with('Hello World');
 
 [get](readme/get.md)
 [group](readme/group.md)
+[gt](readme/gt.md)
+[gte](readme/gte.md)
 
 ### H
 
@@ -98,6 +100,8 @@ cmd.log.with('Hello World');
 [last](readme/last.md)
 [log](readme/log.md)
 [logger](readme/logger.md)
+[lt](readme/lt.md)
+[lte](readme/lte.md)
 
 ### M
 
